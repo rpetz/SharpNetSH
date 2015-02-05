@@ -2,7 +2,7 @@
 
 namespace Ignite.SharpNetSH
 {
-	public interface IAddAction : IAction
+	public interface IAddAction
 	{
 		/// <summary>
 		/// Specifies an IPv4 or IPv6 address to be added to the IP listen list. 
@@ -28,7 +28,7 @@ namespace Ignite.SharpNetSH
 		/// <param name="usageCheck">Turns on or turns off usage check. Default is enabled.</param>
 		/// <param name="dsMapperUsage">Turns on or turns off DS mappers. Default is disabled.</param>
 		/// <param name="clientCertNegotation">Turns on or turns off negotiation of certificate. Default is disabled.</param>
-		void SSLCert(String ipPort = null, String certHash = null, String certStoreName = null,
+		void SSLCert(String ipPort, String certHash = null, String certStoreName = null,
 			String sslCtIdentifier = null, String sslCtStoreName = null,
 			Guid? appId = null,
 			UInt32? revocationFreshnessTime = null, UInt32? urlRetrievalTimeout = null,
@@ -41,7 +41,7 @@ namespace Ignite.SharpNetSH
 		/// </summary>
 		/// <param name="timeoutType">Specifies the type of timeout for setting.</param>
 		/// <param name="value">Specifies the value of the timeout (in seconds). If value is hexadecimal, then add the prefix 0x.</param>
-		void Timeout(Timeout? timeoutType = null, UInt16? value = null);
+		void Timeout(Timeout timeoutType, UInt16 value);
 
 		/// <summary>
 		/// Reserves the specified URL for non-administrator users and accounts. The discretionary access control list (DACL) can be specified by using an account name with the listen and delegate parameters or by using a security descriptor definition language (SDDL) string.
@@ -50,7 +50,7 @@ namespace Ignite.SharpNetSH
 		/// <param name="url">Specifies the fully qualified URL.</param>
 		/// <param name="user">Specifies the user or user group name.</param>
 		/// <param name="sddl">Specifies the SDDL string that describes the DACL.</param>
-		void UrlAcl(String url = null, String user = null, String sddl = null);
+		void UrlAcl(String url, String user, String sddl = null);
 
 		/// <summary>
 		/// Reserves the specified URL for non-administrator users and accounts. The discretionary access control list (DACL) can be specified by using an account name with the listen and delegate parameters or by using a security descriptor definition language (SDDL) string.
@@ -62,6 +62,6 @@ namespace Ignite.SharpNetSH
 		/// False: Denies the user from registering URLs.</param>
 		/// <param name="delegateUrls">True: Allows the user to delegate URLs.<br></br>
 		/// False: Denies the user from delegating URLs. This is the default value.</param>
-		void UrlAcl(String url = null, String user = null, Boolean? listenUrls = null, Boolean? delegateUrls = null);
+		void UrlAcl(String url, String user, Boolean? listenUrls = null, Boolean? delegateUrls = null);
 	}
 }
