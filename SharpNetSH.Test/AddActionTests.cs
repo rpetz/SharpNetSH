@@ -12,7 +12,7 @@ namespace Ignite.SharpNetSH.Test
 	public class AddActionTests
 	{
 		[TestMethod]
-		public void VerifyIPListenOutput()
+		public void VerifyIpListenOutput()
 		{
 			var harness = new StringHarness();
 			new NetSH(harness).Http.Add.IPListen("test");
@@ -23,43 +23,35 @@ namespace Ignite.SharpNetSH.Test
 		public void VerifySSLCertOutput()
 		{
 			var harness = new StringHarness();
-			var adder = new NetSH(harness).Http.Add;
+			new NetSH(harness).Http.Add.SSLCert(ipPort:"testipport",
+				certHash:"testcerthash",
+				certStoreName:"testcertstorename",
+				sslCtlIdentifier:"testsslctlidentifier",
+				sslCtlStoreName:"testsslctlstorename",
+				appId:new Guid("11111111-1111-1111-1111-111111111111"),
+				revocationFreshnessTime:1,
+				urlRetrievalTimeout:1,
+				verifyClientCertRevocation:false,
+				verifyRevocationWithCachedClientCertOnly:true,
+				usageCheck:false,
+				dsMapperUsage:true,
+				clientCertNegotation:false);
 
-			var parameters = new object[][]
-			{
-				new object[] {"certHash", "test"},
-				new object[] {"appId", new Guid("00112233-4455-6677-8899-AABBCCDDEEFF"), "{00112233-4455-6677-8899-AABBCCDDEEFF}"},
-				new object[] {"certStoreName", "test"},
-				new object[] {"verifyClientCertRevocation", true, "enable"},
-				new object[] {"verifyClientCertRevocation", false, "disable"},
-				new object[] {"verifyRevocationWithCachedClientCertonly", true, "enable"},
-				new object[] {"verifyRevocationWithCachedClientCertonly", false, "disable"},
-				new object[] {"usageCheck", true, "enable"},
-				new object[] {"usageCheck", false, "disable"},
-				new object[] {"revocationFreshnessTime", "1"},
-				new object[] {"urlRetrievalTimeout", "1"},
-				new object[] {"sslCtlIdentifier", true, "test"},
-				new object[] {"sslctlStoreName", false, "test"},
-				new object[] {"dsMapperUsage", true, "enable"},
-				new object[] {"dsMapperUsage", false, "disable"},
-				new object[] {"clientCertNegotation", true, "enable"},
-				new object[] {"clientCertNegotation", false, "disable"}
-			};
-
-			var simplestCommand = "netsh http add sslcert ipport=test";
-			var sslCertMethod = adder.GetType().GetMethods(BindingFlags.Public).FirstOrDefault(x => x.Name == "SSLCert");
-
-			for (var x = 0; x < parameters.Length; x++)
-			{
-				var current = parameters[x];
-				var parameterName = (String)current[0];
-				var resultName = parameterName.ToLower();
-				var input = current[1];
-				var result = current[2];
-				sslCertMethod.Invoke(adder, )
-			}
-
-			Assert.AreEqual(harness.Value, "netsh http add ");
+			var value = harness.Value;
+			var parameters = typeof (AddAction).GetMethod("SSLCert").GetParameters();
+			parameters.ToList().ForEach(x => {
+				var type = x.ParameterType;
+				var name = x.Name.ToLower();
+				if (type == typeof(string)) {
+					Assert.IsTrue(value.Contains(name + "=" + "test" + name));
+				}
+				else if (type == typeof (Guid)) {
+					Assert.IsTrue(value.Contains(name + "={11111111-1111-1111-1111-111111111111}"));
+				}
+				else if (type == typeof (bool)) {
+					Assert.IsTrue(value.Contains(name + "=enabled") || value.Contains(name + "=disabled"));
+				}
+			});
 		}
 
 		[TestMethod]

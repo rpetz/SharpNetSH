@@ -23,12 +23,32 @@ namespace Ignite.SharpNetSH
 			_harness.Execute(text);
 		}
 
-		public void SSLCert(string ipPort, string certHash = null, string certStoreName = null, string sslCtlIdentifier = null, string sslCtlStoreName = null, Guid? appId = null, uint? revocationFreshnessTime = null, uint? urlRetrievalTimeout = null, bool? verifyClientCertRevocation = null, bool? verifyRevocationWithCachedClientCertOnly = null, bool? usageCheck = null, bool? dsMapperUsage = null, bool? clientCertNegotation = null)
+		public void SSLCert(string ipPort, string certHash = null, string certStoreName = null, string sslCtlIdentifier = null, string sslCtlStoreName = null, Guid? appId = null, 
+							uint? revocationFreshnessTime = null, uint? urlRetrievalTimeout = null, bool? verifyClientCertRevocation = null, bool? verifyRevocationWithCachedClientCertOnly = null, 
+							bool? usageCheck = null, bool? dsMapperUsage = null, bool? clientCertNegotation = null)
 		{
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			throw new NotImplementedException();
+			var text = _priorText + " sslcert ipport=" + ipPort;
+
+			if (!String.IsNullOrWhiteSpace(certHash)) text += " certhash=" + certHash;
+			if (!String.IsNullOrWhiteSpace(certStoreName)) text += " certstorename=" + certStoreName;
+			if (!String.IsNullOrWhiteSpace(sslCtlIdentifier)) text += " sslctlidentifier=" + sslCtlIdentifier;
+			if (!String.IsNullOrWhiteSpace(sslCtlStoreName)) text += " sslctlstorename=" + sslCtlStoreName;
+			
+			if (appId != null) text += " appid={" + appId + "}";
+			
+			if (revocationFreshnessTime != null) text += " revocationfreshnesstime=" + revocationFreshnessTime;
+			if (urlRetrievalTimeout != null) text += " urlretrievaltimeout=" + urlRetrievalTimeout;
+
+			if (verifyClientCertRevocation != null) text += " verifyclientcertrevocation=" + ((bool)verifyClientCertRevocation ? "enabled" : "disabled");
+			if (verifyRevocationWithCachedClientCertOnly != null) text += " verifyrevocationwithcachedclientcertonly=" + ((bool)verifyRevocationWithCachedClientCertOnly ? "enabled" : "disabled");
+			if (usageCheck != null) text += " usagecheck=" + ((bool)usageCheck ? "enabled" : "disabled");
+			if (dsMapperUsage != null) text += " dsmapperusage=" + ((bool)dsMapperUsage ? "enabled" : "disabled");
+			if (clientCertNegotation != null) text += " clientcertnegotation=" + ((bool)clientCertNegotation ? "enabled" : "disabled");
+
+			_harness.Execute(text);
 		}
 
 		public void Timeout(Timeout timeoutType, ushort value)
