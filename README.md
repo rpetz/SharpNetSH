@@ -1,10 +1,9 @@
 # SharpNetSH
 A simple netsh library for C#
 
-###This is a early version that isn't ready yet
+##This is version 1.0, and theoretically should work with all NetSH commands, however I have not yet tested them all and currently it only supports execute-only (I.E. none of the NetSH.Http.Show commands will return anything back at the moment)
 
 #####TODO
 
-- Build the command line harness
 - Allow multiple harnesses to be registered and retain registration order
-- Release 1.0.0 to nuget
+- Build the response values in
