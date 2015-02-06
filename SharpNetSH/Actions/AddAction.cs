@@ -56,7 +56,8 @@ namespace Ignite.SharpNetSH
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			throw new NotImplementedException();
+			var text = _priorText + " timeout timeouttype=" + timeoutType.ToString().ToLower() + " value=" + value;
+			_harness.Execute(text);
 		}
 
 		public void UrlAcl(string url, string user, string sddl = null)
@@ -64,7 +65,9 @@ namespace Ignite.SharpNetSH
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			throw new NotImplementedException();
+			var text = _priorText + " urlacl url=" + url + " user=" + user;
+			if (!String.IsNullOrWhiteSpace(sddl)) text += " sddl=" + sddl;
+			_harness.Execute(text);
 		}
 
 		public void UrlAcl(string url, string user, bool? listenUrls = null, bool? delegateUrls = null)
@@ -72,7 +75,10 @@ namespace Ignite.SharpNetSH
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			throw new NotImplementedException();
+			var text = _priorText + " urlacl url=" + url + " user=" + user;
+			if (listenUrls != null) text += " listen=" + ((bool)listenUrls ? "yes" : "no");
+			if (delegateUrls != null) text += " delegate=" + ((bool)delegateUrls ? "yes" : "no");
+			_harness.Execute(text);
 		}
 
 		public void Initialize(String priorText, IExecutionHarness harness)
