@@ -66,6 +66,7 @@
     <Compile Include="Objects\Timeout.cs" />
     <Compile Include="Objects\View.cs" />
     <Compile Include="Actions\ShowAction.cs" />
+    <Compile Include="Services\CommandLineHarness.cs" />
     <Compile Include="Services\ConsoleLogHarness.cs" />
   </ItemGroup>
   <ItemGroup>
