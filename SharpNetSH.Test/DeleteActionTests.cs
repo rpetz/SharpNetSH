@@ -14,6 +14,8 @@ namespace Ignite.SharpNetSH.Test
 			Assert.AreEqual("netsh http delete cache url=testurl recursive=no", harness.Value);
 			new NetSH(harness).Http.Delete.Cache("testurl", true);
 			Assert.AreEqual("netsh http delete cache url=testurl recursive=yes", harness.Value);
+			new NetSH(harness).Http.Delete.Cache("testurl");
+			Assert.AreEqual("netsh http delete cache url=testurl", harness.Value);
 		}
 
 		[TestMethod]
