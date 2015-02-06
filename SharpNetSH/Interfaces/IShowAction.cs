@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH
 {
@@ -30,7 +31,7 @@ namespace Ignite.SharpNetSH
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307243(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
 		/// <param name="ipPort">Specifies the IPv4 or IPv6 address and port for which the SSL certificate bindings will be displayed. Not specifying an ipport lists all bindings.</param>
-		void SSLCert(String ipPort = null);
+		IEnumerable<SSLCertificate> SSLCert(String ipPort = null);
 
 		/// <summary>
 		/// Shows the timeout values of the service (in seconds).

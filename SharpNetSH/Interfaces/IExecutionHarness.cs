@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH
 {
 	public interface IExecutionHarness
 	{
-		void Execute(String action);
+		IEnumerable<String> Execute(String action);
 	}
 }

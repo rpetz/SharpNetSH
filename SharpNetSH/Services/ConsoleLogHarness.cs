@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH
 {
@@ -7,9 +8,10 @@ namespace Ignite.SharpNetSH
 	/// </summary>
 	public class ConsoleLogHarness : IExecutionHarness
 	{
-		public void Execute(string action)
+		public IEnumerable<String> Execute(string action)
 		{
 			Console.WriteLine("Executing: " + action);
+			return new List<String>();
 		}
 	}
 }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Ignite.SharpNetSH
 {
@@ -50,14 +53,51 @@ namespace Ignite.SharpNetSH
 			_harness.Execute(text);
 		}
 
-		public void SSLCert(string ipPort = null)
+		public IEnumerable<SSLCertificate> SSLCert(string ipPort = null)
 		{
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
 			var text = _priorText + " sslcert";
 			if (!String.IsNullOrWhiteSpace(ipPort)) text += " ipport=" + ipPort;
-			_harness.Execute(text);
+			var rawOutput = _harness.Execute(text);
+
+			var certificates = new List<SSLCertificate>();
+			if (rawOutput == null) return certificates;
+
+			var currentCertificateRows = new List<string>();
+			foreach (var line in rawOutput.Skip(3))
+			{
+				if (String.IsNullOrWhiteSpace(line))
+				{
+					if (currentCertificateRows.Count > 0)
+						certificates.Add(ProcessRawCertificateData(currentCertificateRows));
+					currentCertificateRows = new List<string>();
+				}
+				else
+					currentCertificateRows.Add(line);
+			}
+
+			return certificates;
+		}
+
+		private SSLCertificate ProcessRawCertificateData(IEnumerable<String> lines)
+		{
+			var certificate = new SSLCertificate();
+			foreach (var line in lines)
+			{
+				var split = Regex.Split(line.Trim(), @"\s+:\s+");
+				if (split.Length != 2) 
+					throw new Exception("Invalid Raw Certificate Data.  Line: " + line);
+
+				var title = split[0];
+				var value = split[1];
+				if (value.ToLower() == "(null)")
+					value = null;
+
+				certificate.AddValue(title, value);
+			}
+			return certificate;
 		}
 
 		public void Timeout()

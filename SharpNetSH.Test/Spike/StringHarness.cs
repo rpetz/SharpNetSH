@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH.Test.Spike
 {
@@ -8,9 +9,10 @@ namespace Ignite.SharpNetSH.Test.Spike
 
 		public String Value { get { return _value; } }
 
-		public void Execute(string action)
+		public IEnumerable<String> Execute(string action)
 		{
 			_value = action;
+			return new List<String>();
 		}
 	}
 }

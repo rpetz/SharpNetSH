@@ -9,6 +9,8 @@ namespace Ignite.SharpNetSH.Test
 		[TestMethod]
 		public void VerifyCacheStateOutput()
 		{
+			var result = new NetSH(new CommandLineHarness(false)).Http.Show.SSLCert("0.0.0.0:9388");
+
 			var harness = new StringHarness();
 			new NetSH(harness).Http.Show.CacheState("testurl");
 			Assert.AreEqual("netsh http show cachestate url=testurl", harness.Value);

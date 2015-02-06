@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Ignite.SharpNetSH
@@ -8,27 +9,27 @@ namespace Ignite.SharpNetSH
 	/// </summary>
 	public class CommandLineHarness : IExecutionHarness
 	{
-		private readonly Boolean _runSilent;
-		private readonly Boolean _keepAlive;
-
-		public CommandLineHarness(bool runSilent = true, bool keepAlive = false)
-		{
-			_runSilent = runSilent;
-			_keepAlive = keepAlive;
-		}
-
-		public void Execute(string action)
+		public IEnumerable<String> Execute(string action)
 		{
 			var process = new Process
 			{
 				StartInfo = new ProcessStartInfo
 				{
-					WindowStyle = _runSilent ? ProcessWindowStyle.Hidden : ProcessWindowStyle.Normal,
+					WindowStyle = ProcessWindowStyle.Hidden,
 					FileName = "cmd.exe",
-					Arguments = (_keepAlive ? "/k " : "/c ") + action
+					UseShellExecute = false,
+					RedirectStandardOutput = true,
+					Arguments = "/c " + action
 				}
 			};
+
 			process.Start();
+
+			var lines = new List<String>();
+			while (!process.StandardOutput.EndOfStream)
+				lines.Add(process.StandardOutput.ReadLine());
+
+			return lines;
 		}
 	}
 }
