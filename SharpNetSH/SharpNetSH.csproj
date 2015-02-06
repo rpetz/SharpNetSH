@@ -52,7 +52,7 @@
     <Compile Include="Interfaces\IActionNameProvider.cs" />
     <Compile Include="Interfaces\IAddAction.cs" />
     <Compile Include="Interfaces\IInitializable.cs" />
-    <Compile Include="Interfaces\IConsoleHarness.cs" />
+    <Compile Include="Interfaces\IExecutionHarness.cs" />
     <Compile Include="Interfaces\IDeleteAction.cs" />
     <Compile Include="Interfaces\IFlushAction.cs" />
     <Compile Include="Interfaces\IHttpAction.cs" />

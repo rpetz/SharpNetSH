@@ -18,8 +18,8 @@ namespace Ignite.SharpNetSH
 		/// <param name="ipPort">Specifies the IP address and port for the binding.</param>
 		/// <param name="certHash">Specifies the SHA hash of the certificate. This hash is 20 bytes long and specified as a hexadecimal string.</param>
 		/// <param name="certStoreName">Specifies the store name for the certificate. Defaults to MY. Certificate must be stored in the local computer context.</param>
-		/// <param name="sslCtIdentifier">Lists the certificate issuers that can be trusted. This list can be a subset of the certificate issuers that are trusted by the computer.</param>
-		/// <param name="sslCtStoreName">Specifies the store name under LOCAL_MACHINE where SslCtlIdentifier is stored.</param>
+		/// <param name="sslCtlIdentifier">Lists the certificate issuers that can be trusted. This list can be a subset of the certificate issuers that are trusted by the computer.</param>
+		/// <param name="sslCtlStoreName">Specifies the store name under LOCAL_MACHINE where SslCtlIdentifier is stored.</param>
 		/// <param name="appId">Specifies the GUID to identify the owning application.</param>
 		/// <param name="revocationFreshnessTime">Specifies the time interval to check for an updated certificate revocation list (CRL). If this value is 0, then the new CRL is updated only if the previous one expires (in seconds).</param>
 		/// <param name="urlRetrievalTimeout">Specifies the timeout interval on attempts to retrieve the certificate revocation list for the remote URL (in milliseconds).</param>
@@ -29,7 +29,7 @@ namespace Ignite.SharpNetSH
 		/// <param name="dsMapperUsage">Turns on or turns off DS mappers. Default is disabled.</param>
 		/// <param name="clientCertNegotation">Turns on or turns off negotiation of certificate. Default is disabled.</param>
 		void SSLCert(String ipPort, String certHash = null, String certStoreName = null,
-			String sslCtIdentifier = null, String sslCtStoreName = null,
+			String sslCtlIdentifier = null, String sslCtlStoreName = null,
 			Guid? appId = null,
 			UInt32? revocationFreshnessTime = null, UInt32? urlRetrievalTimeout = null,
 			Boolean? verifyClientCertRevocation = null, Boolean? verifyRevocationWithCachedClientCertOnly = null,

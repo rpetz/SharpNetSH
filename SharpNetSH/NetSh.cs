@@ -2,9 +2,9 @@
 {
 	public class NetSH : INetSH, IActionNameProvider
 	{
-		private readonly IConsoleHarness _harness;
+		private readonly IExecutionHarness _harness;
 
-		public NetSH(IConsoleHarness harness)
+		public NetSH(IExecutionHarness harness)
 		{
 			_harness = harness;
 		}

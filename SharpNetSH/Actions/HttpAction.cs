@@ -5,7 +5,7 @@ namespace Ignite.SharpNetSH
 	public class HttpAction : IHttpAction, IAction
 	{
 		private String _priorText;
-		private IConsoleHarness _harness;
+		private IExecutionHarness _harness;
 		private Boolean _initialized;
 
 		public string ActionName { get { return "http"; } }
@@ -61,7 +61,7 @@ namespace Ignite.SharpNetSH
 			}
 		}
 
-		public void Initialize(String priorText, IConsoleHarness harness)
+		public void Initialize(String priorText, IExecutionHarness harness)
 		{
 			_harness = harness;
 			_priorText = priorText + " " + ActionName;

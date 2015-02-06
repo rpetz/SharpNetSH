@@ -7,7 +7,7 @@ namespace Ignite.SharpNetSH
 	{
 		private String _priorText;
 		private Boolean _initialized;
-		private IConsoleHarness _harness;
+		private IExecutionHarness _harness;
 
 		public string ActionName { get { return "flush"; } }
 
@@ -19,7 +19,7 @@ namespace Ignite.SharpNetSH
 			_harness.Execute(_priorText + " logbuffer");
 		}
 
-		public void Initialize(String priorText, IConsoleHarness harness)
+		public void Initialize(String priorText, IExecutionHarness harness)
 		{
 			_priorText = priorText + " " + ActionName;
 			_harness = harness;

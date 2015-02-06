@@ -2,7 +2,7 @@
 
 namespace Ignite.SharpNetSH
 {
-	public interface IConsoleHarness
+	public interface IExecutionHarness
 	{
 		void Execute(String action);
 	}

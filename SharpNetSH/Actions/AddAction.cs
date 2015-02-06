@@ -6,7 +6,7 @@ namespace Ignite.SharpNetSH
 	{
 		private String _priorText;
 		private Boolean _initialized;
-		private IConsoleHarness _harness;
+		private IExecutionHarness _harness;
 
 		public string ActionName { get { return "add"; } }
 
@@ -15,10 +15,15 @@ namespace Ignite.SharpNetSH
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			throw new NotImplementedException();
+			var text = _priorText + " iplisten";
+
+			if (!String.IsNullOrWhiteSpace(address))
+				text += " address=" + address;
+
+			_harness.Execute(text);
 		}
 
-		public void SSLCert(string ipPort, string certHash = null, string certStoreName = null, string sslCtIdentifier = null, string sslCtStoreName = null, Guid? appId = null, uint? revocationFreshnessTime = null, uint? urlRetrievalTimeout = null, bool? verifyClientCertRevocation = null, bool? verifyRevocationWithCachedClientCertOnly = null, bool? usageCheck = null, bool? dsMapperUsage = null, bool? clientCertNegotation = null)
+		public void SSLCert(string ipPort, string certHash = null, string certStoreName = null, string sslCtlIdentifier = null, string sslCtlStoreName = null, Guid? appId = null, uint? revocationFreshnessTime = null, uint? urlRetrievalTimeout = null, bool? verifyClientCertRevocation = null, bool? verifyRevocationWithCachedClientCertOnly = null, bool? usageCheck = null, bool? dsMapperUsage = null, bool? clientCertNegotation = null)
 		{
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
@@ -50,7 +55,7 @@ namespace Ignite.SharpNetSH
 			throw new NotImplementedException();
 		}
 
-		public void Initialize(String priorText, IConsoleHarness harness)
+		public void Initialize(String priorText, IExecutionHarness harness)
 		{
 			_priorText = priorText + " " + ActionName;
 			_harness = harness;

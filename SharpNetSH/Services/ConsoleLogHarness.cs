@@ -2,7 +2,7 @@
 
 namespace Ignite.SharpNetSH.Services
 {
-	public class ConsoleLogHarness : IConsoleHarness
+	public class ConsoleLogHarness : IExecutionHarness
 	{
 		public void Execute(string action)
 		{
