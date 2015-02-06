@@ -23,14 +23,36 @@ namespace Ignite.SharpNetSH
 			return action;
 		}
 
-		public void CacheState(string url = null)
+		public IEnumerable<CacheEntry> CacheState(string url = null)
 		{
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
 			var text = _priorText + " cachestate";
 			if (!String.IsNullOrWhiteSpace(url)) text += " url=" + url;
-			_harness.Execute(text);
+			var rawOutput = _harness.Execute(text);
+
+			var entries = new List<CacheEntry>();
+			if (rawOutput == null || rawOutput.Contains("There were no cache entries corresponding to the provided URL")) return entries;
+
+			var currentEntryRows = new List<string>();
+			foreach (var line in rawOutput.Skip(3))
+			{
+				if (String.IsNullOrWhiteSpace(line))
+				{
+					if (currentEntryRows.Count > 0)
+					{
+						var entry = new CacheEntry();
+						ProcessRawCertificateData(entry, @":\s+", currentEntryRows);
+						entries.Add(entry);
+					}
+					currentEntryRows = new List<string>();
+				}
+				else
+					currentEntryRows.Add(line);
+			}
+
+			return entries;
 		}
 
 		public void IpListen()
@@ -63,7 +85,7 @@ namespace Ignite.SharpNetSH
 			var rawOutput = _harness.Execute(text);
 
 			var certificates = new List<SSLCertificate>();
-			if (rawOutput == null) return certificates;
+			if (rawOutput == null || rawOutput.Contains("The system cannot find the file specified.")) return certificates;
 
 			var currentCertificateRows = new List<string>();
 			foreach (var line in rawOutput.Skip(3))
@@ -71,7 +93,11 @@ namespace Ignite.SharpNetSH
 				if (String.IsNullOrWhiteSpace(line))
 				{
 					if (currentCertificateRows.Count > 0)
-						certificates.Add(ProcessRawCertificateData(currentCertificateRows));
+					{
+						var certificate = new SSLCertificate();
+						ProcessRawCertificateData(certificate, @"\s+:\s+", currentCertificateRows);
+						certificates.Add(certificate);
+					}
 					currentCertificateRows = new List<string>();
 				}
 				else
@@ -79,25 +105,6 @@ namespace Ignite.SharpNetSH
 			}
 
 			return certificates;
-		}
-
-		private SSLCertificate ProcessRawCertificateData(IEnumerable<String> lines)
-		{
-			var certificate = new SSLCertificate();
-			foreach (var line in lines)
-			{
-				var split = Regex.Split(line.Trim(), @"\s+:\s+");
-				if (split.Length != 2) 
-					throw new Exception("Invalid Raw Certificate Data.  Line: " + line);
-
-				var title = split[0];
-				var value = split[1];
-				if (value.ToLower() == "(null)")
-					value = null;
-
-				certificate.AddValue(title, value);
-			}
-			return certificate;
 		}
 
 		public void Timeout()
@@ -124,6 +131,24 @@ namespace Ignite.SharpNetSH
 			_priorText = priorText + " " + ActionName;
 			_harness = harness;
 			_initialized = true;
+		}
+
+		private void ProcessRawCertificateData(OutputObject outputObject, String splitRegex, IEnumerable<String> lines)
+		{
+			foreach (var line in lines)
+			{
+				var regex = new Regex(splitRegex);
+				var split = regex.Split(line.Trim(), 2);
+				if (split.Length != 2)
+					throw new Exception("Invalid Raw Certificate Data.  Line: " + line);
+
+				var title = split[0];
+				var value = split[1];
+				if (value.ToLower() == "(null)")
+					value = null;
+
+				outputObject.AddValue(title, value);
+			}
 		}
 	}
 }

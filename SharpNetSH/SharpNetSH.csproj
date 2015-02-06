@@ -61,6 +61,8 @@
     <Compile Include="Interfaces\INetSH.cs" />
     <Compile Include="Interfaces\IShowAction.cs" />
     <Compile Include="NetSh.cs" />
+    <Compile Include="Objects\CacheEntry.cs" />
+    <Compile Include="Objects\OutputObject.cs" />
     <Compile Include="Objects\SSLCertificate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
