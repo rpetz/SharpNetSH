@@ -2,7 +2,7 @@
 
 namespace Ignite.SharpNetSH
 {
-	public interface IInitializable
+	internal interface IInitializable
 	{
 		void Initialize(String priorText, IExecutionHarness harness);
 	}

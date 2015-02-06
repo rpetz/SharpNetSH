@@ -2,13 +2,23 @@
 
 namespace Ignite.SharpNetSH
 {
-	public class ShowAction : IShowAction, IAction
+	internal class ShowAction : IShowAction, IAction
 	{
 		private String _priorText;
 		private Boolean _initialized;
 		private IExecutionHarness _harness;
 
 		public string ActionName { get { return "show"; } }
+
+		private ShowAction()
+		{ }
+
+		internal static IShowAction CreateAction(String priorText, IExecutionHarness harness)
+		{
+			var action = new ShowAction();
+			action.Initialize(priorText, harness);
+			return action;
+		}
 
 		public void CacheState(string url = null)
 		{

@@ -2,13 +2,23 @@ using System;
 
 namespace Ignite.SharpNetSH
 {
-	public class AddAction : IAddAction, IAction
+	internal class AddAction : IAddAction, IAction
 	{
 		private String _priorText;
 		private Boolean _initialized;
 		private IExecutionHarness _harness;
 
 		public string ActionName { get { return "add"; } }
+
+		private AddAction()
+		{ }
+
+		internal static IAddAction CreateAction(String priorText, IExecutionHarness harness)
+		{
+			var action = new AddAction();
+			action.Initialize(priorText, harness);
+			return action;
+		}
 
 		public void IPListen(string address)
 		{

@@ -2,7 +2,7 @@
 
 namespace Ignite.SharpNetSH
 {
-	public static class ExtensionMethods
+	internal static class ExtensionMethods
 	{
 		public static String ToYesNo(this bool? value)
 		{ return ((bool) value ? "yes" : "no"); }

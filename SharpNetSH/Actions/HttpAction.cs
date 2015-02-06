@@ -2,13 +2,23 @@
 
 namespace Ignite.SharpNetSH
 {
-	public class HttpAction : IHttpAction, IAction
+	internal class HttpAction : IHttpAction, IAction
 	{
 		private String _priorText;
 		private IExecutionHarness _harness;
 		private Boolean _initialized;
 
 		public string ActionName { get { return "http"; } }
+
+		private HttpAction()
+		{ }
+
+		internal static IHttpAction CreateAction(String priorText, IExecutionHarness harness)
+		{
+			var action = new HttpAction();
+			action.Initialize(priorText, harness);
+			return action;
+		}
 
 		public IAddAction Add
 		{
@@ -17,9 +27,7 @@ namespace Ignite.SharpNetSH
 				if (!_initialized)
 					throw new Exception("Actions must be initialized prior to use.");
 
-				var action = new AddAction();
-				action.Initialize(_priorText, _harness);
-				return action;
+				return AddAction.CreateAction(_priorText, _harness);
 			}
 		}
 
@@ -30,9 +38,7 @@ namespace Ignite.SharpNetSH
 				if (!_initialized)
 					throw new Exception("Actions must be initialized prior to use.");
 
-				var action = new DeleteAction();
-				action.Initialize(_priorText, _harness);
-				return action;
+				return DeleteAction.CreateAction(_priorText, _harness);
 			}
 		}
 
@@ -43,9 +49,7 @@ namespace Ignite.SharpNetSH
 				if (!_initialized)
 					throw new Exception("Actions must be initialized prior to use.");
 
-				var action = new FlushAction();
-				action.Initialize(_priorText, _harness);
-				return action;
+				return FlushAction.CreateAction(_priorText, _harness);
 			}
 		}
 		public IShowAction Show
@@ -55,9 +59,7 @@ namespace Ignite.SharpNetSH
 				if (!_initialized)
 					throw new Exception("Actions must be initialized prior to use.");
 
-				var action = new ShowAction();
-				action.Initialize(_priorText, _harness);
-				return action;
+				return ShowAction.CreateAction(_priorText, _harness);
 			}
 		}
 

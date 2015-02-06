@@ -2,7 +2,7 @@
 
 namespace Ignite.SharpNetSH
 {
-	public interface IActionNameProvider
+	internal interface IActionNameProvider
 	{
 		/// <summary>
 		/// Gets the text to output to the netsh command

@@ -9,15 +9,7 @@
 			_harness = harness;
 		}
 
-		public IHttpAction Http
-		{
-			get
-			{
-				var http = new HttpAction();
-				http.Initialize(ActionName, _harness);
-				return http;
-			}
-		}
+		public IHttpAction Http { get { return HttpAction.CreateAction(ActionName, _harness); } }
 
 		public string ActionName { get { return "netsh"; } }
 	}

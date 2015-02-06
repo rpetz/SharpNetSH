@@ -2,13 +2,23 @@
 
 namespace Ignite.SharpNetSH
 {
-	public class DeleteAction : IDeleteAction, IAction
+	internal class DeleteAction : IDeleteAction, IAction
 	{
 		private String _priorText;
 		private Boolean _initialized;
 		private IExecutionHarness _harness;
 
 		public string ActionName { get { return "delete"; } }
+
+		private DeleteAction()
+		{ }
+
+		internal static IDeleteAction CreateAction(String priorText, IExecutionHarness harness)
+		{
+			var action = new DeleteAction();
+			action.Initialize(priorText, harness);
+			return action;
+		}
 
 		public void Cache(string url, bool? recursive = null)
 		{

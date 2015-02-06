@@ -1,15 +1,24 @@
 ﻿using System;
-using System.Text;
 
 namespace Ignite.SharpNetSH
 {
-	public class FlushAction : IFlushAction, IAction
+	internal class FlushAction : IFlushAction, IAction
 	{
 		private String _priorText;
 		private Boolean _initialized;
 		private IExecutionHarness _harness;
 
 		public string ActionName { get { return "flush"; } }
+
+		private FlushAction()
+		{ }
+
+		internal static IFlushAction CreateAction(String priorText, IExecutionHarness harness)
+		{
+			var action = new FlushAction();
+			action.Initialize(priorText, harness);
+			return action;
+		}
 
 		public void LogBuffer()
 		{
