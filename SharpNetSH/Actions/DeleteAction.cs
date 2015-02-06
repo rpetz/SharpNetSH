@@ -15,7 +15,7 @@ namespace Ignite.SharpNetSH
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			var text = _priorText + " url=" + url;
+			var text = _priorText + " cache url=" + url;
 			if (recursive != null)
 				text += " recursive=" + recursive.ToYesNo();
 
@@ -27,7 +27,8 @@ namespace Ignite.SharpNetSH
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			throw new NotImplementedException();
+			var text = _priorText + " iplisten address=" + address;
+			_harness.Execute(text);
 		}
 
 		public void SSLCert(string ipPort)
@@ -35,7 +36,8 @@ namespace Ignite.SharpNetSH
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			throw new NotImplementedException();
+			var text = _priorText + " sslcert ipport=" + ipPort;
+			_harness.Execute(text);
 		}
 
 		public void Timeout(Timeout timeoutType)
@@ -43,7 +45,8 @@ namespace Ignite.SharpNetSH
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			throw new NotImplementedException();
+			var text = _priorText + " timeout timeouttype=" + timeoutType.ToString().ToLower();
+			_harness.Execute(text);
 		}
 
 		public void UrlAcl(string url)
@@ -51,7 +54,8 @@ namespace Ignite.SharpNetSH
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			throw new NotImplementedException();
+			var text = _priorText + " urlacl url=" + url;
+			_harness.Execute(text);
 		}
 
 		public void Initialize(String priorText, IExecutionHarness harness)
