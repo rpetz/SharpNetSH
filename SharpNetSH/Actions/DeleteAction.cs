@@ -15,7 +15,11 @@ namespace Ignite.SharpNetSH
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			throw new NotImplementedException();
+			var text = _priorText + " url=" + url;
+			if (recursive != null)
+				text += " recursive=" + recursive.ToYesNo();
+
+			_harness.Execute(text);
 		}
 
 		public void IpListen(string address)

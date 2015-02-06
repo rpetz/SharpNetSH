@@ -10,40 +10,35 @@ namespace Ignite.SharpNetSH.Test
 		public void VerifyCacheOutput()
 		{
 			var harness = new StringHarness();
-			new NetSH(harness).Http.Flush.LogBuffer();
-			Assert.AreEqual(harness.Value, "netsh http flush logbuffer");
+			Assert.Fail("Test not implemented");
 		}
 
 		[TestMethod]
 		public void VerifyIpListenOutput()
 		{
 			var harness = new StringHarness();
-			new NetSH(harness).Http.Flush.LogBuffer();
-			Assert.AreEqual(harness.Value, "netsh http flush logbuffer");
+			Assert.Fail("Test not implemented");
 		}
 
 		[TestMethod]
 		public void VerifySSLCertOutput()
 		{
 			var harness = new StringHarness();
-			new NetSH(harness).Http.Flush.LogBuffer();
-			Assert.AreEqual(harness.Value, "netsh http flush logbuffer");
+			Assert.Fail("Test not implemented");
 		}
 
 		[TestMethod]
 		public void VerifyTimeoutOutput()
 		{
 			var harness = new StringHarness();
-			new NetSH(harness).Http.Flush.LogBuffer();
-			Assert.AreEqual(harness.Value, "netsh http flush logbuffer");
+			Assert.Fail("Test not implemented");
 		}
 
 		[TestMethod]
 		public void VerifyUrlAclOutput()
 		{
 			var harness = new StringHarness();
-			new NetSH(harness).Http.Flush.LogBuffer();
-			Assert.AreEqual(harness.Value, "netsh http flush logbuffer");
+			Assert.Fail("Test not implemented");
 		}
 	}
 }

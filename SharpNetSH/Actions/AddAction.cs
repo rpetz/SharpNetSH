@@ -42,11 +42,11 @@ namespace Ignite.SharpNetSH
 			if (revocationFreshnessTime != null) text += " revocationfreshnesstime=" + revocationFreshnessTime;
 			if (urlRetrievalTimeout != null) text += " urlretrievaltimeout=" + urlRetrievalTimeout;
 
-			if (verifyClientCertRevocation != null) text += " verifyclientcertrevocation=" + ((bool)verifyClientCertRevocation ? "enabled" : "disabled");
-			if (verifyRevocationWithCachedClientCertOnly != null) text += " verifyrevocationwithcachedclientcertonly=" + ((bool)verifyRevocationWithCachedClientCertOnly ? "enabled" : "disabled");
-			if (usageCheck != null) text += " usagecheck=" + ((bool)usageCheck ? "enabled" : "disabled");
-			if (dsMapperUsage != null) text += " dsmapperusage=" + ((bool)dsMapperUsage ? "enabled" : "disabled");
-			if (clientCertNegotation != null) text += " clientcertnegotation=" + ((bool)clientCertNegotation ? "enabled" : "disabled");
+			if (verifyClientCertRevocation != null) text += " verifyclientcertrevocation=" + verifyClientCertRevocation.ToEnabledDisabled();
+			if (verifyRevocationWithCachedClientCertOnly != null) text += " verifyrevocationwithcachedclientcertonly=" + verifyRevocationWithCachedClientCertOnly.ToEnabledDisabled();
+			if (usageCheck != null) text += " usagecheck=" + usageCheck.ToEnabledDisabled();
+			if (dsMapperUsage != null) text += " dsmapperusage=" + dsMapperUsage.ToEnabledDisabled();
+			if (clientCertNegotation != null) text += " clientcertnegotation=" + clientCertNegotation.ToEnabledDisabled();
 
 			_harness.Execute(text);
 		}
@@ -76,8 +76,8 @@ namespace Ignite.SharpNetSH
 				throw new Exception("Actions must be initialized prior to use.");
 
 			var text = _priorText + " urlacl url=" + url + " user=" + user;
-			if (listenUrls != null) text += " listen=" + ((bool)listenUrls ? "yes" : "no");
-			if (delegateUrls != null) text += " delegate=" + ((bool)delegateUrls ? "yes" : "no");
+			if (listenUrls != null) text += " listen=" + listenUrls.ToYesNo();
+			if (delegateUrls != null) text += " delegate=" + delegateUrls.ToYesNo();
 			_harness.Execute(text);
 		}
 

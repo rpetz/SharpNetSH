@@ -11,7 +11,7 @@ namespace Ignite.SharpNetSH.Test
 		{
 			var harness = new StringHarness();
 			new NetSH(harness).Http.Flush.LogBuffer();
-			Assert.AreEqual(harness.Value, "netsh http flush logbuffer");
+			Assert.AreEqual("netsh http flush logbuffer", harness.Value);
 		}
 	}
 }

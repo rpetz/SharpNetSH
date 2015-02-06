@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using Ignite.SharpNetSH.Test.Spike;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,7 +13,7 @@ namespace Ignite.SharpNetSH.Test
 		{
 			var harness = new StringHarness();
 			new NetSH(harness).Http.Add.IPListen("test");
-			Assert.AreEqual(harness.Value, "netsh http add iplisten address=test");
+			Assert.AreEqual("netsh http add iplisten address=test", harness.Value);
 		}
 
 		[TestMethod]
@@ -58,31 +55,32 @@ namespace Ignite.SharpNetSH.Test
 		public void VerifyTimeoutOutput()
 		{
 			var harness = new StringHarness();
-			Assert.AreEqual(harness.Value, "netsh http add ");
+			new NetSH(harness).Http.Add.Timeout(Timeout.HeaderWaitTimeout, 1);
+			Assert.AreEqual("netsh http add timeout timeouttype=headerwaittimeout value=1", harness.Value);
+			new NetSH(harness).Http.Add.Timeout(Timeout.IdleConnectionTimeout, 1);
+			Assert.AreEqual("netsh http add timeout timeouttype=idleconnectiontimeout value=1", harness.Value);
 		}
 
 		[TestMethod]
 		public void VerifyUrlAclOutput()
 		{
 			var harness = new StringHarness();
-			Assert.AreEqual(harness.Value, "netsh http add ");
-		}
+			var netsh = new NetSH(harness);
 
-		private object[] MapParameters(MethodBase method, IEnumerable<KeyValuePair<string, object>> namedParameters)
-		{
-			var paramNames = method.GetParameters().Select(p => p.Name).ToArray();
-			var parameters = new object[paramNames.Length];
-			for (var i = 0; i < parameters.Length; ++i)
-			{
-				parameters[i] = Type.Missing;
-			}
-			foreach (var item in namedParameters)
-			{
-				var paramName = item.Key;
-				var paramIndex = Array.IndexOf(paramNames, paramName);
-				parameters[paramIndex] = item.Value;
-			}
-			return parameters;
+			netsh.Http.Add.UrlAcl("testurl", "testuser", false, false);
+			Assert.AreEqual("netsh http add urlacl url=testurl user=testuser listen=no delegate=no", harness.Value);
+
+			netsh.Http.Add.UrlAcl("testurl", "testuser", false, true);
+			Assert.AreEqual("netsh http add urlacl url=testurl user=testuser listen=no delegate=yes", harness.Value);
+
+			netsh.Http.Add.UrlAcl("testurl", "testuser", true, false);
+			Assert.AreEqual("netsh http add urlacl url=testurl user=testuser listen=yes delegate=no", harness.Value);
+
+			netsh.Http.Add.UrlAcl("testurl", "testuser", true, true);
+			Assert.AreEqual("netsh http add urlacl url=testurl user=testuser listen=yes delegate=yes", harness.Value);
+
+			netsh.Http.Add.UrlAcl("testurl", "testuser", "testsddl");
+			Assert.AreEqual("netsh http add urlacl url=testurl user=testuser sddl=testsddl", harness.Value);
 		}
 	}
 }

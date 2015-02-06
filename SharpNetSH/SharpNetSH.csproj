@@ -49,6 +49,7 @@
     <Compile Include="Actions\DeleteAction.cs" />
     <Compile Include="Actions\FlushAction.cs" />
     <Compile Include="Actions\HttpAction.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Interfaces\IAction.cs" />
     <Compile Include="Interfaces\IActionNameProvider.cs" />
     <Compile Include="Interfaces\IAddAction.cs" />
