@@ -5,7 +5,5 @@ A simple netsh library for C#
 
 #####TODO
 
-- Cleanup the encapsulation
-- Finish fleshing out the various commands
-- Finish unit tests
+- Build the command line harness
 - Release 1.0.0 to nuget

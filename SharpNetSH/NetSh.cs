@@ -1,6 +1,6 @@
 ﻿namespace Ignite.SharpNetSH
 {
-	public class NetSH : INetSH, IActionNameProvider
+	public class NetSH : INetSH
 	{
 		private readonly IExecutionHarness _harness;
 
@@ -9,8 +9,6 @@
 			_harness = harness;
 		}
 
-		public IHttpAction Http { get { return HttpAction.CreateAction(ActionName, _harness); } }
-
-		public string ActionName { get { return "netsh"; } }
+		public IHttpAction Http { get { return HttpAction.CreateAction("netsh", _harness); } }
 	}
 }

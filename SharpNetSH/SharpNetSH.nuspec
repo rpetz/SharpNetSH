@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SharpNetSH</id>
-    <version>1.0.1-alpha</version>
+    <version>$version$</version>
     <authors>Robert Petz</authors>
     <owners>Robert Petz</owners>
     <licenseUrl>https://raw.githubusercontent.com/rpetz/SharpNetSH/master/LICENSE</licenseUrl>

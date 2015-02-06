@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ignite.SharpNetSH.Services
+namespace Ignite.SharpNetSH
 {
 	public class ConsoleLogHarness : IExecutionHarness
 	{
