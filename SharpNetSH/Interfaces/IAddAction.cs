@@ -8,8 +8,8 @@ namespace Ignite.SharpNetSH
 		/// Specifies an IPv4 or IPv6 address to be added to the IP listen list. 
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307219(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
-		/// <param name="address"></param>
-		void IPListen(String address);
+		/// <param name="ipAddress"></param>
+		void IPListen(String ipAddress);
 
 		/// <summary>
 		/// Adds a new Secure Sockets Layer (SSL) server certificate binding and the corresponding client certificate policies for an IP address and port.

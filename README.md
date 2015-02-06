@@ -9,3 +9,4 @@ A simple netsh library for C#
 - Finish ShowAction responses
 - Finish AddAction responses
 - Finish DeleteAction responses
+- Need to handle error cases (like adding an existing IP Address to Http.Add.IpListen)

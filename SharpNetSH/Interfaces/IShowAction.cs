@@ -16,7 +16,7 @@ namespace Ignite.SharpNetSH
 		/// Lists all IP addresses in the IP listen list. The IP listen list is used to scope the list of addresses to which the HTTP service binds. "0.0.0.0" means any IPv4 address and "::" means any IPv6 address.
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307241(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
-		void IpListen();
+		IEnumerable<String> IpListen();
 
 		/// <summary>
 		/// Shows a snapshot of the HTTP service.

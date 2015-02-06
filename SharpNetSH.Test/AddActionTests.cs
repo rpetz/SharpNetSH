@@ -13,7 +13,7 @@ namespace Ignite.SharpNetSH.Test
 		{
 			var harness = new StringHarness();
 			new NetSH(harness).Http.Add.IPListen("test");
-			Assert.AreEqual("netsh http add iplisten address=test", harness.Value);
+			Assert.AreEqual("netsh http add iplisten ipaddress=test", harness.Value);
 		}
 
 		[TestMethod]

@@ -20,15 +20,15 @@ namespace Ignite.SharpNetSH
 			return action;
 		}
 
-		public void IPListen(string address)
+		public void IPListen(string ipAddress)
 		{
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
 			var text = _priorText + " iplisten";
 
-			if (!String.IsNullOrWhiteSpace(address))
-				text += " address=" + address;
+			if (!String.IsNullOrWhiteSpace(ipAddress))
+				text += " ipaddress=" + ipAddress;
 
 			_harness.Execute(text);
 		}

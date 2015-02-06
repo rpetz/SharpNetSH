@@ -32,12 +32,12 @@ namespace Ignite.SharpNetSH
 			_harness.Execute(text);
 		}
 
-		public void IpListen(string address)
+		public void IpListen(string ipAddress)
 		{
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
-			var text = _priorText + " iplisten address=" + address;
+			var text = _priorText + " iplisten ipaddress=" + ipAddress;
 			_harness.Execute(text);
 		}
 

@@ -55,13 +55,18 @@ namespace Ignite.SharpNetSH
 			return entries;
 		}
 
-		public void IpListen()
+		public IEnumerable<String> IpListen()
 		{
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
 			var text = _priorText + " iplisten";
-			_harness.Execute(text);
+			var rawOutput = _harness.Execute(text);
+
+			var entries = new List<String>();
+			if (rawOutput == null) return entries;
+			entries = rawOutput.Skip(3).Where(line => !String.IsNullOrWhiteSpace(line)).Select(line => line.Trim()).ToList();
+			return entries;
 		}
 
 		public void ServiceState(View? view = null, bool? verbose = null)

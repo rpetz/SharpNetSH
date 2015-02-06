@@ -23,7 +23,7 @@ namespace Ignite.SharpNetSH.Test
 		{
 			var harness = new StringHarness();
 			new NetSH(harness).Http.Delete.IpListen("testaddress");
-			Assert.AreEqual("netsh http delete iplisten address=testaddress", harness.Value);
+			Assert.AreEqual("netsh http delete iplisten ipaddress=testaddress", harness.Value);
 		}
 
 		[TestMethod]
