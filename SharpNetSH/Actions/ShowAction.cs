@@ -43,7 +43,7 @@ namespace Ignite.SharpNetSH
 					if (currentEntryRows.Count > 0)
 					{
 						var entry = new CacheEntry();
-						ProcessRawCertificateData(entry, @":\s+", currentEntryRows);
+						ProcessRawData(entry, @":\s+", currentEntryRows);
 						entries.Add(entry);
 					}
 					currentEntryRows = new List<string>();
@@ -100,7 +100,7 @@ namespace Ignite.SharpNetSH
 					if (currentCertificateRows.Count > 0)
 					{
 						var certificate = new SSLCertificate();
-						ProcessRawCertificateData(certificate, @"\s+:\s+", currentCertificateRows);
+						ProcessRawData(certificate, @"\s+:\s+", currentCertificateRows);
 						certificates.Add(certificate);
 					}
 					currentCertificateRows = new List<string>();
@@ -112,13 +112,18 @@ namespace Ignite.SharpNetSH
 			return certificates;
 		}
 
-		public void Timeout()
+		public TimeoutEntries Timeout()
 		{
 			if (!_initialized)
 				throw new Exception("Actions must be initialized prior to use.");
 
 			var text = _priorText + " timeout";
-			_harness.Execute(text);
+			var rawOutput = _harness.Execute(text);
+
+			var timeoutEntries = new TimeoutEntries();
+			ProcessRawData(timeoutEntries, @":\s+", rawOutput.Skip(3).Where(x => !String.IsNullOrWhiteSpace(x)));
+
+			return timeoutEntries;
 		}
 
 		public void UrlAcl(string url = null)
@@ -138,7 +143,7 @@ namespace Ignite.SharpNetSH
 			_initialized = true;
 		}
 
-		private void ProcessRawCertificateData(OutputObject outputObject, String splitRegex, IEnumerable<String> lines)
+		private void ProcessRawData(OutputObject outputObject, String splitRegex, IEnumerable<String> lines)
 		{
 			foreach (var line in lines)
 			{

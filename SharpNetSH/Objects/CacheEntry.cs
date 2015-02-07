@@ -22,7 +22,7 @@ namespace Ignite.SharpNetSH
 				case "hit count": HitCount = ulong.Parse(value); break;
 				case "force disconnect after serving": ForceDisconnectAfterServing = bool.Parse(value); break;
 				default:
-					throw new Exception("Invalid Raw Certificate Data. Title: " + title + ", Value: " + value);
+					throw new Exception("Invalid Raw Cache Data. Title: " + title + ", Value: " + value);
 			}
 		}
 

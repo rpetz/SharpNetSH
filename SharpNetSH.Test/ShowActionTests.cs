@@ -9,7 +9,7 @@ namespace Ignite.SharpNetSH.Test
 		[TestMethod]
 		public void VerifyCacheStateOutput()
 		{
-			var result = new NetSH(new CommandLineHarness()).Http.Show.IpListen();
+			var result = new NetSH(new CommandLineHarness()).Http.Show.Timeout();
 
 			var harness = new StringHarness();
 			new NetSH(harness).Http.Show.CacheState("testurl");

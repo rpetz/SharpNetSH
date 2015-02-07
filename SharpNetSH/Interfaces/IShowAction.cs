@@ -37,7 +37,7 @@ namespace Ignite.SharpNetSH
 		/// Shows the timeout values of the service (in seconds).
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307244(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
-		void Timeout();
+		TimeoutEntries Timeout();
 
 		/// <summary>
 		/// Lists DACLs for the specified reserved URL or all reserved URLs.
