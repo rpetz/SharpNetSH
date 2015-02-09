@@ -1,4 +1,4 @@
-﻿namespace Ignite.SharpNetSH
+﻿namespace Ignite.SharpNetSH.HTTP
 {
 	public interface IHttpAction
 	{

@@ -1,4 +1,6 @@
-﻿namespace Ignite.SharpNetSH
+﻿using Ignite.SharpNetSH.HTTP;
+
+namespace Ignite.SharpNetSH
 {
 	public interface INetSH
 	{

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Ignite.SharpNetSH
+namespace Ignite.SharpNetSH.HTTP
 {
 	public enum Timeout
 	{

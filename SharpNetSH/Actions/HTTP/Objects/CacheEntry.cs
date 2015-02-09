@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Ignite.SharpNetSH
+namespace Ignite.SharpNetSH.HTTP
 {
-	public class CacheEntry : OutputObject
+	public sealed class CacheEntry : OutputObject
 	{
 		internal override void AddValue(String title, String value)
 		{

@@ -3,7 +3,7 @@
 namespace Ignite.SharpNetSH
 {
 	[AttributeUsage(AttributeTargets.Parameter)]
-	public class ParameterNameAttribute : Attribute
+	internal class ParameterNameAttribute : Attribute
 	{
 		public ParameterNameAttribute(string parameterName) {
 			ParameterName = parameterName;

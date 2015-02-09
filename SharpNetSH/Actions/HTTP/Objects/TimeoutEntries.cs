@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Ignite.SharpNetSH
+namespace Ignite.SharpNetSH.HTTP
 {
-	public class TimeoutEntries : OutputObject
+	public sealed class TimeoutEntries : OutputObject
 	{
 		public ushort IdleConnectionTimeout { get; private set; }
 		public ushort HeaderWaitTimeout { get; private set; }

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Ignite.SharpNetSH
+namespace Ignite.SharpNetSH.HTTP
 {
-	public class SSLCertificate : OutputObject
+	public sealed class SSLCertificate : OutputObject
 	{
 		internal override void AddValue(String title, String value)
 		{

@@ -5,7 +5,7 @@ using System.Runtime.Remoting.Proxies;
 
 namespace Ignite.SharpNetSH
 {
-	public class ActionProxy<TInterface> : RealProxy
+	internal class ActionProxy<TInterface> : RealProxy
 	{
 		private readonly String _priorText;
 		private readonly String _actionName;
