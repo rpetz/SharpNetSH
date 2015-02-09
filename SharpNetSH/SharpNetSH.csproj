@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\HTTP\HttpAction.cs" />
+    <Compile Include="Attributes\BooleanValueAttribute.cs" />
     <Compile Include="Attributes\MethodNameAttribute.cs" />
     <Compile Include="Attributes\ParameterNameAttribute.cs" />
     <Compile Include="Interfaces\IOutputObject.cs" />

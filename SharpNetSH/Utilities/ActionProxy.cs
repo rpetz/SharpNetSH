@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
@@ -25,9 +27,42 @@ namespace Ignite.SharpNetSH
 		{
 			var methodCall = (IMethodCallMessage)msg;
 			var method = (MethodInfo)methodCall.MethodBase;
-			var result = method.ProcessParameters(methodCall.InArgs);
+			var result = ProcessParameters(method, methodCall);
 			_harness.Execute(_priorText + " " + _actionName + " " + result);
 			return new ReturnMessage(null, null, 0, methodCall.LogicalCallContext, methodCall);
+		}
+
+		private String ProcessParameters(MethodBase method, IMethodCallMessage methodCall)
+		{
+			var results = new List<String>();
+			var i = 0;
+			foreach (var value in methodCall.InArgs)
+			{
+				var parameter = method.GetParameters().FirstOrDefault(x => x.Name == methodCall.GetInArgName(i));
+				var parameterName = parameter.GetParameterName();
+				i++;
+
+				if (value == null) continue;
+
+				// We have to process booleans differently based upon the configured boolean type (i.e. Yes/No, Enabled/Disabled, True/False outputs) 
+				if (value is Boolean?)
+				{
+					results.Add(parameterName + "=" + parameter.GetBooleanType().GetBooleanValue((Boolean) value));
+					continue;
+				}
+
+				// Enums might be configured with a custom description to change how to output their text
+				if (value.GetType().IsEnum)
+				{
+					results.Add(parameterName + "=" + value.GetDescription());
+					continue;
+				}
+
+				// Otherwise it's a stringable (i.e. ToString()) property
+				results.Add(parameterName + "=" + value);
+			}
+			if (results.Count == 0) return method.GetMethodName();
+			return method.GetMethodName() + " " + results.Aggregate((x, y) => String.IsNullOrWhiteSpace(x) ? y : x + " " + y);
 		}
 	}
 }

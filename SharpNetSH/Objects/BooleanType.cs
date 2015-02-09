@@ -2,7 +2,9 @@
 {
 	public enum BooleanType
 	{
+		[BooleanValue("yes", "no")]
 		YesNo,
-		EnableDisable
+		[BooleanValue("enabled", "disabled")]
+		EnabledDisabled
 	}
 }
