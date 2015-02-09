@@ -1,7 +1,7 @@
 # SharpNetSH
 A simple netsh library for C#
 
-#####This is version 1.0, and theoretically should work with all NetSH commands, however I have not yet tested them all and currently it only supports execute-only (I.E. none of the NetSH.Http.Show commands will return anything back at the moment)
+#####The Attribute branch is migrating the codebase from hard coded method call building to dynamic proxies.  Essentially changing the current unmaintainable codebase to convention over configuration.
 
 ###TODO
 
