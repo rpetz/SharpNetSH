@@ -27,7 +27,7 @@ namespace Ignite.SharpNetSH
 				if (!_initialized)
 					throw new Exception("Actions must be initialized prior to use.");
 
-				return ActionProxy<IAddAction>.Create(new AddAction(), _priorText, _harness);
+				return ActionProxy<IAddAction>.Create("add", _priorText, _harness);
 			}
 		}
 
@@ -38,7 +38,7 @@ namespace Ignite.SharpNetSH
 				if (!_initialized)
 					throw new Exception("Actions must be initialized prior to use.");
 
-				return ActionProxy<IDeleteAction>.Create(new DeleteAction(), _priorText, _harness);
+				return ActionProxy<IDeleteAction>.Create("delete", _priorText, _harness);
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace Ignite.SharpNetSH
 				if (!_initialized)
 					throw new Exception("Actions must be initialized prior to use.");
 
-				return ActionProxy<IFlushAction>.Create(new FlushAction(), _priorText, _harness);
+				return ActionProxy<IFlushAction>.Create("flush", _priorText, _harness);
 			}
 		}
 		public IShowAction Show
@@ -59,7 +59,7 @@ namespace Ignite.SharpNetSH
 				if (!_initialized)
 					throw new Exception("Actions must be initialized prior to use.");
 
-				return ActionProxy<IShowAction>.Create(new ShowAction(), _priorText, _harness);
+				return ActionProxy<IShowAction>.Create("show", _priorText, _harness);
 			}
 		}
 

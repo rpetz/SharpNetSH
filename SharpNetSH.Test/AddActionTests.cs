@@ -58,11 +58,10 @@ namespace Ignite.SharpNetSH.Test
 													clientCertNegotiation:						(bool?) values[12]);
 
 				var value = harness.Value;
-				var parameters = typeof (AddAction).GetMethod("SSLCert").GetParameters();
+				var parameters = typeof (IAddAction).GetMethod("SSLCert").GetParameters();
 				var i = 0;
 				parameters.ToList().ForEach(x =>
 				{
-
 					var type = x.ParameterType;
 					var name = x.Name.ToLower();
 
@@ -74,17 +73,11 @@ namespace Ignite.SharpNetSH.Test
 					}
 
 					if (type == typeof (string))
-					{
 						Assert.IsTrue(value.Contains(name + "=" + "test" + name));
-					}
 					else if (type == typeof (Guid))
-					{
 						Assert.IsTrue(value.Contains(name + "={11111111-1111-1111-1111-111111111111}"));
-					}
 					else if (type == typeof (bool))
-					{
 						Assert.IsTrue(value.Contains(name + "=enabled") || value.Contains(name + "=disabled"));
-					}
 					i++;
 				});
 			}
