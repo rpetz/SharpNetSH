@@ -2,12 +2,12 @@
 
 namespace Ignite.SharpNetSH.HTTP
 {
-	public sealed class TimeoutEntries : OutputObject
+	public sealed class TimeoutEntries : IOutputObject
 	{
 		public ushort IdleConnectionTimeout { get; private set; }
 		public ushort HeaderWaitTimeout { get; private set; }
 
-		internal override void AddValue(string title, string value)
+		void IOutputObject.AddValue(String title, String value)
 		{
 			switch (title.ToLower())
 			{

@@ -48,6 +48,7 @@
     <Compile Include="Actions\HTTP\HttpAction.cs" />
     <Compile Include="Attributes\MethodNameAttribute.cs" />
     <Compile Include="Attributes\ParameterNameAttribute.cs" />
+    <Compile Include="Interfaces\IOutputObject.cs" />
     <Compile Include="Utilities\ExtensionMethods.cs" />
     <Compile Include="Interfaces\IAction.cs" />
     <Compile Include="Interfaces\IActionNameProvider.cs" />
@@ -63,7 +64,6 @@
     <Compile Include="Utilities\ActionProxy.cs" />
     <Compile Include="Objects\BooleanType.cs" />
     <Compile Include="Actions\HTTP\Objects\CacheEntry.cs" />
-    <Compile Include="Utilities\OutputObject.cs" />
     <Compile Include="Actions\HTTP\Objects\SSLCertificate.cs" />
     <Compile Include="Actions\HTTP\Objects\TimeoutEntries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

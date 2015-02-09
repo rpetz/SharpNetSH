@@ -2,9 +2,9 @@
 
 namespace Ignite.SharpNetSH.HTTP
 {
-	public sealed class SSLCertificate : OutputObject
+	public sealed class SSLCertificate : IOutputObject
 	{
-		internal override void AddValue(String title, String value)
+		void IOutputObject.AddValue(String title, String value)
 		{
 			switch (title.ToLower())
 			{

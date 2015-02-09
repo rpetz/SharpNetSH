@@ -3,9 +3,9 @@ using System.Globalization;
 
 namespace Ignite.SharpNetSH.HTTP
 {
-	public sealed class CacheEntry : OutputObject
+	public sealed class CacheEntry : IOutputObject
 	{
-		internal override void AddValue(String title, String value)
+		void IOutputObject.AddValue(String title, String value)
 		{
 			switch (title.ToLower())
 			{
