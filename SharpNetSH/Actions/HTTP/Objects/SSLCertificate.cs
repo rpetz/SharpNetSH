@@ -26,6 +26,9 @@ namespace Ignite.SharpNetSH.HTTP
 			}
 		}
 
+		internal SSLCertificate()
+		{ }
+
 		public string IpPort { get; protected set; }
 		public string CertificateHash { get; protected set; }
 		public Guid ApplicationId { get; protected set; }

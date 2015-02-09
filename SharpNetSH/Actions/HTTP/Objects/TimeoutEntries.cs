@@ -7,6 +7,9 @@ namespace Ignite.SharpNetSH.HTTP
 		public ushort IdleConnectionTimeout { get; private set; }
 		public ushort HeaderWaitTimeout { get; private set; }
 
+		internal TimeoutEntries()
+		{ }
+
 		void IOutputObject.AddValue(String title, String value)
 		{
 			switch (title.ToLower())

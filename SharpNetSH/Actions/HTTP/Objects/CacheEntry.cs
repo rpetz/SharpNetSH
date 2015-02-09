@@ -26,6 +26,9 @@ namespace Ignite.SharpNetSH.HTTP
 			}
 		}
 
+		internal CacheEntry()
+		{ }
+
 		public string URL { get; private set; }
 		public ushort StatusCode { get; private set; }
 		public string HttpVerb { get; private set; }
