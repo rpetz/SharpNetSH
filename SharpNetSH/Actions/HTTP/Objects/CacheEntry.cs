@@ -1,10 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Ignite.SharpNetSH.HTTP
 {
-	public sealed class CacheEntry : IOutputObject
+	public sealed class CacheEntry : IOutputObject, IResponseProcessor
 	{
+		internal CacheEntry()
+		{ }
+
+		public string URL { get; private set; }
+		public ushort StatusCode { get; private set; }
+		public string HttpVerb { get; private set; }
+		public string CachePolicyType { get; private set; }
+		public DateTimeOffset CreationTime { get; private set; }
+		public string RequestQueueName { get; private set; }
+		public string ContentType { get; private set; }
+		public string ContentEncoding { get; private set; }
+		public uint HeadersLength { get; private set; }
+		public ulong ContentLength { get; private set; }
+		public ulong HitCount { get; private set; }
+		public bool ForceDisconnectAfterServing { get; private set; }
+
 		void IOutputObject.AddValue(String title, String value)
 		{
 			switch (title.ToLower())
@@ -26,20 +43,9 @@ namespace Ignite.SharpNetSH.HTTP
 			}
 		}
 
-		internal CacheEntry()
-		{ }
-
-		public string URL { get; private set; }
-		public ushort StatusCode { get; private set; }
-		public string HttpVerb { get; private set; }
-		public string CachePolicyType { get; private set; }
-		public DateTimeOffset CreationTime { get; private set; }
-		public string RequestQueueName { get; private set; }
-		public string ContentType { get; private set; }
-		public string ContentEncoding { get; private set; }
-		public uint HeadersLength { get; private set; }
-		public ulong ContentLength { get; private set; }
-		public ulong HitCount { get; private set; }
-		public bool ForceDisconnectAfterServing { get; private set; }
+		void IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH.HTTP
 {
-	public sealed class TimeoutEntries : IOutputObject
+	public sealed class TimeoutEntries : IOutputObject, IMultiResponseProcessor
 	{
-		public ushort IdleConnectionTimeout { get; private set; }
-		public ushort HeaderWaitTimeout { get; private set; }
-
 		internal TimeoutEntries()
 		{ }
+
+		public ushort IdleConnectionTimeout { get; private set; }
+		public ushort HeaderWaitTimeout { get; private set; }
 
 		void IOutputObject.AddValue(String title, String value)
 		{
@@ -19,6 +21,11 @@ namespace Ignite.SharpNetSH.HTTP
 				default:
 					throw new Exception("Invalid Raw Timeout Data. Title: " + title + ", Value: " + value);
 			}
+		}
+
+		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

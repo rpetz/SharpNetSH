@@ -1,12 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH.HTTP
 {
 	public interface IAddAction
 	{
-		[MethodName("mytest")]
-		void MyTest([ParameterName("testboolean", BooleanType.EnabledDisabled)] Boolean testBoolean);
-
 		/// <summary>
 		/// Specifies an IPv4 or IPv6 address to be added to the IP listen list. 
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307219(v=vs.85).aspx">MSDN</a>.

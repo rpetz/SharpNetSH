@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -59,5 +60,13 @@ namespace Ignite.SharpNetSH
 
 			return (TAttribute)attrs;
 		}
+
+		public static Boolean GetEnumerableType<T>(this Type type)
+		{
+			return type.Equals(typeof(IEnumerable<T>));
+		}
+
+		public static Boolean IsEnumerable<T>(this Type type)
+		{ return type.Equals(typeof(IEnumerable<T>)); }
 	}
 }

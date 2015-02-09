@@ -49,7 +49,9 @@
     <Compile Include="Attributes\BooleanValueAttribute.cs" />
     <Compile Include="Attributes\MethodNameAttribute.cs" />
     <Compile Include="Attributes\ParameterNameAttribute.cs" />
+    <Compile Include="Interfaces\IMultiResponseProcessor.cs" />
     <Compile Include="Interfaces\IOutputObject.cs" />
+    <Compile Include="Interfaces\IResponseProcessor.cs" />
     <Compile Include="Utilities\ExtensionMethods.cs" />
     <Compile Include="Interfaces\IAction.cs" />
     <Compile Include="Interfaces\IActionNameProvider.cs" />

@@ -1,9 +1,28 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH.HTTP
 {
-	public sealed class SSLCertificate : IOutputObject
+	public sealed class SSLCertificate : IOutputObject, IMultiResponseProcessor
 	{
+		internal SSLCertificate()
+		{ }
+
+		public string IpPort { get; protected set; }
+		public string CertificateHash { get; protected set; }
+		public Guid ApplicationId { get; protected set; }
+		public string CertificateStoreName { get; protected set; }
+		public string VerifyClientCertificateRevocation { get; protected set; }
+		public string VerifyRevocationUsingCachedClientCertificateOnly { get; protected set; }
+		public string UsageCheck { get; protected set; }
+		public uint RevocationFreshnessTime { get; protected set; }
+		public uint URLRetrievalTimeout { get; protected set; }
+		public string CtlIdentifier { get; protected set; }
+		public string CtlStoreName { get; protected set; }
+		public bool DsMapperUsage { get; protected set; }
+		public bool NegotiateClientCertificate { get; protected set; }
+
 		void IOutputObject.AddValue(String title, String value)
 		{
 			switch (title.ToLower())
@@ -26,21 +45,9 @@ namespace Ignite.SharpNetSH.HTTP
 			}
 		}
 
-		internal SSLCertificate()
-		{ }
-
-		public string IpPort { get; protected set; }
-		public string CertificateHash { get; protected set; }
-		public Guid ApplicationId { get; protected set; }
-		public string CertificateStoreName { get; protected set; }
-		public string VerifyClientCertificateRevocation { get; protected set; }
-		public string VerifyRevocationUsingCachedClientCertificateOnly { get; protected set; }
-		public string UsageCheck { get; protected set; }
-		public uint RevocationFreshnessTime { get; protected set; }
-		public uint URLRetrievalTimeout { get; protected set; }
-		public string CtlIdentifier { get; protected set; }
-		public string CtlStoreName { get; protected set; }
-		public bool DsMapperUsage { get; protected set; }
-		public bool NegotiateClientCertificate { get; protected set; }
+		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		{
+			return new List<SSLCertificate>();
+		}
 	}
 }

@@ -10,14 +10,6 @@ namespace Ignite.SharpNetSH.Test
 	public class AddActionTests
 	{
 		[TestMethod]
-		public void Test()
-		{
-			var harness = new StringHarness();
-			new NetSH(harness).Http.Add.MyTest(true);
-			Assert.AreEqual("netsh http add mytest testboolean=enabled", harness.Value);
-		}
-
-		[TestMethod]
 		public void VerifyIpListenOutput()
 		{
 			var harness = new StringHarness();
