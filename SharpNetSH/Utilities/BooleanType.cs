@@ -5,6 +5,8 @@
 		[BooleanValue("yes", "no")]
 		YesNo,
 		[BooleanValue("enabled", "disabled")]
-		EnabledDisabled
+		EnabledDisabled,
+		[BooleanValue("true","false")]
+		TrueFalse
 	}
 }

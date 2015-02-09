@@ -63,7 +63,7 @@
     <Compile Include="Actions\HTTP\IShowAction.cs" />
     <Compile Include="Actions\NetSh.cs" />
     <Compile Include="Utilities\ActionProxy.cs" />
-    <Compile Include="Objects\BooleanType.cs" />
+    <Compile Include="Utilities\BooleanType.cs" />
     <Compile Include="Actions\HTTP\Objects\CacheEntry.cs" />
     <Compile Include="Actions\HTTP\Objects\SSLCertificate.cs" />
     <Compile Include="Actions\HTTP\Objects\TimeoutEntries.cs" />

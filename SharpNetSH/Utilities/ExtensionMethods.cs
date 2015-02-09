@@ -52,25 +52,14 @@ namespace Ignite.SharpNetSH
 		{
 			if (!enumerationValue.GetType().IsEnum)
 				throw new Exception("Expected enum type");
-			var type = enumerationValue.GetType();
-			if (!type.IsEnum)
-				throw new ArgumentException("EnumerationValue must be of Enum type", "enumerationValue");
+			
+			var memberInfo = enumerationValue.GetType().GetMember(enumerationValue.ToString()).FirstOrDefault();
+			if (memberInfo == null)
+				return null;
 
-			//Tries to find a DescriptionAttribute for a potential friendly name
-			//for the enum
-			var memberInfo = type.GetMember(enumerationValue.ToString());
-			if (memberInfo != null && memberInfo.Length > 0)
-			{
-				var attrs = memberInfo[0].GetCustomAttributes(typeof(TAttribute), false);
+			var attrs = memberInfo.GetCustomAttributes(typeof(TAttribute), false).FirstOrDefault();
 
-				if (attrs != null && attrs.Length > 0)
-				{
-					//Pull out the description value
-					return ((TAttribute)attrs[0]);
-				}
-			}
-
-			return null;
+			return (TAttribute)attrs;
 		}
 	}
 }
