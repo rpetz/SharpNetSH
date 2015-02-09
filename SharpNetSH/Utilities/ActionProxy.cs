@@ -44,22 +44,15 @@ namespace Ignite.SharpNetSH
 
 				if (value == null) continue;
 
-				// We have to process booleans differently based upon the configured boolean type (i.e. Yes/No, Enabled/Disabled, True/False outputs) 
 				if (value is Boolean?)
-				{
+					// We have to process booleans differently based upon the configured boolean type (i.e. Yes/No, Enabled/Disabled, True/False outputs) 
 					results.Add(parameterName + "=" + parameter.GetBooleanType().GetBooleanValue((Boolean) value));
-					continue;
-				}
-
-				// Enums might be configured with a custom description to change how to output their text
-				if (value.GetType().IsEnum)
-				{
+				else if (value.GetType().IsEnum)
+					// Enums might be configured with a custom description to change how to output their text
 					results.Add(parameterName + "=" + value.GetDescription());
-					continue;
-				}
-
-				// Otherwise it's a stringable (i.e. ToString()) property
-				results.Add(parameterName + "=" + value);
+				else
+					// Otherwise it's a stringable (i.e. ToString()) property
+					results.Add(parameterName + "=" + value);
 			}
 			if (results.Count == 0) return method.GetMethodName();
 			return method.GetMethodName() + " " + results.Aggregate((x, y) => String.IsNullOrWhiteSpace(x) ? y : x + " " + y);
