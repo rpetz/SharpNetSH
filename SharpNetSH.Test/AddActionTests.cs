@@ -12,10 +12,11 @@ namespace Ignite.SharpNetSH.Test
 		public void VerifyIpListenOutput()
 		{
 			var harness = new StringHarness();
-			new NetSH(harness).Http.Add.IPListen("test");
+			new NetSH(harness).Http.Add.IpListen("test");
 			Assert.AreEqual("netsh http add iplisten ipaddress=test", harness.Value);
 		}
 
+		// ReSharper disable RedundantArgumentName
 		[TestMethod]
 		public void VerifySSLCertOutput()
 		{
@@ -54,7 +55,7 @@ namespace Ignite.SharpNetSH.Test
 													verifyRevocationWithCachedClientCertOnly:	(bool?) values[9],
 													usageCheck:									(bool?) values[10],
 													dsMapperUsage:								(bool?) values[11],
-													clientCertNegotation:						(bool?) values[12]);
+													clientCertNegotiation:						(bool?) values[12]);
 
 				var value = harness.Value;
 				var parameters = typeof (AddAction).GetMethod("SSLCert").GetParameters();
@@ -88,46 +89,7 @@ namespace Ignite.SharpNetSH.Test
 				});
 			}
 		}
-
-		[TestMethod]
-		public void VerifySSLCertOutputOld()
-		{
-			var harness = new StringHarness();
-
-			new NetSH(harness).Http.Add.SSLCert(ipPort: "testipport",
-				certHash: "testcerthash",
-				certStoreName: "testcertstorename",
-				sslCtlIdentifier: "testsslctlidentifier",
-				sslCtlStoreName: "testsslctlstorename",
-				appId: new Guid("11111111-1111-1111-1111-111111111111"),
-				revocationFreshnessTime: 1,
-				urlRetrievalTimeout: 1,
-				verifyClientCertRevocation: false,
-				verifyRevocationWithCachedClientCertOnly: true,
-				usageCheck: false,
-				dsMapperUsage: true,
-				clientCertNegotation: false);
-
-			var value = harness.Value;
-			var parameters = typeof(AddAction).GetMethod("SSLCert").GetParameters();
-			parameters.ToList().ForEach(x =>
-			{
-				var type = x.ParameterType;
-				var name = x.Name.ToLower();
-				if (type == typeof(string))
-				{
-					Assert.IsTrue(value.Contains(name + "=" + "test" + name));
-				}
-				else if (type == typeof(Guid))
-				{
-					Assert.IsTrue(value.Contains(name + "={11111111-1111-1111-1111-111111111111}"));
-				}
-				else if (type == typeof(bool))
-				{
-					Assert.IsTrue(value.Contains(name + "=enabled") || value.Contains(name + "=disabled"));
-				}
-			});
-		}
+		// ReSharper restore RedundantArgumentName
 
 		[TestMethod]
 		public void VerifyTimeoutOutput()

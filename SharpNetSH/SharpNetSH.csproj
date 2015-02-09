@@ -49,6 +49,8 @@
     <Compile Include="Actions\DeleteAction.cs" />
     <Compile Include="Actions\FlushAction.cs" />
     <Compile Include="Actions\HttpAction.cs" />
+    <Compile Include="Attributes\MethodNameAttribute.cs" />
+    <Compile Include="Attributes\ParameterNameAttribute.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Interfaces\IAction.cs" />
     <Compile Include="Interfaces\IActionNameProvider.cs" />
@@ -61,11 +63,13 @@
     <Compile Include="Interfaces\INetSH.cs" />
     <Compile Include="Interfaces\IShowAction.cs" />
     <Compile Include="NetSh.cs" />
+    <Compile Include="Objects\ActionProxy.cs" />
+    <Compile Include="Objects\BooleanType.cs" />
     <Compile Include="Objects\CacheEntry.cs" />
+    <Compile Include="Objects\CannotDirectlyCallException.cs" />
     <Compile Include="Objects\OutputObject.cs" />
     <Compile Include="Objects\SSLCertificate.cs" />
     <Compile Include="Objects\TimeoutEntries.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\Timeout.cs" />
     <Compile Include="Objects\View.cs" />

@@ -9,7 +9,8 @@ namespace Ignite.SharpNetSH
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307219(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
 		/// <param name="ipAddress"></param>
-		void IPListen(String ipAddress);
+		[MethodName("iplisten")]
+		void IpListen([ParameterName("ipaddress")]string ipAddress);
 
 		/// <summary>
 		/// Adds a new Secure Sockets Layer (SSL) server certificate binding and the corresponding client certificate policies for an IP address and port.
@@ -27,13 +28,21 @@ namespace Ignite.SharpNetSH
 		/// <param name="verifyRevocationWithCachedClientCertOnly">Turns on or turns off usage of only cached client certificate for revocation checking.</param>
 		/// <param name="usageCheck">Turns on or turns off usage check. Default is enabled.</param>
 		/// <param name="dsMapperUsage">Turns on or turns off DS mappers. Default is disabled.</param>
-		/// <param name="clientCertNegotation">Turns on or turns off negotiation of certificate. Default is disabled.</param>
-		void SSLCert(String ipPort, String certHash = null, String certStoreName = null,
-			String sslCtlIdentifier = null, String sslCtlStoreName = null,
-			Guid? appId = null,
-			UInt32? revocationFreshnessTime = null, UInt32? urlRetrievalTimeout = null,
-			Boolean? verifyClientCertRevocation = null, Boolean? verifyRevocationWithCachedClientCertOnly = null,
-			Boolean? usageCheck = null, Boolean? dsMapperUsage = null, Boolean? clientCertNegotation = null);
+		/// <param name="clientCertNegotiation">Turns on or turns off negotiation of certificate. Default is disabled.</param>
+		[MethodName("sslcert")]
+		void SSLCert([ParameterName("ipport")] string ipPort,
+					 [ParameterName("certhash")] string certHash = null,
+					 [ParameterName("certstorename")] string certStoreName = null,
+					 [ParameterName("sslctlidentifier")] string sslCtlIdentifier = null,
+					 [ParameterName("sslctlstorename")] string sslCtlStoreName = null,
+					 [ParameterName("appid")] Guid? appId = null,
+					 [ParameterName("revocationfreshnesstime")] uint? revocationFreshnessTime = null,
+					 [ParameterName("urlretrievaltimeout")] uint? urlRetrievalTimeout = null,
+					 [ParameterName("verifyclientcertrevocation")] bool? verifyClientCertRevocation = null,
+					 [ParameterName("verifyrevocationwithcachedclientcertonly")] bool? verifyRevocationWithCachedClientCertOnly = null,
+					 [ParameterName("usagecheck")] bool? usageCheck = null,
+					 [ParameterName("dsmapperusage")] bool? dsMapperUsage = null,
+					 [ParameterName("clientcertnegotiation")] bool? clientCertNegotiation = null);
 
 		/// <summary>
 		/// Adds a global timeout to the HTTP.sys service.
@@ -41,7 +50,9 @@ namespace Ignite.SharpNetSH
 		/// </summary>
 		/// <param name="timeoutType">Specifies the type of timeout for setting.</param>
 		/// <param name="value">Specifies the value of the timeout (in seconds). If value is hexadecimal, then add the prefix 0x.</param>
-		void Timeout(Timeout timeoutType, UInt16 value);
+		[MethodName("timeout")]
+		void Timeout([ParameterName("timeouttype")] Timeout timeoutType,
+					 [ParameterName("value")] ushort value);
 
 		/// <summary>
 		/// Reserves the specified URL for non-administrator users and accounts. The discretionary access control list (DACL) can be specified by using an account name with the listen and delegate parameters or by using a security descriptor definition language (SDDL) string.
@@ -50,7 +61,10 @@ namespace Ignite.SharpNetSH
 		/// <param name="url">Specifies the fully qualified URL.</param>
 		/// <param name="user">Specifies the user or user group name.</param>
 		/// <param name="sddl">Specifies the SDDL string that describes the DACL.</param>
-		void UrlAcl(String url, String user, String sddl = null);
+		[MethodName("urlacl")]
+		void UrlAcl([ParameterName("url")] string url,
+					[ParameterName("user")] string user,
+					[ParameterName("sddl")] string sddl = null);
 
 		/// <summary>
 		/// Reserves the specified URL for non-administrator users and accounts. The discretionary access control list (DACL) can be specified by using an account name with the listen and delegate parameters or by using a security descriptor definition language (SDDL) string.
@@ -62,6 +76,10 @@ namespace Ignite.SharpNetSH
 		/// False: Denies the user from registering URLs.</param>
 		/// <param name="delegateUrls">True: Allows the user to delegate URLs.<br></br>
 		/// False: Denies the user from delegating URLs. This is the default value.</param>
-		void UrlAcl(String url, String user, Boolean? listenUrls = null, Boolean? delegateUrls = null);
+		[MethodName("urlacl")]
+		void UrlAcl([ParameterName("url")] string url,
+					[ParameterName("user")] string user,
+					[ParameterName("listen")] bool? listenUrls = null,
+					[ParameterName("delegate")] bool? delegateUrls = null);
 	}
 }
