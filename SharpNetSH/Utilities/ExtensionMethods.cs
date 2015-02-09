@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -47,8 +46,7 @@ namespace Ignite.SharpNetSH
 			return attribute != null ? attribute.Description : enumerationValue.ToString();
 		}
 
-		public static TAttribute GetEnumValue<TEnumeration, TAttribute>(this TEnumeration enumerationValue)
-			where TAttribute : class
+		public static TAttribute GetEnumValue<TEnumeration, TAttribute>(this TEnumeration enumerationValue) where TAttribute : class
 		{
 			if (!enumerationValue.GetType().IsEnum)
 				throw new Exception("Expected enum type");
