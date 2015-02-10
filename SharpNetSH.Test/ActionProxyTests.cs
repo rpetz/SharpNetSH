@@ -25,7 +25,8 @@ namespace Ignite.SharpNetSH.Test
 			var harness = new Mock<IExecutionHarness>();
 			var proxy = ActionProxy<ITestAction>.Create("test", "netsh unittest", harness.Object);
 			proxy.SimpleMethod();
-			harness.Verify(x => x.Execute(It.IsAny<String>()), Times.Once());
+			int exitCode;
+			harness.Verify(x => x.Execute(It.IsAny<String>(), out exitCode), Times.Once());
 		}
 
 		[TestMethod]

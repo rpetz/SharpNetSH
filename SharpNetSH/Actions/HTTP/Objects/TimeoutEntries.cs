@@ -24,7 +24,7 @@ namespace Ignite.SharpNetSH.HTTP
 			}
 		}
 
-		object IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		object IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode)
 		{
 			this.ProcessRawData(@":\s+", responseLines.Skip(3).Where(x => !String.IsNullOrWhiteSpace(x)));
 			return this;

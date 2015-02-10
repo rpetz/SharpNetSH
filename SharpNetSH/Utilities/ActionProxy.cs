@@ -30,7 +30,8 @@ namespace Ignite.SharpNetSH
 			var methodCall = (IMethodCallMessage)msg;
 			var method = (MethodInfo)methodCall.MethodBase;
 			var result = ProcessParameters(method, methodCall);
-			var response = _harness.Execute(_priorText + " " + _actionName + " " + result);
+			int exitCode;
+			var response = _harness.Execute(_priorText + " " + _actionName + " " + result, out exitCode);
 			var returnType = method.ReturnType;
 			var isEnumerable = false;
 
@@ -63,14 +64,14 @@ namespace Ignite.SharpNetSH
 				if (isSimpleProcessor)
 				{
 					var simpleProcessor = (IResponseProcessor) processorUnknown;
-					var processedResponse = simpleProcessor.ProcessResponse(response);
+					var processedResponse = simpleProcessor.ProcessResponse(response, exitCode);
 					return new ReturnMessage(processedResponse, null, 0, methodCall.LogicalCallContext, methodCall);
 				}
 				
 				if (isMultiProcessor)
 				{
 					var simpleProcessor = (IMultiResponseProcessor) processorUnknown;
-					var processedResponse = simpleProcessor.ProcessResponse(response);
+					var processedResponse = simpleProcessor.ProcessResponse(response, exitCode);
 					return new ReturnMessage(processedResponse, null, 0, methodCall.LogicalCallContext, methodCall);
 				}
 			}
@@ -82,7 +83,7 @@ namespace Ignite.SharpNetSH
 			{
 				// We use FormatterServices here because we don't expose public constructors for our ResponseProcessors
 				var processor = (IResponseProcessor)FormatterServices.GetUninitializedObject(returnType);
-				var processedResponse = processor.ProcessResponse(response);
+				var processedResponse = processor.ProcessResponse(response, exitCode);
 				return new ReturnMessage(processedResponse, null, 0, methodCall.LogicalCallContext, methodCall);
 			}
 
@@ -90,7 +91,7 @@ namespace Ignite.SharpNetSH
 			{
 				// We use FormatterServices here because we don't expose public constructors for our ResponseProcessors
 				var processor = (IMultiResponseProcessor)FormatterServices.GetUninitializedObject(returnType);
-				var processedResponse = processor.ProcessResponse(response);
+				var processedResponse = processor.ProcessResponse(response, exitCode);
 				return new ReturnMessage(processedResponse, null, 0, methodCall.LogicalCallContext, methodCall);
 			}
 

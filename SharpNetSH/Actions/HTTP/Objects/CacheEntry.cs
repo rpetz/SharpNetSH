@@ -45,7 +45,7 @@ namespace Ignite.SharpNetSH.HTTP
 			}
 		}
 
-		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode)
 		{
 			var entries = new List<CacheEntry>();
 			if (responseLines == null || responseLines.Contains("There were no cache entries corresponding to the provided URL")) return entries;

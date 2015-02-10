@@ -9,9 +9,10 @@ namespace Ignite.SharpNetSH.Test.Spike
 
 		public String Value { get { return _value; } }
 
-		public IEnumerable<String> Execute(string action)
+		public IEnumerable<String> Execute(string action, out int exitCode)
 		{
 			_value = action;
+			exitCode = 0;
 			return new List<String>();
 		}
 	}

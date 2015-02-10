@@ -9,7 +9,7 @@ namespace Ignite.SharpNetSH
 	/// </summary>
 	public class CommandLineHarness : IExecutionHarness
 	{
-		public IEnumerable<String> Execute(string action)
+		public IEnumerable<String> Execute(string action, out int exitCode)
 		{
 			var process = new Process
 			{
@@ -28,6 +28,8 @@ namespace Ignite.SharpNetSH
 			var lines = new List<String>();
 			while (!process.StandardOutput.EndOfStream)
 				lines.Add(process.StandardOutput.ReadLine());
+
+			exitCode = process.ExitCode;
 
 			return lines;
 		}

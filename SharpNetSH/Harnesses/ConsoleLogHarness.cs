@@ -8,9 +8,10 @@ namespace Ignite.SharpNetSH
 	/// </summary>
 	public class ConsoleLogHarness : IExecutionHarness
 	{
-		public IEnumerable<String> Execute(string action)
+		public IEnumerable<String> Execute(string action, out int exitCode)
 		{
 			Console.WriteLine("Executing: " + action);
+			exitCode = 0;
 			return new List<String>();
 		}
 	}

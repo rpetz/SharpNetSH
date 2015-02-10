@@ -46,7 +46,7 @@ namespace Ignite.SharpNetSH.HTTP
 			}
 		}
 
-		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode)
 		{
 			var certificates = new List<SSLCertificate>();
 			if (responseLines == null || responseLines.Contains("The system cannot find the file specified.")) return certificates;

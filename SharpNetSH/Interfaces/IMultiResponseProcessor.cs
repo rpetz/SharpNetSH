@@ -5,6 +5,6 @@ namespace Ignite.SharpNetSH
 {
 	internal interface IMultiResponseProcessor
 	{
-		IEnumerable ProcessResponse(IEnumerable<string> responseLines);
+		IEnumerable ProcessResponse(IEnumerable<string> responseLines, int exitCode);
 	}
 }

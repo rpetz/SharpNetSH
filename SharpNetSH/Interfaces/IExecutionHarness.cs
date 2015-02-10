@@ -5,6 +5,6 @@ namespace Ignite.SharpNetSH
 {
 	public interface IExecutionHarness
 	{
-		IEnumerable<String> Execute(String action);
+		IEnumerable<String> Execute(String action, out int exitCode);
 	}
 }

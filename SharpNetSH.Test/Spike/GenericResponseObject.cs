@@ -10,12 +10,12 @@ namespace Ignite.SharpNetSH.Test.Spike
 
 		}
 
-		object IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		object IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode)
 		{
 			return this;
 		}
 
-		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode)
 		{
 			return new List<GenericResponseObject<T>>();
 		}

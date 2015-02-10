@@ -7,7 +7,7 @@ namespace Ignite.SharpNetSH.HTTP
 {
 	internal class IpListenShowResponseProcessor : IMultiResponseProcessor
 	{
-		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode)
 		{
 			var entries = new List<String>();
 			if (responseLines == null) return entries;
