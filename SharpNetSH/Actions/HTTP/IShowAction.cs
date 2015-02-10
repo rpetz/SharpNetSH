@@ -22,13 +22,20 @@ namespace Ignite.SharpNetSH.HTTP
 		IEnumerable<String> IpListen();
 
 		/// <summary>
-		/// Shows a snapshot of the HTTP service.
+		/// Shows a snapshot of the HTTP service using the Session view
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307242(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
-		/// <param name="view">View snapshot of HTTP service state based on server session or request queues.</param>
 		/// <param name="verbose">View verbose information showing property information too.</param>
-		[MethodName("servicestate")]
-		void ServiceState([ParameterName("view")] View? view = null, [ParameterName("verbose")] Boolean? verbose = null);
+		[MethodName("servicestate view=session")]
+		IEnumerable<SessionView> ServiceStateSessionView([ParameterName("verbose")] Boolean? verbose = null);
+
+		/// <summary>
+		/// Shows a snapshot of the HTTP service using the Request Queue view
+		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307242(v=vs.85).aspx">MSDN</a>.
+		/// </summary>
+		/// <param name="verbose">View verbose information showing property information too.</param>
+		[MethodName("servicestate view=requestq")]
+		IEnumerable<RequestQueueView> ServiceStateRequestQueueView([ParameterName("verbose")] Boolean? verbose = null);
 
 		/// <summary>
 		/// Lists SSL server certificate bindings and the corresponding client certificate policies for an IP address and port.

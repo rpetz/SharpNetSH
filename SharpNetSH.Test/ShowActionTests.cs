@@ -30,32 +30,23 @@ namespace Ignite.SharpNetSH.Test
 		public void VerifyServiceStateOutput()
 		{
 			var harness = new StringHarness();
-			new NetSH(harness).Http.Show.ServiceState(View.ServiceState);
-			Assert.AreEqual("netsh http show servicestate view=servicestate", harness.Value);
+			new NetSH(harness).Http.Show.ServiceStateRequestQueueView();
+			Assert.AreEqual("netsh http show servicestate view=requestq", harness.Value);
 
-			new NetSH(harness).Http.Show.ServiceState(View.ServiceState, false);
-			Assert.AreEqual("netsh http show servicestate view=servicestate verbose=no", harness.Value);
+			new NetSH(harness).Http.Show.ServiceStateRequestQueueView(false);
+			Assert.AreEqual("netsh http show servicestate view=requestq verbose=no", harness.Value);
 
-			new NetSH(harness).Http.Show.ServiceState(View.ServiceState, true);
-			Assert.AreEqual("netsh http show servicestate view=servicestate verbose=yes", harness.Value);
+			new NetSH(harness).Http.Show.ServiceStateRequestQueueView(true);
+			Assert.AreEqual("netsh http show servicestate view=requestq verbose=yes", harness.Value);
 
-			new NetSH(harness).Http.Show.ServiceState(View.Session);
+			new NetSH(harness).Http.Show.ServiceStateSessionView();
 			Assert.AreEqual("netsh http show servicestate view=session", harness.Value);
 
-			new NetSH(harness).Http.Show.ServiceState(View.Session, false);
+			new NetSH(harness).Http.Show.ServiceStateSessionView(false);
 			Assert.AreEqual("netsh http show servicestate view=session verbose=no", harness.Value);
 
-			new NetSH(harness).Http.Show.ServiceState(View.Session, true);
+			new NetSH(harness).Http.Show.ServiceStateSessionView(true);
 			Assert.AreEqual("netsh http show servicestate view=session verbose=yes", harness.Value);
-
-			new NetSH(harness).Http.Show.ServiceState(null, false);
-			Assert.AreEqual("netsh http show servicestate verbose=no", harness.Value);
-
-			new NetSH(harness).Http.Show.ServiceState(null, true);
-			Assert.AreEqual("netsh http show servicestate verbose=yes", harness.Value);
-
-			new NetSH(harness).Http.Show.ServiceState();
-			Assert.AreEqual("netsh http show servicestate", harness.Value);
 		}
 
 		[TestMethod]
