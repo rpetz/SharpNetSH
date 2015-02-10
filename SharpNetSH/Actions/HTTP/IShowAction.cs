@@ -51,6 +51,6 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="url">Specifies the fully qualified URL. If unspecified, implies all URLs.</param>
 		[MethodName("urlacl")]
-		void UrlAcl([ParameterName("url")] String url = null);
+		IEnumerable<UrlAclEntry> UrlAcl([ParameterName("url")] String url = null);
 	}
 }
