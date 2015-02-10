@@ -20,7 +20,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="ipAddress">Specifies the IPv4 or IPv6 address to be deleted from the IP listen list.</param>
 		[MethodName("iplisten")]
-		void IpListen([ParameterName("ipaddress")] String ipAddress);
+		StandardResponse IpListen([ParameterName("ipaddress")] String ipAddress);
 
 		/// <summary>
 		/// Deletes SSL server certificate bindings and the corresponding client certificate policies for an IP address and port.
@@ -28,7 +28,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="ipPort">Specifies the IPv4 or IPv6 address and port for which the SSL certificate bindings will be deleted.</param>
 		[MethodName("sslcert")]
-		void SSLCert([ParameterName("ipport")] String ipPort);
+		StandardResponse SSLCert([ParameterName("ipport")] String ipPort);
 
 		/// <summary>
 		/// Deletes a global timeout and makes the HTTP.sys service revert to default values.

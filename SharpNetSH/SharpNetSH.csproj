@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\HTTP\HttpAction.cs" />
+    <Compile Include="Actions\HTTP\Objects\StandardResponse.cs" />
     <Compile Include="Actions\HTTP\ResponseProcessors\IpListenShowResponseProcessor.cs" />
+    <Compile Include="Actions\HTTP\ResponseProcessors\StandardExitCodeResponseProcessor.cs" />
     <Compile Include="Attributes\BooleanValueAttribute.cs" />
     <Compile Include="Attributes\MethodNameAttribute.cs" />
     <Compile Include="Attributes\ParameterNameAttribute.cs" />

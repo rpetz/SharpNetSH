@@ -11,7 +11,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="ipAddress"></param>
 		[MethodName("iplisten")]
-		void IpListen([ParameterName("ipaddress")]string ipAddress);
+		StandardResponse IpListen([ParameterName("ipaddress")]string ipAddress);
 
 		/// <summary>
 		/// Adds a new Secure Sockets Layer (SSL) server certificate binding and the corresponding client certificate policies for an IP address and port.
@@ -31,7 +31,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="dsMapperUsage">Turns on or turns off DS mappers. Default is disabled.</param>
 		/// <param name="clientCertNegotiation">Turns on or turns off negotiation of certificate. Default is disabled.</param>
 		[MethodName("sslcert")]
-		void SSLCert([ParameterName("ipport")] string ipPort,
+		StandardResponse SSLCert([ParameterName("ipport")] string ipPort,
 					 [ParameterName("certhash")] string certHash = null,
 					 [ParameterName("certstorename")] string certStoreName = null,
 					 [ParameterName("sslctlidentifier")] string sslCtlIdentifier = null,
