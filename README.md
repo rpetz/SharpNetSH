@@ -1,7 +1,7 @@
 # SharpNetSH
 A simple netsh library for C#
 
-#####The Attribute branch is migrating the codebase from hard coded method call building to dynamic proxies.  Essentially changing the current unmaintainable codebase to convention over configuration.
+#####This is version 2.0, and theoretically should work with all NetSH commands, however I have not yet tested them all and only some of the methods can return back values
 
 ###TODO
 
