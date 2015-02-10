@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Ignite.SharpNetSH.HTTP
 {
-	public sealed class CacheEntry : IOutputObject, IResponseProcessor
+	public sealed class CacheEntry : IOutputObject, IMultiResponseProcessor
 	{
 		internal CacheEntry()
 		{ }
@@ -43,9 +45,29 @@ namespace Ignite.SharpNetSH.HTTP
 			}
 		}
 
-		void IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
 		{
-			throw new NotImplementedException();
+			var entries = new List<CacheEntry>();
+			if (responseLines == null || responseLines.Contains("There were no cache entries corresponding to the provided URL")) return entries;
+
+			var currentEntryRows = new List<string>();
+			foreach (var line in responseLines.Skip(3))
+			{
+				if (String.IsNullOrWhiteSpace(line))
+				{
+					if (currentEntryRows.Count > 0)
+					{
+						var entry = new CacheEntry();
+						entry.ProcessRawData(@":\s+", currentEntryRows);
+						entries.Add(entry);
+					}
+					currentEntryRows = new List<string>();
+				}
+				else
+					currentEntryRows.Add(line);
+			}
+
+			return entries;
 		}
 	}
 }

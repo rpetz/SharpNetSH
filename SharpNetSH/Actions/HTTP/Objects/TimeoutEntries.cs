@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ignite.SharpNetSH.HTTP
 {
-	public sealed class TimeoutEntries : IOutputObject, IMultiResponseProcessor
+	public sealed class TimeoutEntries : IOutputObject, IResponseProcessor
 	{
 		internal TimeoutEntries()
 		{ }
@@ -23,9 +24,10 @@ namespace Ignite.SharpNetSH.HTTP
 			}
 		}
 
-		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
+		object IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
 		{
-			throw new NotImplementedException();
+			this.ProcessRawData(@":\s+", responseLines.Skip(3).Where(x => !String.IsNullOrWhiteSpace(x)));
+			return this;
 		}
 	}
 }

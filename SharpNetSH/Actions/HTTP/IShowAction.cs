@@ -18,6 +18,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307241(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
 		[MethodName("iplisten")]
+		[ResponseProcessor(typeof(IpListenShowResponseProcessor))]
 		IEnumerable<String> IpListen();
 
 		/// <summary>

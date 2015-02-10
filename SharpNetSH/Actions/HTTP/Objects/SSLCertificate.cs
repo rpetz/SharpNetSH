@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ignite.SharpNetSH.HTTP
 {
@@ -47,7 +48,27 @@ namespace Ignite.SharpNetSH.HTTP
 
 		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
 		{
-			return new List<SSLCertificate>();
+			var certificates = new List<SSLCertificate>();
+			if (responseLines == null || responseLines.Contains("The system cannot find the file specified.")) return certificates;
+
+			var currentCertificateRows = new List<string>();
+			foreach (var line in responseLines.Skip(3))
+			{
+				if (String.IsNullOrWhiteSpace(line))
+				{
+					if (currentCertificateRows.Count > 0)
+					{
+						var certificate = new SSLCertificate();
+						certificate.ProcessRawData(@"\s+:\s+", currentCertificateRows);
+						certificates.Add(certificate);
+					}
+					currentCertificateRows = new List<string>();
+				}
+				else
+					currentCertificateRows.Add(line);
+			}
+
+			return certificates;
 		}
 	}
 }

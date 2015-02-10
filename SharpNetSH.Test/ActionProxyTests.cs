@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Ignite.SharpNetSH.Test.Spike;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -169,6 +170,67 @@ namespace Ignite.SharpNetSH.Test
 			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", harness);
 			proxy.MethodWithParameterNameDecoration("myParameterTest");
 			Assert.AreEqual("netsh unittest testActionName MethodWithParameterNameDecoration test=myParameterTest", harness.Value);
+		}
+
+		[TestMethod]
+		public void ShouldCallCustomResponseProcessor()
+		{
+			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
+			var result = proxy.MethodWithCustomResponseProcessor();
+			Assert.AreEqual(result, "CustomResponseProcessor");
+		}
+
+		[TestMethod]
+		public void ShouldCallCustomMultiResponseProcessor()
+		{
+			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
+			var result = proxy.MethodWithCustomMultiResponseProcessor();
+			Assert.AreEqual(result.FirstOrDefault(), "CustomMultiResponseProcessor");
+		}
+
+		[TestMethod]
+		public void ShouldCallOverridenResponseProcessor()
+		{
+			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
+			var result = proxy.MethodWithOverriddenResponseProcessor();
+			Assert.IsNotNull(result);
+		}
+
+		[TestMethod]
+		public void ShouldCallOverridenMultiResponseProcessor()
+		{
+			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
+			var result = proxy.MethodWithOverriddenMultiResponseProcessor();
+			Assert.IsNotNull(result);
+			Assert.IsTrue(result.Count() == 10);
+		}
+
+		[TestMethod]
+		public void ShouldThrowErrorIfCustomResponseProcessorIsBothSimpleAndMulti()
+		{
+			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
+			var gotException = false;
+
+			try
+			{ proxy.MethodWithOverzealousResponseProcessor(); }
+			catch (Exception)
+			{ gotException = true; }
+
+			Assert.IsTrue(gotException);
+		}
+
+		[TestMethod]
+		public void ShouldThrowErrorIfCustomResponseProcessorIsNeitherSimpleNorMulti()
+		{
+			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
+			var gotException = false;
+
+			try
+			{ proxy.MethodWithInvalidResponseProcessor(); }
+			catch (Exception)
+			{ gotException = true; }
+
+			Assert.IsTrue(gotException);
 		}
 	}
 }

@@ -3,21 +3,16 @@ using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH.Test.Spike
 {
-	public class ComplexResponseObject : IResponseProcessor, IMultiResponseProcessor
+	public class OverzealousResponseProcessor : IResponseProcessor, IMultiResponseProcessor
 	{
-		internal ComplexResponseObject()
-		{
-
-		}
-
 		object IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
 		{
-			return this;
+			return null;
 		}
 
 		IEnumerable IMultiResponseProcessor.ProcessResponse(IEnumerable<string> responseLines)
 		{
-			return new List<ComplexResponseObject>();
+			return null;
 		}
 	}
 }

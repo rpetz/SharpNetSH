@@ -46,9 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\HTTP\HttpAction.cs" />
+    <Compile Include="Actions\HTTP\ResponseProcessors\IpListenShowResponseProcessor.cs" />
     <Compile Include="Attributes\BooleanValueAttribute.cs" />
     <Compile Include="Attributes\MethodNameAttribute.cs" />
     <Compile Include="Attributes\ParameterNameAttribute.cs" />
+    <Compile Include="Attributes\ResponseProcessorAttribute.cs" />
     <Compile Include="Interfaces\IMultiResponseProcessor.cs" />
     <Compile Include="Interfaces\IOutputObject.cs" />
     <Compile Include="Interfaces\IResponseProcessor.cs" />

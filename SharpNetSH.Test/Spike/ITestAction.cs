@@ -33,5 +33,23 @@ namespace Ignite.SharpNetSH.Test.Spike
 		void MethodWithNameDecoration();
 
 		void MethodWithParameterNameDecoration([ParameterName("test")] String myParameter);
+
+		[ResponseProcessor(typeof(CustomResponseProcessor))]
+		String MethodWithCustomResponseProcessor();
+
+		[ResponseProcessor(typeof(CustomMultiResponseProcessor))]
+		IEnumerable<String> MethodWithCustomMultiResponseProcessor();
+
+		[ResponseProcessor(typeof(OverriddenResponseProcessor))]
+		SimpleResponseObject MethodWithOverriddenResponseProcessor();
+
+		[ResponseProcessor(typeof(OverriddenMultiResponseProcessor))]
+		IEnumerable<SimpleResponseObject> MethodWithOverriddenMultiResponseProcessor();
+
+		[ResponseProcessor(typeof(object))]
+		String MethodWithInvalidResponseProcessor();
+
+		[ResponseProcessor(typeof(OverzealousResponseProcessor))]
+		String MethodWithOverzealousResponseProcessor();
 	}
 }
