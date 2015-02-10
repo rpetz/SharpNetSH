@@ -11,7 +11,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="url">Required. Specifies the fully qualified URL.</param>
 		/// <param name="recursive">If true, removes all entries under the specified URL.</param>
 		[MethodName("cache")]
-		void Cache([ParameterName("url")] String url, [ParameterName("recursive", BooleanType.YesNo)] Boolean? recursive = null);
+		StandardResponse Cache([ParameterName("url")] String url, [ParameterName("recursive", BooleanType.YesNo)] Boolean? recursive = null);
 
 		/// <summary>
 		/// Specifies an IPv4 or IPv6 address to be deleted from the IP listen list.
@@ -36,7 +36,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="timeoutType">Specifies the type of timeout setting.</param>
 		[MethodName("timeout")]
-		void Timeout([ParameterName("timeouttype")] Timeout timeoutType);
+		StandardResponse Timeout([ParameterName("timeouttype")] Timeout timeoutType);
 
 		/// <summary>
 		/// Deletes a reserved URL.
@@ -44,6 +44,6 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="url">Specifies the fully qualified URL.</param>
 		[MethodName("urlacl")]
-		void UrlAcl([ParameterName("url")] String url);
+		StandardResponse UrlAcl([ParameterName("url")] String url);
 	}
 }

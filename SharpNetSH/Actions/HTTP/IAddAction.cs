@@ -32,18 +32,18 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="clientCertNegotiation">Turns on or turns off negotiation of certificate. Default is disabled.</param>
 		[MethodName("sslcert")]
 		StandardResponse SSLCert([ParameterName("ipport")] string ipPort,
-					 [ParameterName("certhash")] string certHash = null,
-					 [ParameterName("certstorename")] string certStoreName = null,
-					 [ParameterName("sslctlidentifier")] string sslCtlIdentifier = null,
-					 [ParameterName("sslctlstorename")] string sslCtlStoreName = null,
-					 [ParameterName("appid")] Guid? appId = null,
-					 [ParameterName("revocationfreshnesstime")] uint? revocationFreshnessTime = null,
-					 [ParameterName("urlretrievaltimeout")] uint? urlRetrievalTimeout = null,
-					 [ParameterName("verifyclientcertrevocation")] bool? verifyClientCertRevocation = null,
-					 [ParameterName("verifyrevocationwithcachedclientcertonly")] bool? verifyRevocationWithCachedClientCertOnly = null,
-					 [ParameterName("usagecheck")] bool? usageCheck = null,
-					 [ParameterName("dsmapperusage")] bool? dsMapperUsage = null,
-					 [ParameterName("clientcertnegotiation")] bool? clientCertNegotiation = null);
+								 [ParameterName("certhash")] string certHash = null,
+								 [ParameterName("certstorename")] string certStoreName = null,
+								 [ParameterName("sslctlidentifier")] string sslCtlIdentifier = null,
+								 [ParameterName("sslctlstorename")] string sslCtlStoreName = null,
+								 [ParameterName("appid")] Guid? appId = null,
+								 [ParameterName("revocationfreshnesstime")] uint? revocationFreshnessTime = null,
+								 [ParameterName("urlretrievaltimeout")] uint? urlRetrievalTimeout = null,
+								 [ParameterName("verifyclientcertrevocation")] bool? verifyClientCertRevocation = null,
+								 [ParameterName("verifyrevocationwithcachedclientcertonly")] bool? verifyRevocationWithCachedClientCertOnly = null,
+								 [ParameterName("usagecheck")] bool? usageCheck = null,
+								 [ParameterName("dsmapperusage")] bool? dsMapperUsage = null,
+								 [ParameterName("clientcertnegotiation")] bool? clientCertNegotiation = null);
 
 		/// <summary>
 		/// Adds a global timeout to the HTTP.sys service.
@@ -52,8 +52,8 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="timeoutType">Specifies the type of timeout for setting.</param>
 		/// <param name="value">Specifies the value of the timeout (in seconds). If value is hexadecimal, then add the prefix 0x.</param>
 		[MethodName("timeout")]
-		void Timeout([ParameterName("timeouttype")] Timeout timeoutType,
-					 [ParameterName("value")] ushort value);
+		StandardResponse Timeout([ParameterName("timeouttype")] Timeout timeoutType,
+								 [ParameterName("value")] ushort value);
 
 		/// <summary>
 		/// Reserves the specified URL for non-administrator users and accounts. The discretionary access control list (DACL) can be specified by using an account name with the listen and delegate parameters or by using a security descriptor definition language (SDDL) string.
@@ -63,9 +63,9 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="user">Specifies the user or user group name.</param>
 		/// <param name="sddl">Specifies the SDDL string that describes the DACL.</param>
 		[MethodName("urlacl")]
-		void UrlAcl([ParameterName("url")] string url,
-					[ParameterName("user")] string user,
-					[ParameterName("sddl")] string sddl = null);
+		StandardResponse UrlAcl([ParameterName("url")] string url,
+								[ParameterName("user")] string user,
+								[ParameterName("sddl")] string sddl = null);
 
 		/// <summary>
 		/// Reserves the specified URL for non-administrator users and accounts. The discretionary access control list (DACL) can be specified by using an account name with the listen and delegate parameters or by using a security descriptor definition language (SDDL) string.
@@ -78,9 +78,9 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="delegateUrls">True: Allows the user to delegate URLs.<br></br>
 		/// False: Denies the user from delegating URLs. This is the default value.</param>
 		[MethodName("urlacl")]
-		void UrlAcl([ParameterName("url")] string url,
-					[ParameterName("user")] string user,
-					[ParameterName("listen")] bool? listenUrls = null,
-					[ParameterName("delegate")] bool? delegateUrls = null);
+		StandardResponse UrlAcl([ParameterName("url")] string url,
+								[ParameterName("user")] string user,
+								[ParameterName("listen")] bool? listenUrls = null,
+								[ParameterName("delegate")] bool? delegateUrls = null);
 	}
 }
