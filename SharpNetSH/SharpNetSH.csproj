@@ -46,10 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\HTTP\HttpAction.cs" />
-    <Compile Include="Actions\HTTP\Objects\RequestQueueView.cs" />
+    <Compile Include="Actions\HTTP\Objects\RequestQueue.cs" />
+    <Compile Include="Actions\HTTP\Objects\ServerSession.cs" />
     <Compile Include="Actions\HTTP\Objects\SessionView.cs" />
     <Compile Include="Actions\HTTP\Objects\StandardResponse.cs" />
     <Compile Include="Actions\HTTP\Objects\UrlAclEntry.cs" />
+    <Compile Include="Actions\HTTP\Objects\UrlGroup.cs" />
     <Compile Include="Actions\HTTP\Objects\User.cs" />
     <Compile Include="Actions\HTTP\ResponseProcessors\IpListenShowResponseProcessor.cs" />
     <Compile Include="Actions\HTTP\ResponseProcessors\StandardExitCodeResponseProcessor.cs" />

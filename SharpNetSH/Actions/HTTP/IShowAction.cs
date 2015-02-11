@@ -35,7 +35,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="verbose">View verbose information showing property information too.</param>
 		[MethodName("servicestate view=requestq")]
-		IEnumerable<RequestQueueView> ServiceStateRequestQueueView([ParameterName("verbose")] Boolean? verbose = null);
+		IEnumerable<RequestQueue> ServiceStateRequestQueueView([ParameterName("verbose")] Boolean? verbose = null);
 
 		/// <summary>
 		/// Lists SSL server certificate bindings and the corresponding client certificate policies for an IP address and port.

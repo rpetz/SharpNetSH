@@ -27,6 +27,12 @@ namespace Ignite.SharpNetSH.Test
 		}
 
 		[TestMethod]
+		public void Test()
+		{
+			var netsh = new NetSH(new CommandLineHarness()).Http.Show.ServiceStateRequestQueueView(false);
+		}
+
+		[TestMethod]
 		public void VerifyServiceStateOutput()
 		{
 			var harness = new StringHarness();
