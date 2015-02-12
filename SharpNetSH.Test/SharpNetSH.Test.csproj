@@ -59,17 +59,8 @@
     <Compile Include="FlushActionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowActionTests.cs" />
-    <Compile Include="Spike\ComplexResponseObject.cs" />
-    <Compile Include="Spike\CustomMultiResponseProcessor.cs" />
-    <Compile Include="Spike\CustomResponseProcessor.cs" />
     <Compile Include="Spike\DecoratedEnum.cs" />
-    <Compile Include="Spike\GenericResponseObject.cs" />
     <Compile Include="Spike\ITestAction.cs" />
-    <Compile Include="Spike\MultiResponseObject.cs" />
-    <Compile Include="Spike\OverriddenMultiResponseProcessor.cs" />
-    <Compile Include="Spike\OverriddenResponseProcessor.cs" />
-    <Compile Include="Spike\OverzealousResponseProcessor.cs" />
-    <Compile Include="Spike\SimpleResponseObject.cs" />
     <Compile Include="Spike\StringHarness.cs" />
     <Compile Include="Spike\TestEnum.cs" />
   </ItemGroup>
