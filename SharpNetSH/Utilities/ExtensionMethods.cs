@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace Ignite.SharpNetSH
 {
@@ -16,9 +15,10 @@ namespace Ignite.SharpNetSH
 			return method.Name;
 		}
 
-		public static Type GetResponseProcessorType(this MethodBase method)
+		public static Type GetResponseProcessorType(this MethodInfo method)
 		{
-			return Attribute.GetCustomAttributes(method).OfType<ResponseProcessorAttribute>().Select(attribute => (attribute).ResponseProcessorType).FirstOrDefault();
+			var attr = Attribute.GetCustomAttributes(method).OfType<ResponseProcessorAttribute>().Select(attribute => (attribute).ResponseProcessorType).FirstOrDefault();
+			return attr ?? method.ReturnType;
 		}
 
 		public static String GetParameterName(this ParameterInfo parameter)
@@ -65,32 +65,6 @@ namespace Ignite.SharpNetSH
 			var attrs = memberInfo.GetCustomAttributes(typeof(TAttribute), false).FirstOrDefault();
 
 			return (TAttribute)attrs;
-		}
-
-		public static Boolean GetEnumerableType<T>(this Type type)
-		{
-			return type == typeof(IEnumerable<T>);
-		}
-
-		public static Boolean IsEnumerable<T>(this Type type)
-		{ return type == typeof(IEnumerable<T>); }
-		
-		public static void ProcessRawData(this IOutputObject outputObject, String splitRegex, IEnumerable<String> lines)
-		{
-			foreach (var line in lines)
-			{
-				var regex = new Regex(splitRegex);
-				var split = regex.Split(line.Trim(), 2);
-				if (split.Length != 2)
-					throw new Exception("Invalid Raw Certificate Data.  Line: " + line);
-
-				var title = split[0];
-				var value = split[1];
-				if (value.ToLower() == "(null)")
-					value = null;
-
-				outputObject.AddValue(title, value);
-			}
 		}
 	}
 }

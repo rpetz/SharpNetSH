@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Ignite.SharpNetSH.Test.Spike;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -10,6 +8,14 @@ namespace Ignite.SharpNetSH.Test
 	[TestClass]
 	public class ActionProxyTests
 	{
+		[TestMethod]
+		public void Test()
+		{
+			var netsh = new NetSH(new CommandLineHarness());
+			var response = netsh.Http.Show.IpListen();
+
+		}
+
 		[TestMethod]
 		public void ShouldOperateOnInterface()
 		{
@@ -36,57 +42,7 @@ namespace Ignite.SharpNetSH.Test
 			var proxy = ActionProxy<ITestAction>.Create("test", "netsh unittest", harness.Object);
 			var response = proxy.SimpleResponseMethod();
 			Assert.IsNotNull(response);
-			Assert.IsInstanceOfType(response, typeof(SimpleResponseObject));
-		}
-
-		[TestMethod]
-		public void ShouldCallIRequestProcessorEvenIfAlsoIMultiRequestProcessor()
-		{
-			var harness = new Mock<IExecutionHarness>();
-			var proxy = ActionProxy<ITestAction>.Create("test", "netsh unittest", harness.Object);
-			var response = proxy.ComplexResponseMethod();
-			Assert.IsNotNull(response);
-			Assert.IsInstanceOfType(response, typeof(ComplexResponseObject));
-		}
-
-		[TestMethod]
-		public void ShouldCallIRequestProcessorEvenIfAlsoGeneric()
-		{
-			var harness = new Mock<IExecutionHarness>();
-			var proxy = ActionProxy<ITestAction>.Create("test", "netsh unittest", harness.Object);
-			var response = proxy.GenericResponseMethod();
-			Assert.IsNotNull(response);
-			Assert.IsInstanceOfType(response, typeof(GenericResponseObject<SimpleResponseObject>));
-		}
-
-		[TestMethod]
-		public void ShouldCallIMultiRequestProcessor()
-		{
-			var harness = new Mock<IExecutionHarness>();
-			var proxy = ActionProxy<ITestAction>.Create("test", "netsh unittest", harness.Object);
-			var response = proxy.MultiResponseMethod();
-			Assert.IsNotNull(response);
-			Assert.IsInstanceOfType(response, typeof(IEnumerable<MultiResponseObject>));
-		}
-
-		[TestMethod]
-		public void ShouldCallIMultiRequestProcessorEvenIfAlsoIRequestProcessor()
-		{
-			var harness = new Mock<IExecutionHarness>();
-			var proxy = ActionProxy<ITestAction>.Create("test", "netsh unittest", harness.Object);
-			var response = proxy.ComplexMultiResponseMethod();
-			Assert.IsNotNull(response);
-			Assert.IsInstanceOfType(response, typeof(IEnumerable<ComplexResponseObject>));
-		}
-
-		[TestMethod]
-		public void ShouldCallIMultiRequestProcessorEvenIfAlsoGeneric()
-		{
-			var harness = new Mock<IExecutionHarness>();
-			var proxy = ActionProxy<ITestAction>.Create("test", "netsh unittest", harness.Object);
-			var response = proxy.GenericMultiResponseMethod();
-			Assert.IsNotNull(response);
-			Assert.IsInstanceOfType(response, typeof(IEnumerable<GenericResponseObject<SimpleResponseObject>>));
+			Assert.IsInstanceOfType(response, typeof(StandardResponse));
 		}
 
 		[TestMethod]
@@ -134,7 +90,7 @@ namespace Ignite.SharpNetSH.Test
 		}
 
 		[TestMethod]
-		public void ShouldSupportBooleanTypeDecoratedParameters()
+		public void ShouldSupportEnumTypeDecoratedParameters()
 		{
 			var harness = new StringHarness();
 			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", harness);
@@ -145,7 +101,7 @@ namespace Ignite.SharpNetSH.Test
 		}
 
 		[TestMethod]
-		public void ShouldSupportParameterNameDecoratedParameters()
+		public void ShouldSupportBooleanTypeDecoratedParameters()
 		{
 			var harness = new StringHarness();
 			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", harness);
@@ -171,67 +127,6 @@ namespace Ignite.SharpNetSH.Test
 			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", harness);
 			proxy.MethodWithParameterNameDecoration("myParameterTest");
 			Assert.AreEqual("netsh unittest testActionName MethodWithParameterNameDecoration test=myParameterTest", harness.Value);
-		}
-
-		[TestMethod]
-		public void ShouldCallCustomResponseProcessor()
-		{
-			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
-			var result = proxy.MethodWithCustomResponseProcessor();
-			Assert.AreEqual(result, "CustomResponseProcessor");
-		}
-
-		[TestMethod]
-		public void ShouldCallCustomMultiResponseProcessor()
-		{
-			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
-			var result = proxy.MethodWithCustomMultiResponseProcessor();
-			Assert.AreEqual(result.FirstOrDefault(), "CustomMultiResponseProcessor");
-		}
-
-		[TestMethod]
-		public void ShouldCallOverridenResponseProcessor()
-		{
-			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
-			var result = proxy.MethodWithOverriddenResponseProcessor();
-			Assert.IsNotNull(result);
-		}
-
-		[TestMethod]
-		public void ShouldCallOverridenMultiResponseProcessor()
-		{
-			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
-			var result = proxy.MethodWithOverriddenMultiResponseProcessor();
-			Assert.IsNotNull(result);
-			Assert.IsTrue(result.Count() == 10);
-		}
-
-		[TestMethod]
-		public void ShouldThrowErrorIfCustomResponseProcessorIsBothSimpleAndMulti()
-		{
-			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
-			var gotException = false;
-
-			try
-			{ proxy.MethodWithOverzealousResponseProcessor(); }
-			catch (Exception)
-			{ gotException = true; }
-
-			Assert.IsTrue(gotException);
-		}
-
-		[TestMethod]
-		public void ShouldThrowErrorIfCustomResponseProcessorIsNeitherSimpleNorMulti()
-		{
-			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", new StringHarness());
-			var gotException = false;
-
-			try
-			{ proxy.MethodWithInvalidResponseProcessor(); }
-			catch (Exception)
-			{ gotException = true; }
-
-			Assert.IsTrue(gotException);
 		}
 	}
 }
