@@ -9,14 +9,6 @@ namespace Ignite.SharpNetSH.Test
 	public class ActionProxyTests
 	{
 		[TestMethod]
-		public void Test()
-		{
-			var netsh = new NetSH(new CommandLineHarness());
-			var response = netsh.Http.Show.IpListen();
-
-		}
-
-		[TestMethod]
 		public void ShouldOperateOnInterface()
 		{
 			var harness = new StringHarness();
