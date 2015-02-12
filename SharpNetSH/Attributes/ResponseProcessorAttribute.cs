@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Ignite.SharpNetSH
 {
@@ -9,6 +10,8 @@ namespace Ignite.SharpNetSH
 
 		public ResponseProcessorAttribute(Type responseProcessorType)
 		{
+			if (!responseProcessorType.GetInterfaces().Contains(typeof (IResponseProcessor)))
+				throw new Exception("Invalid response processor type applied to attribute");
 			ResponseProcessorType = responseProcessorType;
 		}
 	}

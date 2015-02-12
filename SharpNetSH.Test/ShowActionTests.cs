@@ -29,7 +29,7 @@ namespace Ignite.SharpNetSH.Test
 		[TestMethod]
 		public void Test()
 		{
-			var netsh = new NetSH(new CommandLineHarness()).Http.Show.ServiceStateRequestQueueView(false);
+			var netsh = new NetSH(new CommandLineHarness()).Http.Show.ServiceStateRequestQueueView(true);
 		}
 
 		[TestMethod]

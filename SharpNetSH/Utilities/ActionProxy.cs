@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -32,66 +31,20 @@ namespace Ignite.SharpNetSH
 			var result = ProcessParameters(method, methodCall);
 			int exitCode;
 			var response = _harness.Execute(_priorText + " " + _actionName + " " + result, out exitCode);
-			var returnType = method.ReturnType;
-			var isEnumerable = false;
-
-			if (returnType.IsGenericType)
-			{
-				var isEnumerableMethod = typeof (ExtensionMethods).GetMethod("IsEnumerable").MakeGenericMethod(returnType.GetGenericArguments());
-				var isEnumerableResult = (bool)isEnumerableMethod.Invoke(null, new[] { returnType });
-
-				if (isEnumerableResult)
-				{
-					returnType = returnType.GetGenericArguments().First();
-					isEnumerable = true;
-				}
-			}
+			var processorType = method.GetResponseProcessorType();
 
 			// If there is a ResponseProcessorAttribute defined, it overrides any response processors on the return type
-			if (method.GetResponseProcessorType() != null)
+			if (processorType != null)
 			{
 				// We use the Activator here because we want custom processors to use their own constructor if they so desire
-				var processorUnknown = Activator.CreateInstance(method.GetResponseProcessorType());
+				var processorUnknown = FormatterServices.GetUninitializedObject(processorType);
 				var isSimpleProcessor = processorUnknown.GetType().GetInterfaces().Contains(typeof (IResponseProcessor));
-				var isMultiProcessor = processorUnknown.GetType().GetInterfaces().Contains(typeof (IMultiResponseProcessor));
 
-				if (isSimpleProcessor && isMultiProcessor)
+				if (!isSimpleProcessor)
 					throw new Exception("Custom processor cannot inherit from both IResponseProcessor and IMultiResponseProcessor");
 
-				if (!isSimpleProcessor && !isMultiProcessor)
-					throw new Exception("Expected custom processor implementing either IResponseProcessor or IMultiResponseProcessor - Type '" + processorUnknown.GetType() + "' does not implement either");
-
-				if (isSimpleProcessor)
-				{
-					var simpleProcessor = (IResponseProcessor) processorUnknown;
-					var processedResponse = simpleProcessor.ProcessResponse(response, exitCode);
-					return new ReturnMessage(processedResponse, null, 0, methodCall.LogicalCallContext, methodCall);
-				}
-				
-				if (isMultiProcessor)
-				{
-					var simpleProcessor = (IMultiResponseProcessor) processorUnknown;
-					var processedResponse = simpleProcessor.ProcessResponse(response, exitCode);
-					return new ReturnMessage(processedResponse, null, 0, methodCall.LogicalCallContext, methodCall);
-				}
-			}
-
-			// We check if it's not enumerable because we want to ensure that the return type of the method
-			// calls the appropriate response processor method in the event that it implements both
-			// IResponseProcessor AND IMultiResponseProcessor
-			if (returnType.GetInterfaces().Contains(typeof (IResponseProcessor)) && !isEnumerable)
-			{
-				// We use FormatterServices here because we don't expose public constructors for our ResponseProcessors
-				var processor = (IResponseProcessor)FormatterServices.GetUninitializedObject(returnType);
-				var processedResponse = processor.ProcessResponse(response, exitCode);
-				return new ReturnMessage(processedResponse, null, 0, methodCall.LogicalCallContext, methodCall);
-			}
-
-			if (returnType.GetInterfaces().Contains(typeof(IMultiResponseProcessor)) && isEnumerable)
-			{
-				// We use FormatterServices here because we don't expose public constructors for our ResponseProcessors
-				var processor = (IMultiResponseProcessor)FormatterServices.GetUninitializedObject(returnType);
-				var processedResponse = processor.ProcessResponse(response, exitCode);
+				var simpleProcessor = (IResponseProcessor) processorUnknown;
+				var processedResponse = simpleProcessor.ProcessResponse(response, exitCode);
 				return new ReturnMessage(processedResponse, null, 0, methodCall.LogicalCallContext, methodCall);
 			}
 

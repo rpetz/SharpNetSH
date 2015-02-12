@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ignite.SharpNetSH.HTTP
+namespace Ignite.SharpNetSH
 {
 	public sealed class StandardResponse : IResponseProcessor
 	{
-		public String Response { get; private set; }
-		public int ExitCode { get; private set; }
-		public bool IsNormalExit { get; private set; }
+		public String Response { get; internal set; }
+		public dynamic ResponseObject { get; internal set; } // TODO: Process the response object
+		public int ExitCode { get; internal set; }
+		public bool IsNormalExit { get; internal set; }
 
 		internal StandardResponse()
 		{ }
 
-		public object ProcessResponse(IEnumerable<string> responseLines, int exitCode)
+		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode)
 		{
 			ExitCode = exitCode;
 			IsNormalExit = exitCode == 0;
