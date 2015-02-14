@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH
 {
 	internal class ExitCodeProcessor : IResponseProcessor
 	{
-		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode)
+		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode, String splitRegEx = null)
 		{
 			IResponseProcessor response = new StandardResponse();
 			response.ProcessResponse(responseLines, exitCode);

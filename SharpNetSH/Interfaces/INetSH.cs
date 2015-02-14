@@ -2,7 +2,7 @@
 
 namespace Ignite.SharpNetSH
 {
-	public interface INetSH
+	internal interface INetSH
 	{
 		/// <summary>
 		/// Represents an HTTP action (currently the only actions available in NetSH are HTTP).

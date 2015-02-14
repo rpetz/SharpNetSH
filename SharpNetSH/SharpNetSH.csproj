@@ -50,7 +50,8 @@
     <Compile Include="ResponseProcessors\DynamicProcessor.cs" />
     <Compile Include="ResponseProcessors\SkipHeaderProcessor.cs" />
     <Compile Include="ResponseProcessors\StandardResponse.cs" />
-    <Compile Include="ResponseProcessors\TrimOnlyProcessor.cs" />
+    <Compile Include="ResponseProcessors\TabulatedDynamicProcessor.cs" />
+    <Compile Include="ResponseProcessors\TrimProcessor.cs" />
     <Compile Include="ResponseProcessors\ExitCodeProcessor.cs" />
     <Compile Include="Attributes\BooleanValueAttribute.cs" />
     <Compile Include="Attributes\MethodNameAttribute.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Harnesses\CommandLineHarness.cs" />
     <Compile Include="Harnesses\ConsoleLogHarness.cs" />
+    <Compile Include="Utilities\Tree.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

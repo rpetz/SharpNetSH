@@ -32,6 +32,7 @@ namespace Ignite.SharpNetSH
 			int exitCode;
 			var response = _harness.Execute(_priorText + " " + _actionName + " " + result, out exitCode);
 			var processorType = method.GetResponseProcessorType();
+			var splitRegEx = method.GetSplitRegEx();
 
 			// If there is a ResponseProcessorAttribute defined, it overrides any response processors on the return type
 			if (processorType != null)
@@ -44,7 +45,7 @@ namespace Ignite.SharpNetSH
 					throw new Exception("Custom processor cannot inherit from both IResponseProcessor and IMultiResponseProcessor");
 
 				var simpleProcessor = (IResponseProcessor) processorUnknown;
-				var processedResponse = simpleProcessor.ProcessResponse(response, exitCode);
+				var processedResponse = simpleProcessor.ProcessResponse(response, exitCode, splitRegEx);
 				return new ReturnMessage(processedResponse, null, 0, methodCall.LogicalCallContext, methodCall);
 			}
 

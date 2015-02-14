@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH.HTTP
 {
@@ -11,7 +10,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="url">Fully qualified URL. If unspecified, implies all URLs. The URL can also be a prefix to registered URLs.</param>
 		[MethodName("cachestate")]
-		[ResponseProcessor(typeof(SkipHeaderProcessor))]
+		[ResponseProcessor(typeof(DynamicProcessor), @":\s+")]
 		StandardResponse CacheState([ParameterName("url")] String url = null);
 
 		/// <summary>
@@ -19,7 +18,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307241(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
 		[MethodName("iplisten")]
-		[ResponseProcessor(typeof(TrimOnlyProcessor))]
+		[ResponseProcessor(typeof(TrimProcessor))]
 		StandardResponse IpListen();
 
 		/// <summary>
@@ -46,7 +45,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="ipPort">Specifies the IPv4 or IPv6 address and port for which the SSL certificate bindings will be displayed. Not specifying an ipport lists all bindings.</param>
 		[MethodName("sslcert")]
-		[ResponseProcessor(typeof(SkipHeaderProcessor))]
+		[ResponseProcessor(typeof(DynamicProcessor), @"\s+:\s+")]
 		StandardResponse SSLCert([ParameterName("ipport")] String ipPort = null);
 
 		/// <summary>
@@ -54,7 +53,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307244(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
 		[MethodName("timeout")]
-		[ResponseProcessor(typeof(SkipHeaderProcessor))]
+		[ResponseProcessor(typeof(TrimProcessor))]
 		StandardResponse Timeout();
 
 		/// <summary>
@@ -63,7 +62,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="url">Specifies the fully qualified URL. If unspecified, implies all URLs.</param>
 		[MethodName("urlacl")]
-		[ResponseProcessor(typeof(SkipHeaderProcessor))]
+		[ResponseProcessor(typeof(TabulatedDynamicProcessor), @":\s+")]
 		StandardResponse UrlAcl([ParameterName("url")] String url = null);
 	}
 }

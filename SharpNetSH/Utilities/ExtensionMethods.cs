@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Ignite.SharpNetSH
 {
@@ -19,6 +22,11 @@ namespace Ignite.SharpNetSH
 		{
 			var attr = Attribute.GetCustomAttributes(method).OfType<ResponseProcessorAttribute>().Select(attribute => (attribute).ResponseProcessorType).FirstOrDefault();
 			return attr ?? method.ReturnType;
+		}
+
+		public static String GetSplitRegEx(this MethodInfo method)
+		{
+			return Attribute.GetCustomAttributes(method).OfType<ResponseProcessorAttribute>().Select(attribute => (attribute).SplitRegEx).FirstOrDefault();
 		}
 
 		public static String GetParameterName(this ParameterInfo parameter)
@@ -65,6 +73,47 @@ namespace Ignite.SharpNetSH
 			var attrs = memberInfo.GetCustomAttributes(typeof(TAttribute), false).FirstOrDefault();
 
 			return (TAttribute)attrs;
+		}
+
+		public static KeyValuePair<String, dynamic> ProcessRawData(this String line, String splitRegEx)
+		{
+			var regex = new Regex(splitRegEx);
+			var split = regex.Split(line.TrimStart(), 2);
+			if (split.Length != 2)
+				throw new Exception("Invalid RegEx for line: " + line);
+
+			var title = split[0];
+			object value = split[1];
+			switch (((String)value).ToLower())
+			{
+				case "(null)":
+					value = null;
+					break;
+				case "yes":
+				case "enabled":
+					value = true;
+					break;
+				case "no":
+				case "disabled":
+					value = false;
+					break;
+			}
+
+			var textInfo = new CultureInfo("en-US", false).TextInfo;
+			var titleCaseTitle = Regex.Replace(textInfo.ToTitleCase(title), @"\s+", "");
+			titleCaseTitle = Regex.Replace(titleCaseTitle, "[^a-zA-Z0-9 -]", ""); // Remove any non-alphanumeric characters
+			return new KeyValuePair<String, dynamic>(titleCaseTitle, value);
+		}
+
+		public static dynamic ProcessRawData(this IEnumerable<String> lines, String splitRegEx)
+		{
+			var outputObject = new ExpandoObject();
+			foreach (var line in lines)
+			{
+				var processedLine = line.ProcessRawData(splitRegEx);
+				((IDictionary<string, object>)outputObject)[processedLine.Key] = processedLine.Value;
+			}
+			return outputObject;
 		}
 	}
 }

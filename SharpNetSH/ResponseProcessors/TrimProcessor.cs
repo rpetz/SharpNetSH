@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Ignite.SharpNetSH
 {
-	internal class TrimOnlyProcessor : IResponseProcessor
+	internal class TrimProcessor : IResponseProcessor
 	{
-		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode)
+		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode, String splitRegEx = null)
 		{
 			IResponseProcessor response = new StandardResponse();
 
