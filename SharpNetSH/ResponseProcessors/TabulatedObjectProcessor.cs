@@ -20,10 +20,18 @@ namespace Ignite.SharpNetSH
 			var regex = new Regex(@"[ ]{4}");
 			var tabulatedLines = lines.ToList().Select(x =>
 			{
-				while (Regex.IsMatch(x, @"^\t*([ ]{4})+")) //Ensures we are still working on a tab at the beginning of the line
+				while (Regex.IsMatch(x, @"^\t*([ ]{4})+")) // Ensures we are still working on a tab at the beginning of the line
 					x = regex.Replace(x, "\t", 1);
 				return x;
 			}).ToList(); //Convert the beginning spaces to tabs
+
+			if (tabulatedLines.Any(x => !Regex.IsMatch(x, @"^\t"))) // If any lines start with a tab level of 0, we need to tab everything over by 1 tab
+				tabulatedLines = tabulatedLines.Select(x =>
+				{
+					if (!String.IsNullOrWhiteSpace(x))
+						return "\t" + x;
+					return x;
+				}).ToList();
 
 			var root = new Tree();
 			RecursivelyProcessToTree(tabulatedLines.Skip(3).GetEnumerator(), root, splitRegEx);
@@ -47,14 +55,14 @@ namespace Ignite.SharpNetSH
 					parent.Children.Add(tree); 
 				else if (level - 1 > parent.TreeLevel) // If the new tree is a distant child of this tree, recursively add it to the last tree we processed
 				{
-					var newParent = parent.Children.Last();
+					var newParent = parent.Children.Any() ? parent.Children.Last() : parent;
 					tree.Parent = newParent;
 					newParent.Children.Add(tree);
 					RecursivelyProcessToTree(lineEnumerator, tree, splitRegEx);
 				}
 				else // Otherwise, get the correct parent and recursively add it's children in
 				{
-					while (parent.TreeLevel >= 0 && parent.TreeLevel > level - 1)
+					while (parent.TreeLevel >= 0 && parent.TreeLevel > ((level - 1 < 0 ? 0 : level - 1)))
 						parent = parent.Parent;
 
 					parent.Children.Add(tree);
@@ -65,27 +73,37 @@ namespace Ignite.SharpNetSH
 		dynamic RecursivelyFlattenToDynamic(Tree source)
 		{
 			IDictionary<string, object> current = new ExpandoObject();
-			current[source.Title] = source.Value;
+			if (!(source.Value is String) || source.Value != "!#COLLECTION")
+				current[source.Title] = source.Value;
+			var lastHeading = String.Empty;
+			var keepLastHeading = false;
 			foreach (var childGrouping in source.Children.GroupBy(x => x.Title))
 			{
-				var collection = new List<dynamic>();
-
-				foreach (var subChild in childGrouping)
+				if (childGrouping.All(x => !x.Children.Any())) // Grab all the listings which have no children
 				{
-					IDictionary<string, object> dynamicSubChild = new ExpandoObject();
-					dynamicSubChild[subChild.Title] = subChild.Value;
-					foreach (var subSubChild in subChild.Children)
-					{
-						if (subSubChild.Children.Any())
-							dynamicSubChild[subSubChild.Title] = RecursivelyFlattenToDynamic(subSubChild);
-						else
-							dynamicSubChild[subSubChild.Title] = subSubChild.Value;
-					}
-					collection.Add(dynamicSubChild);
+					foreach (var child in childGrouping.Where(child => !(child.Value is String) || child.Value != "!#COLLECTION"))
+						current[child.Title] = child.Value;
+				}
+				else // Otherwise treat it as a collection of objects
+				{
+					var collection = childGrouping.Select(subChild => RecursivelyFlattenToDynamic(subChild)).ToList();
+
+					if (keepLastHeading)
+						current[lastHeading] = collection;
+					else
+						current[childGrouping.Key.Pluralize(false)] = collection;
 				}
 
-				current[childGrouping.Key.Pluralize(false)] = collection;
+				if (keepLastHeading)
+					keepLastHeading = false;
+
+				if (childGrouping.First().Value is String && childGrouping.First().Value == "!#COLLECTION")
+				{
+					lastHeading = childGrouping.Key;
+					keepLastHeading = true;
+				}
 			}
+
 			return current;
 		}
 	}

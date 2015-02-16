@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Ignite.SharpNetSH.Test.Spike;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -9,6 +8,20 @@ namespace Ignite.SharpNetSH.Test
 	[TestClass]
 	public class ActionProxyTests
 	{
+		[TestMethod]
+		public void Test()
+		{
+			var netsh = new NetSH(new CommandLineHarness());
+			var serviceStateResponse = netsh.Http.Show.ServiceStateRequestQueueView(true);
+			var sessionStateResponse = netsh.Http.Show.ServiceStateSessionView(true);
+			var sslCertResponse = netsh.Http.Show.SSLCert();
+			var timeoutResponse = netsh.Http.Show.Timeout();
+			var urlAclResponse = netsh.Http.Show.UrlAcl();
+			var ipListenResponse = netsh.Http.Show.IpListen();
+			var cacheState = netsh.Http.Show.CacheState();
+
+		}
+
 		[TestMethod]
 		public void ShouldOperateOnInterface()
 		{

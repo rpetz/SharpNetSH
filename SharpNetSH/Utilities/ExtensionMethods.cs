@@ -79,6 +79,8 @@ namespace Ignite.SharpNetSH
 		{
 			var regex = new Regex(splitRegEx);
 			var split = regex.Split(line.TrimStart(), 2);
+			if (split.Length == 1)
+				split = new[] {split[0], "!#COLLECTION"};
 			if (split.Length != 2)
 				throw new Exception("Invalid RegEx for line: " + line);
 

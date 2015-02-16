@@ -11,6 +11,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="url">Fully qualified URL. If unspecified, implies all URLs. The URL can also be a prefix to registered URLs.</param>
 		[MethodName("cachestate")]
 		[ResponseProcessor(typeof(BlockProcessor), @":\s+")]
+		//TODO: Update This response processor
 		StandardResponse CacheState([ParameterName("url")] String url = null);
 
 		/// <summary>
@@ -19,6 +20,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		[MethodName("iplisten")]
 		[ResponseProcessor(typeof(TrimProcessor))]
+		//TODO: Update This response processor
 		StandardResponse IpListen();
 
 		/// <summary>
@@ -27,7 +29,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="verbose">View verbose information showing property information too.</param>
 		[MethodName("servicestate view=session")]
-		[ResponseProcessor(typeof(SkipHeaderProcessor))]
+		[ResponseProcessor(typeof(TabulatedObjectProcessor), @":\s+")]
 		StandardResponse ServiceStateSessionView([ParameterName("verbose")] Boolean? verbose = null);
 
 		/// <summary>
@@ -36,7 +38,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="verbose">View verbose information showing property information too.</param>
 		[MethodName("servicestate view=requestq")]
-		[ResponseProcessor(typeof(SkipHeaderProcessor))]
+		[ResponseProcessor(typeof(TabulatedObjectProcessor), @":\s+")]
 		StandardResponse ServiceStateRequestQueueView([ParameterName("verbose")] Boolean? verbose = null);
 
 		/// <summary>
@@ -53,7 +55,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307244(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
 		[MethodName("timeout")]
-		[ResponseProcessor(typeof(TrimProcessor))]
+		[ResponseProcessor(typeof(BlockProcessor), @":\s+")]
 		StandardResponse Timeout();
 
 		/// <summary>

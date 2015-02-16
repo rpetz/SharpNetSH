@@ -7,7 +7,7 @@ namespace Ignite.SharpNetSH
 	public sealed class StandardResponse : IResponseProcessor
 	{
 		public String Response { get; internal set; }
-		public dynamic ResponseObject { get; internal set; } // TODO: Process the response object
+		public dynamic ResponseObject { get; internal set; }
 		public int ExitCode { get; internal set; }
 		public bool IsNormalExit { get; internal set; }
 
