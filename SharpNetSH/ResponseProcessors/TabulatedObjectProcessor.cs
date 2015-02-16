@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Humanizer;
 
 namespace Ignite.SharpNetSH
 {
-	internal class TabulatedDynamicProcessor : IResponseProcessor
+	internal class TabulatedObjectProcessor : IResponseProcessor
 	{
 		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode, String splitRegEx = null)
 		{
@@ -25,7 +27,7 @@ namespace Ignite.SharpNetSH
 
 			var root = new Tree();
 			RecursivelyProcessToTree(tabulatedLines.Skip(3).GetEnumerator(), root, splitRegEx);
-			standardResponse.ResponseObject = RecursivelyFlattenToDynamic(root);
+			standardResponse.ResponseObject = root.Children.Select(child => RecursivelyFlattenToDynamic(child)).ToList(); // Remove the root and add the dynamic objects to the response
 			return standardResponse;
 		}
 
@@ -62,7 +64,29 @@ namespace Ignite.SharpNetSH
 
 		dynamic RecursivelyFlattenToDynamic(Tree source)
 		{
-			return null;
+			IDictionary<string, object> current = new ExpandoObject();
+			current[source.Title] = source.Value;
+			foreach (var childGrouping in source.Children.GroupBy(x => x.Title))
+			{
+				var collection = new List<dynamic>();
+
+				foreach (var subChild in childGrouping)
+				{
+					IDictionary<string, object> dynamicSubChild = new ExpandoObject();
+					dynamicSubChild[subChild.Title] = subChild.Value;
+					foreach (var subSubChild in subChild.Children)
+					{
+						if (subSubChild.Children.Any())
+							dynamicSubChild[subSubChild.Title] = RecursivelyFlattenToDynamic(subSubChild);
+						else
+							dynamicSubChild[subSubChild.Title] = subSubChild.Value;
+					}
+					collection.Add(dynamicSubChild);
+				}
+
+				current[childGrouping.Key.Pluralize(false)] = collection;
+			}
+			return current;
 		}
 	}
 }

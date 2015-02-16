@@ -10,7 +10,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="url">Fully qualified URL. If unspecified, implies all URLs. The URL can also be a prefix to registered URLs.</param>
 		[MethodName("cachestate")]
-		[ResponseProcessor(typeof(DynamicProcessor), @":\s+")]
+		[ResponseProcessor(typeof(BlockProcessor), @":\s+")]
 		StandardResponse CacheState([ParameterName("url")] String url = null);
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="ipPort">Specifies the IPv4 or IPv6 address and port for which the SSL certificate bindings will be displayed. Not specifying an ipport lists all bindings.</param>
 		[MethodName("sslcert")]
-		[ResponseProcessor(typeof(DynamicProcessor), @"\s+:\s+")]
+		[ResponseProcessor(typeof(BlockProcessor), @"\s+:\s+")]
 		StandardResponse SSLCert([ParameterName("ipport")] String ipPort = null);
 
 		/// <summary>
@@ -62,7 +62,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="url">Specifies the fully qualified URL. If unspecified, implies all URLs.</param>
 		[MethodName("urlacl")]
-		[ResponseProcessor(typeof(TabulatedDynamicProcessor), @":\s+")]
+		[ResponseProcessor(typeof(TabulatedObjectProcessor), @":\s+")]
 		StandardResponse UrlAcl([ParameterName("url")] String url = null);
 	}
 }

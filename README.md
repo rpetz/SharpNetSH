@@ -52,3 +52,9 @@ NetSH appears to have a standardized output structure.  Tabbing is used to indic
         - winhttp        - Not Supported
         - winsock        - Not Supported
         - wlan           - Not Supported
+
+###Dependencies
+
+######[Humanizer](https://github.com/MehdiK/Humanizer) - Latest Version
+
+In order to properly build objects, we have to be able to pluralize words when possible.  For instance, when calling `[netSH].Http.Show.UrlAcl()` it provides a list of Reserved URLs, each with a list of Users that are assigned capabilities on those URLs.  When we parse this object, the sub-list of Users gets created because each user block can be grouped together by it's title of `User`.  As a result we take this title, pluralize it, assign it an IEnumerable object, and then place each User object into the that collection.  We could recreate this code ourselves, but it is beyond the scope of this project and as such we bring in Humanizer.

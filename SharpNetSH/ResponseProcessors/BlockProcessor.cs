@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Ignite.SharpNetSH
 {
-	internal class DynamicProcessor : IResponseProcessor
+	internal class BlockProcessor : IResponseProcessor
 	{
 		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode, String splitRegEx = null)
 		{

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ignite.SharpNetSH.Test.Spike;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -10,14 +9,6 @@ namespace Ignite.SharpNetSH.Test
 	[TestClass]
 	public class ActionProxyTests
 	{
-		[TestMethod]
-		public void Test()
-		{
-			var netsh = new NetSH(new CommandLineHarness());
-			var response = netsh.Http.Show.UrlAcl();
-			var certs = (IEnumerable<dynamic>)response.ResponseObject;
-		}
-
 		[TestMethod]
 		public void ShouldOperateOnInterface()
 		{

@@ -36,6 +36,9 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Humanizer">
+      <HintPath>..\packages\Humanizer.1.33.7\lib\portable-win+net40+sl50+wp8+wpa81\Humanizer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,10 +50,10 @@
   <ItemGroup>
     <Compile Include="Actions\HTTP\HttpAction.cs" />
     <Compile Include="Actions\HTTP\Timeout.cs" />
-    <Compile Include="ResponseProcessors\DynamicProcessor.cs" />
+    <Compile Include="ResponseProcessors\BlockProcessor.cs" />
     <Compile Include="ResponseProcessors\SkipHeaderProcessor.cs" />
     <Compile Include="ResponseProcessors\StandardResponse.cs" />
-    <Compile Include="ResponseProcessors\TabulatedDynamicProcessor.cs" />
+    <Compile Include="ResponseProcessors\TabulatedObjectProcessor.cs" />
     <Compile Include="ResponseProcessors\TrimProcessor.cs" />
     <Compile Include="ResponseProcessors\ExitCodeProcessor.cs" />
     <Compile Include="Attributes\BooleanValueAttribute.cs" />
@@ -80,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
