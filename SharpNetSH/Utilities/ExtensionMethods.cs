@@ -79,8 +79,10 @@ namespace Ignite.SharpNetSH
 		{
 			var regex = new Regex(splitRegEx);
 			var split = regex.Split(line.TrimStart(), 2);
+
 			if (split.Length == 1)
-				split = new[] {split[0], "!#COLLECTION"};
+				split = new[] { split[0], "!#COLLECTION" };
+
 			if (split.Length != 2)
 				throw new Exception("Invalid RegEx for line: " + line);
 
@@ -92,19 +94,26 @@ namespace Ignite.SharpNetSH
 					value = null;
 					break;
 				case "yes":
+				case "true":
 				case "enabled":
 					value = true;
 					break;
 				case "no":
+				case "false":
 				case "disabled":
 					value = false;
 					break;
 			}
 
+			return new KeyValuePair<String, dynamic>(title.ToCSharpFriendlyPropertyName(), value);
+		}
+
+		public static String ToCSharpFriendlyPropertyName(this String name)
+		{
 			var textInfo = new CultureInfo("en-US", false).TextInfo;
-			var titleCaseTitle = Regex.Replace(textInfo.ToTitleCase(title), @"\s+", "");
+			var titleCaseTitle = Regex.Replace(textInfo.ToTitleCase(name), @"\s+", "");
 			titleCaseTitle = Regex.Replace(titleCaseTitle, "[^a-zA-Z0-9 -]", ""); // Remove any non-alphanumeric characters
-			return new KeyValuePair<String, dynamic>(titleCaseTitle, value);
+			return titleCaseTitle;
 		}
 
 		public static dynamic ProcessRawData(this IEnumerable<String> lines, String splitRegEx)

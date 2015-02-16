@@ -75,32 +75,53 @@ namespace Ignite.SharpNetSH
 			IDictionary<string, object> current = new ExpandoObject();
 			if (!(source.Value is String) || source.Value != "!#COLLECTION")
 				current[source.Title] = source.Value;
+			else if (source.Value == "!#VALUE")
+				return source.Value;
+
 			var lastHeading = String.Empty;
 			var keepLastHeading = false;
-			foreach (var childGrouping in source.Children.GroupBy(x => x.Title))
+
+			if (source.Children.All(x => x.Value is String && x.Value == "!#COLLECTION"))
+				current[source.Title] = source.Children.Select(child => child.RawText.Trim()).Cast<dynamic>().ToList();
+			else
 			{
-				if (childGrouping.All(x => !x.Children.Any())) // Grab all the listings which have no children
+				foreach (var childGrouping in source.Children.GroupBy(x => x.Title))
 				{
-					foreach (var child in childGrouping.Where(child => !(child.Value is String) || child.Value != "!#COLLECTION"))
-						current[child.Title] = child.Value;
-				}
-				else // Otherwise treat it as a collection of objects
-				{
-					var collection = childGrouping.Select(subChild => RecursivelyFlattenToDynamic(subChild)).ToList();
+					if (childGrouping.Count() > 1) // It's a collection of objects
+					{
+						var collection = childGrouping.Select(subChild => RecursivelyFlattenToDynamic(subChild)).ToList();
+						if (keepLastHeading)
+							current[lastHeading] = collection;
+						else
+							current[childGrouping.Key.Pluralize(false)] = collection;
+					}
+					else // It's a single object
+					{
+						var child = childGrouping.First();
+						if (child.Children.Any())
+						{
+							keepLastHeading = false;
+							current[child.Title] = RecursivelyFlattenToDynamic(child);
+						}
+						else if (child.Value is String)
+						{
+							if (child.Value == "!#COLLECTION")
+								current[child.Title] = null;
+							else if (child.Value != "!#COLLECTION")
+								current[child.Title] = child.Value;
+						}
+						else
+							current[child.Title] = child.Value;
+					}
 
 					if (keepLastHeading)
-						current[lastHeading] = collection;
-					else
-						current[childGrouping.Key.Pluralize(false)] = collection;
-				}
+						keepLastHeading = false;
 
-				if (keepLastHeading)
-					keepLastHeading = false;
-
-				if (childGrouping.First().Value is String && childGrouping.First().Value == "!#COLLECTION")
-				{
-					lastHeading = childGrouping.Key;
-					keepLastHeading = true;
+					if (childGrouping.First().Value is String && childGrouping.First().Value == "!#COLLECTION")
+					{
+						lastHeading = childGrouping.Key;
+						keepLastHeading = true;
+					}
 				}
 			}
 

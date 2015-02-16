@@ -11,7 +11,6 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="url">Fully qualified URL. If unspecified, implies all URLs. The URL can also be a prefix to registered URLs.</param>
 		[MethodName("cachestate")]
 		[ResponseProcessor(typeof(BlockProcessor), @":\s+")]
-		//TODO: Update This response processor
 		StandardResponse CacheState([ParameterName("url")] String url = null);
 
 		/// <summary>
@@ -20,7 +19,6 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		[MethodName("iplisten")]
 		[ResponseProcessor(typeof(TrimProcessor))]
-		//TODO: Update This response processor
 		StandardResponse IpListen();
 
 		/// <summary>
