@@ -10,7 +10,7 @@
     <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A C# netsh manager</description>
-    <releaseNotes>This only implements some of the functionality at the moment, DO NOT USE</releaseNotes>
+    <releaseNotes>Please see the project site for more information.  NOTE: While this is technically in release state, it's still highly experimental.  If you find any unusual exceptions please utilize the Issues feature of the project's GitHub page.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>C# netsh</tags>
   </metadata>

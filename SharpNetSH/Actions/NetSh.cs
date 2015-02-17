@@ -11,6 +11,11 @@ namespace Ignite.SharpNetSH
 			_harness = harness;
 		}
 
+		/// <summary>
+		/// Instantiates a new instance of NetSH with a CommandLineHarness
+		/// </summary>
+		public static NetSH CMD { get {  return new NetSH(new CommandLineHarness()); } }
+
 		public IHttpAction Http { get { return HttpAction.CreateAction("netsh", _harness); } }
 	}
 }
