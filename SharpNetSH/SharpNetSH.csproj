@@ -71,7 +71,7 @@
     <Compile Include="Actions\HTTP\IDeleteAction.cs" />
     <Compile Include="Actions\HTTP\IFlushAction.cs" />
     <Compile Include="Actions\HTTP\IHttpAction.cs" />
-    <Compile Include="Interfaces\INetSH.cs" />
+    <Compile Include="Actions\INetSH.cs" />
     <Compile Include="Actions\HTTP\IShowAction.cs" />
     <Compile Include="Actions\NetSh.cs" />
     <Compile Include="Utilities\ActionProxy.cs" />
