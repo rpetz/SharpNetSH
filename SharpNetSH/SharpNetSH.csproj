@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Actions\HTTP\HttpAction.cs" />
     <Compile Include="Actions\HTTP\Timeout.cs" />
+    <Compile Include="Interfaces\IResponse.cs" />
     <Compile Include="ResponseProcessors\BlockProcessor.cs" />
     <Compile Include="ResponseProcessors\SkipHeaderProcessor.cs" />
     <Compile Include="ResponseProcessors\StandardResponse.cs" />

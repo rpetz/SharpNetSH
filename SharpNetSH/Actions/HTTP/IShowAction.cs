@@ -11,7 +11,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="url">Fully qualified URL. If unspecified, implies all URLs. The URL can also be a prefix to registered URLs.</param>
 		[MethodName("cachestate")]
 		[ResponseProcessor(typeof(BlockProcessor), @":\s+")]
-		StandardResponse CacheState([ParameterName("url")] String url = null);
+		IResponse CacheState([ParameterName("url")] String url = null);
 
 		/// <summary>
 		/// Lists all IP addresses in the IP listen list. The IP listen list is used to scope the list of addresses to which the HTTP service binds. "0.0.0.0" means any IPv4 address and "::" means any IPv6 address.
@@ -19,7 +19,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		[MethodName("iplisten")]
 		[ResponseProcessor(typeof(TrimProcessor))]
-		StandardResponse IpListen();
+		IResponse IpListen();
 
 		/// <summary>
 		/// Shows a snapshot of the HTTP service using the Session view
@@ -28,7 +28,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="verbose">View verbose information showing property information too.</param>
 		[MethodName("servicestate view=session")]
 		[ResponseProcessor(typeof(TabulatedObjectProcessor), @":\s+")]
-		StandardResponse ServiceStateSessionView([ParameterName("verbose")] Boolean? verbose = null);
+		IResponse ServiceStateSessionView([ParameterName("verbose")] Boolean? verbose = null);
 
 		/// <summary>
 		/// Shows a snapshot of the HTTP service using the Request Queue view
@@ -37,7 +37,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="verbose">View verbose information showing property information too.</param>
 		[MethodName("servicestate view=requestq")]
 		[ResponseProcessor(typeof(TabulatedObjectProcessor), @":\s+")]
-		StandardResponse ServiceStateRequestQueueView([ParameterName("verbose")] Boolean? verbose = null);
+		IResponse ServiceStateRequestQueueView([ParameterName("verbose")] Boolean? verbose = null);
 
 		/// <summary>
 		/// Lists SSL server certificate bindings and the corresponding client certificate policies for an IP address and port.
@@ -46,7 +46,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="ipPort">Specifies the IPv4 or IPv6 address and port for which the SSL certificate bindings will be displayed. Not specifying an ipport lists all bindings.</param>
 		[MethodName("sslcert")]
 		[ResponseProcessor(typeof(BlockProcessor), @"\s+:\s+")]
-		StandardResponse SSLCert([ParameterName("ipport")] String ipPort = null);
+		IResponse SSLCert([ParameterName("ipport")] String ipPort = null);
 
 		/// <summary>
 		/// Shows the timeout values of the service (in seconds).
@@ -54,7 +54,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		[MethodName("timeout")]
 		[ResponseProcessor(typeof(BlockProcessor), @":\s+")]
-		StandardResponse Timeout();
+		IResponse Timeout();
 
 		/// <summary>
 		/// Lists DACLs for the specified reserved URL or all reserved URLs.
@@ -63,6 +63,6 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="url">Specifies the fully qualified URL. If unspecified, implies all URLs.</param>
 		[MethodName("urlacl")]
 		[ResponseProcessor(typeof(TabulatedObjectProcessor), @":\s+")]
-		StandardResponse UrlAcl([ParameterName("url")] String url = null);
+		IResponse UrlAcl([ParameterName("url")] String url = null);
 	}
 }

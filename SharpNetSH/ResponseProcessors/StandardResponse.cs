@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Ignite.SharpNetSH
 {
-	public sealed class StandardResponse : IResponseProcessor
+	public sealed class StandardResponse : IResponseProcessor, IResponse
 	{
 		public String Response { get; internal set; }
 		public dynamic ResponseObject { get; internal set; }

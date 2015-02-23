@@ -11,7 +11,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="url">Required. Specifies the fully qualified URL.</param>
 		/// <param name="recursive">If true, removes all entries under the specified URL.</param>
 		[MethodName("cache")]
-		StandardResponse Cache([ParameterName("url")] String url, [ParameterName("recursive", BooleanType.YesNo)] Boolean? recursive = null);
+		IResponse Cache([ParameterName("url")] String url, [ParameterName("recursive", BooleanType.YesNo)] Boolean? recursive = null);
 
 		/// <summary>
 		/// Specifies an IPv4 or IPv6 address to be deleted from the IP listen list.
@@ -20,7 +20,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="ipAddress">Specifies the IPv4 or IPv6 address to be deleted from the IP listen list.</param>
 		[MethodName("iplisten")]
-		StandardResponse IpListen([ParameterName("ipaddress")] String ipAddress);
+		IResponse IpListen([ParameterName("ipaddress")] String ipAddress);
 
 		/// <summary>
 		/// Deletes SSL server certificate bindings and the corresponding client certificate policies for an IP address and port.
@@ -28,7 +28,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="ipPort">Specifies the IPv4 or IPv6 address and port for which the SSL certificate bindings will be deleted.</param>
 		[MethodName("sslcert")]
-		StandardResponse SSLCert([ParameterName("ipport")] String ipPort);
+		IResponse SSLCert([ParameterName("ipport")] String ipPort);
 
 		/// <summary>
 		/// Deletes a global timeout and makes the HTTP.sys service revert to default values.
@@ -36,7 +36,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="timeoutType">Specifies the type of timeout setting.</param>
 		[MethodName("timeout")]
-		StandardResponse Timeout([ParameterName("timeouttype")] Timeout timeoutType);
+		IResponse Timeout([ParameterName("timeouttype")] Timeout timeoutType);
 
 		/// <summary>
 		/// Deletes a reserved URL.
@@ -44,6 +44,6 @@ namespace Ignite.SharpNetSH.HTTP
 		/// </summary>
 		/// <param name="url">Specifies the fully qualified URL.</param>
 		[MethodName("urlacl")]
-		StandardResponse UrlAcl([ParameterName("url")] String url);
+		IResponse UrlAcl([ParameterName("url")] String url);
 	}
 }

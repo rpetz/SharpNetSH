@@ -21,7 +21,7 @@ namespace Ignite.SharpNetSH
 		public static Type GetResponseProcessorType(this MethodInfo method)
 		{
 			var attr = Attribute.GetCustomAttributes(method).OfType<ResponseProcessorAttribute>().Select(attribute => (attribute).ResponseProcessorType).FirstOrDefault();
-			return attr ?? method.ReturnType;
+			return attr ?? typeof(StandardResponse); // TODO: Determine if we need to handle 'void' methods - currently we don't
 		}
 
 		public static String GetSplitRegEx(this MethodInfo method)
