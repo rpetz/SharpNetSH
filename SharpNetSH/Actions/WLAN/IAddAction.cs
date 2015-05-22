@@ -6,9 +6,10 @@ namespace Ignite.SharpNetSH.WLAN
     {
         /// <summary>
         /// Adds a wireless network into the allowed and blocked network list configured on the system.
+        /// If permission is denyall then ssid should not be given. 
         /// </summary>
         /// <param name="permission">Permission type of the filter.</param>
-        /// <param name="ssid">SSID of the wireless network. Requiered if permission is allow or block. If permission is denyall then parameter should not be given. </param>
+        /// <param name="ssid">SSID of the wireless network.</param>
         /// <param name="networktype">Network type of the wireless network.</param>
         /// <returns></returns>
         [MethodName("filter")]
@@ -24,6 +25,6 @@ namespace Ignite.SharpNetSH.WLAN
         /// <param name="user">Parameter user is optional. It specifies whether this profile is applied to all users or current user only. By default it is applied to all users.</param>
         /// <returns></returns> 
         [MethodName("profile")]
-        IResponse Profile([ParameterName("filename")] String filename, [ParameterName("interface")] String _interface, [ParameterName("user")] User user);
+        IResponse Profile([ParameterName("filename")] String filename, [ParameterName("interface")] String _interface = null, [ParameterName("user")] User? user = null);
     }
 }
