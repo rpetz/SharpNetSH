@@ -64,6 +64,7 @@
     <Compile Include="Spike\ITestAction.cs" />
     <Compile Include="Spike\StringHarness.cs" />
     <Compile Include="Spike\TestEnum.cs" />
+    <Compile Include="wlan\AddActionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpNetSH\SharpNetSH.csproj">
