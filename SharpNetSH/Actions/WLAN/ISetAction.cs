@@ -68,7 +68,7 @@ namespace Ignite.SharpNetSH.WLAN
         ///  is persistent by default.</param>
         /// <returns></returns>
         [MethodName("hostednetwork")]
-        IResponse HostedNetwork([ParameterName("mode")] Mode mode, [ParameterName("ssid")] String ssid = null, [ParameterName("key")] String key = null, [ParameterName("keyusage")] KeyUsage? keyUsage = null);
+        IResponse HostedNetwork([ParameterName("mode")] Mode? mode, [ParameterName("ssid")] String ssid = null, [ParameterName("key")] String key = null, [ParameterName("keyUsage")] KeyUsage? keyUsage = null);
 
         /// <summary>
         /// Set the preference order of a wireless network profile on an interface. All three parameters are required. 
