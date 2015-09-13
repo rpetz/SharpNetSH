@@ -25,38 +25,40 @@ namespace Ignite.SharpNetSH.Test
 
 			var tests = new[]
 			{
-				new object[] {"testipport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) true, (bool?) false, (bool?) true, (bool?) false, (bool?) true},
-				new object[] {"testipport", null, "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
-				new object[] {"testipport", "testcerthash", null, "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
-				new object[] {"testipport", "testcerthash", "testcertstorename", null, "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
-				new object[] {"testipport", "testcerthash", "testcertstorename", "testsslctlidentifier", null, (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
-				new object[] {"testipport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", null, (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
-				new object[] {"testipport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), null, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
-				new object[] {"testipport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, null, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
-				new object[] {"testipport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, null, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
-				new object[] {"testipport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, null, (bool?) false, (bool?) true, (bool?) false},
-				new object[] {"testipport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, null, (bool?) true, (bool?) false},
-				new object[] {"testipport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, null, (bool?) false},
-				new object[] {"testipport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, null}
+				new object[] {"testipport", null, "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) true, (bool?) false, (bool?) true, (bool?) false, (bool?) true},
+				new object[] {null, "testhostnameport", null, "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
+				new object[] {"testipport", null, "testcerthash", null, "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
+				new object[] {null, "testhostnameport", "testcerthash", "testcertstorename", null, "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
+				new object[] {"testipport", null, "testcerthash", "testcertstorename", "testsslctlidentifier", null, (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
+				new object[] {null, "testhostnameport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", null, (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
+				new object[] {"testipport", null, "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), null, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
+				new object[] {null, "testhostnameport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, null, (bool?) false, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
+				new object[] {"testipport", null, "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, null, (bool?) true, (bool?) false, (bool?) true, (bool?) false},
+				new object[] {null, "testhostnameport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, null, (bool?) false, (bool?) true, (bool?) false},
+				new object[] {"testipport", null, "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, null, (bool?) true, (bool?) false},
+				new object[] {null, "testhostnameport", "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, null, (bool?) false},
+				new object[] {"testipport", null, "testcerthash", "testcertstorename", "testsslctlidentifier", "testsslctlstorename", (Guid?) new Guid("11111111-1111-1111-1111-111111111111"), (uint?) 1, (uint?) 1, (bool?) false, (bool?) true, (bool?) false, (bool?) true, null}
 			};
 
 			foreach (var values in tests)
 			{
-				var nullValueIndex = values.ToList().IndexOf(null);
+				var nullValueIndices = values.Select((val, idx) => Tuple.Create(val, idx)).Where(t => t.Item1 == null).Select(t => t.Item2).ToArray();
+				
 
 				new NetSH(harness).Http.Add.SSLCert(ipPort:										(string)values[0],
-													certHash:									(string)values[1],
-													certStoreName:								(string)values[2],
-													sslCtlIdentifier:							(string)values[3],
-													sslCtlStoreName:							(string)values[4],
-													appId:										(Guid?) values[5],
-													revocationFreshnessTime:					(uint?) values[6],
-													urlRetrievalTimeout:						(uint?) values[7],
-													verifyClientCertRevocation:					(bool?) values[8],
-													verifyRevocationWithCachedClientCertOnly:	(bool?) values[9],
-													usageCheck:									(bool?) values[10],
-													dsMapperUsage:								(bool?) values[11],
-													clientCertNegotiation:						(bool?) values[12]);
+													hostnamePort:								(string)values[1],
+													certHash:									(string)values[2],
+													certStoreName:								(string)values[3],
+													sslCtlIdentifier:							(string)values[4],
+													sslCtlStoreName:							(string)values[5],
+													appId:										(Guid?) values[6],
+													revocationFreshnessTime:					(uint?) values[7],
+													urlRetrievalTimeout:						(uint?) values[8],
+													verifyClientCertRevocation:					(bool?) values[9],
+													verifyRevocationWithCachedClientCertOnly:	(bool?) values[10],
+													usageCheck:									(bool?) values[11],
+													dsMapperUsage:								(bool?) values[12],
+													clientCertNegotiation:						(bool?) values[13]);
 
 				var value = harness.Value;
 				var parameters = typeof (IAddAction).GetMethod("SSLCert").GetParameters();
@@ -66,7 +68,7 @@ namespace Ignite.SharpNetSH.Test
 					var type = x.ParameterType;
 					var name = x.Name.ToLower();
 
-					if (i == nullValueIndex)
+					if (nullValueIndices.Contains(i))
 					{
 						Assert.IsTrue(!value.Contains(name + "="));
 						i++;

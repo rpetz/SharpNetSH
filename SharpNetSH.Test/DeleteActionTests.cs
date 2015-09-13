@@ -31,8 +31,10 @@ namespace Ignite.SharpNetSH.Test
 		public void VerifySSLCertOutput()
 		{
 			var harness = new StringHarness();
-			new NetSH(harness).Http.Delete.SSLCert("testipport");
+			new NetSH(harness).Http.Delete.SSLCert(ipPort:"testipport");
 			Assert.AreEqual("netsh http delete sslcert ipport=testipport", harness.Value);
+			new NetSH(harness).Http.Delete.SSLCert(hostnamePort: "www.contoso.com:1414");
+			Assert.AreEqual("netsh http delete sslcert hostnameport=www.contoso.com:1414", harness.Value);
 		}
 
 		[TestMethod]

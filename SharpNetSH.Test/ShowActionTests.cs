@@ -62,8 +62,11 @@ namespace Ignite.SharpNetSH.Test
 			new NetSH(harness).Http.Show.SSLCert();
 			Assert.AreEqual("netsh http show sslcert", harness.Value);
 
-			new NetSH(harness).Http.Show.SSLCert("testipport");
+			new NetSH(harness).Http.Show.SSLCert(ipPort: "testipport");
 			Assert.AreEqual("netsh http show sslcert ipport=testipport", harness.Value);
+
+			new NetSH(harness).Http.Show.SSLCert(hostnamePort: "www.contoso.com:4443");
+			Assert.AreEqual("netsh http show sslcert hostnameport=www.contoso.com:4443", harness.Value);
 		}
 
 		[TestMethod]
