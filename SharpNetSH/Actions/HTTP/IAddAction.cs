@@ -17,6 +17,7 @@ namespace Ignite.SharpNetSH.HTTP
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307220(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
 		/// <param name="ipPort">Specifies the IP address and port for the binding.</param>
+		/// <param name="hostnamePort">Specifies hostname and port for the binding.</param>
 		/// <param name="certHash">Specifies the SHA hash of the certificate. This hash is 20 bytes long and specified as a hexadecimal string.</param>
 		/// <param name="certStoreName">Specifies the store name for the certificate. Defaults to MY. Certificate must be stored in the local computer context.</param>
 		/// <param name="sslCtlIdentifier">Lists the certificate issuers that can be trusted. This list can be a subset of the certificate issuers that are trusted by the computer.</param>
@@ -30,7 +31,8 @@ namespace Ignite.SharpNetSH.HTTP
 		/// <param name="dsMapperUsage">Turns on or turns off DS mappers. Default is disabled.</param>
 		/// <param name="clientCertNegotiation">Turns on or turns off negotiation of certificate. Default is disabled.</param>
 		[MethodName("sslcert")]
-		IResponse SSLCert([ParameterName("ipport")] string ipPort,
+		IResponse SSLCert([ParameterName("ipport")] string ipPort = null,
+						  [ParameterName("hostnameport")] string hostnamePort = null,
 						  [ParameterName("certhash")] string certHash = null,
 						  [ParameterName("certstorename")] string certStoreName = null,
 						  [ParameterName("sslctlidentifier")] string sslCtlIdentifier = null,

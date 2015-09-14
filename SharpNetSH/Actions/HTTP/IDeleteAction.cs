@@ -27,8 +27,9 @@ namespace Ignite.SharpNetSH.HTTP
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307229(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
 		/// <param name="ipPort">Specifies the IPv4 or IPv6 address and port for which the SSL certificate bindings will be deleted.</param>
+		/// <param name="ipPort">Specifies the hostname and port for which the SSL certificate bindings will be deleted.</param>
 		[MethodName("sslcert")]
-		IResponse SSLCert([ParameterName("ipport")] String ipPort);
+		IResponse SSLCert([ParameterName("ipport")] String ipPort = null, [ParameterName("hostnameport")] String hostnamePort = null);
 
 		/// <summary>
 		/// Deletes a global timeout and makes the HTTP.sys service revert to default values.

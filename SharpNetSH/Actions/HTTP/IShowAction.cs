@@ -40,13 +40,14 @@ namespace Ignite.SharpNetSH.HTTP
 		IResponse ServiceStateRequestQueueView([ParameterName("verbose")] Boolean? verbose = null);
 
 		/// <summary>
-		/// Lists SSL server certificate bindings and the corresponding client certificate policies for an IP address and port.
+		/// Lists SSL server certificate bindings and the corresponding client certificate policies for an IP address/hostname and port. Not specifying an ipport or hostnameport lists all bindings.
 		/// See <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc307243(v=vs.85).aspx">MSDN</a>.
 		/// </summary>
-		/// <param name="ipPort">Specifies the IPv4 or IPv6 address and port for which the SSL certificate bindings will be displayed. Not specifying an ipport lists all bindings.</param>
+		/// <param name="ipPort">Specifies the IPv4 or IPv6 address and port for which the SSL certificate bindings will be displayed.</param>
+		/// <param name="hostnamePort">Specifies the hostname and port for which the SSL certificate bindings will be displayed.</param>
 		[MethodName("sslcert")]
 		[ResponseProcessor(typeof(BlockProcessor), @"\s+:\s+")]
-		IResponse SSLCert([ParameterName("ipport")] String ipPort = null);
+		IResponse SSLCert([ParameterName("ipport")] string ipPort = null, [ParameterName("hostnameport")] string hostnamePort = null);
 
 		/// <summary>
 		/// Shows the timeout values of the service (in seconds).
