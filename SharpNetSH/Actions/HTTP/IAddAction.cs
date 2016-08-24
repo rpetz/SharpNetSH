@@ -40,11 +40,11 @@ namespace Ignite.SharpNetSH.HTTP
 						  [ParameterName("appid")] Guid? appId = null,
 						  [ParameterName("revocationfreshnesstime")] uint? revocationFreshnessTime = null,
 						  [ParameterName("urlretrievaltimeout")] uint? urlRetrievalTimeout = null,
-						  [ParameterName("verifyclientcertrevocation")] bool? verifyClientCertRevocation = null,
-						  [ParameterName("verifyrevocationwithcachedclientcertonly")] bool? verifyRevocationWithCachedClientCertOnly = null,
-						  [ParameterName("usagecheck")] bool? usageCheck = null,
-						  [ParameterName("dsmapperusage")] bool? dsMapperUsage = null,
-						  [ParameterName("clientcertnegotiation")] bool? clientCertNegotiation = null);
+						  [ParameterName("verifyclientcertrevocation", BooleanType.EnableDisable)] bool? verifyClientCertRevocation = null,
+						  [ParameterName("verifyrevocationwithcachedclientcertonly", BooleanType.EnableDisable)] bool? verifyRevocationWithCachedClientCertOnly = null,
+						  [ParameterName("usagecheck", BooleanType.EnableDisable)] bool? usageCheck = null,
+						  [ParameterName("dsmapperusage", BooleanType.EnableDisable)] bool? dsMapperUsage = null,
+						  [ParameterName("clientcertnegotiation", BooleanType.EnableDisable)] bool? clientCertNegotiation = null);
 
 		/// <summary>
 		/// Adds a global timeout to the HTTP.sys service.

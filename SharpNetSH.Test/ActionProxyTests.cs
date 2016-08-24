@@ -98,9 +98,9 @@ namespace Ignite.SharpNetSH.Test
 			var harness = new StringHarness();
 			var proxy = ActionProxy<ITestAction>.Create("testActionName", "netsh unittest", harness);
 			proxy.MethodWithBooleanTypeYesNo(true, false, true);
-			Assert.AreEqual("netsh unittest testActionName MethodWithBooleanTypeYesNo testBooleanYesNo=yes testBooleanEnabledDisabled=disabled testBooleanTrueFalse=true", harness.Value);
+			Assert.AreEqual("netsh unittest testActionName MethodWithBooleanTypeYesNo testBooleanYesNo=yes testBooleanEnableDisable=disable testBooleanTrueFalse=true", harness.Value);
 			proxy.MethodWithBooleanTypeYesNo(false, true, false);
-			Assert.AreEqual("netsh unittest testActionName MethodWithBooleanTypeYesNo testBooleanYesNo=no testBooleanEnabledDisabled=enabled testBooleanTrueFalse=false", harness.Value);
+			Assert.AreEqual("netsh unittest testActionName MethodWithBooleanTypeYesNo testBooleanYesNo=no testBooleanEnableDisable=enable testBooleanTrueFalse=false", harness.Value);
 		}
 
 		[TestMethod]

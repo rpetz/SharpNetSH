@@ -95,12 +95,12 @@ namespace Ignite.SharpNetSH
 					break;
 				case "yes":
 				case "true":
-				case "enabled":
+				case "enable":
 					value = true;
 					break;
 				case "no":
 				case "false":
-				case "disabled":
+				case "disable":
 					value = false;
 					break;
 			}
