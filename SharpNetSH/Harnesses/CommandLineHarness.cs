@@ -16,6 +16,7 @@ namespace Ignite.SharpNetSH
 				StartInfo = new ProcessStartInfo
 				{
 					WindowStyle = ProcessWindowStyle.Hidden,
+                    CreateNoWindow = true,
 					FileName = "cmd.exe",
 					UseShellExecute = false,
 					RedirectStandardOutput = true,

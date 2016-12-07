@@ -13,6 +13,6 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: Guid("36e5e23c-54e8-4204-abb0-d5a274de0722")]
 [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyInformationalVersion("2.0.6-beta")]
+[assembly: AssemblyInformationalVersion("2.0.6-beta02")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: InternalsVisibleTo("Ignite.SharpNetSH.Test")]
