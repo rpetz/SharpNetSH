@@ -115,4 +115,4 @@ NetSH contains a massive amount of contexts and actions - as such we have implem
         - wfp            - Not Supported
         - winhttp        - Not Supported
         - winsock        - Not Supported
-        - wlan           - Not Supported
+        - wlan           - Partial Supported
