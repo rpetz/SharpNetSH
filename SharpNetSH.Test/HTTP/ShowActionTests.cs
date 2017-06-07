@@ -1,8 +1,7 @@
 using Ignite.SharpNetSH.Test.Spike;
-using Ignite.SharpNetSH.HTTP;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Ignite.SharpNetSH.Test
+namespace Ignite.SharpNetSH.Test.HTTP
 {
 	[TestClass]
 	public class ShowActionTests
@@ -35,7 +34,9 @@ namespace Ignite.SharpNetSH.Test
 		[TestMethod]
 		public void VerifyServiceStateOutput()
 		{
+
 			var harness = new StringHarness();
+
 			new NetSH(harness).Http.Show.ServiceStateRequestQueueView();
 			Assert.AreEqual("netsh http show servicestate view=requestq", harness.Value);
 
