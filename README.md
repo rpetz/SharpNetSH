@@ -28,7 +28,7 @@ The `NetSH.CMD` command instantiates a new instance of the default NetSH object,
 
 If you wish to write your own execution harness simply implement the `Ignite.SharpNetSH.IExecutionHarness` interface.  We also provide a `ConsoleLogHarness` which simply directs your command output to `Console.WriteLine` calls.
 
-We have commented each method call with text directly from it's MSDN counterpart, along with links to the original MSDN source pages.  As such - to explore the various contexts and actions, simply check out your type ahead for detailed information.
+We have commented each method call with text directly from its MSDN counterpart, along with links to the original MSDN source pages.  As such, to explore the various contexts and actions, simply check out your type ahead for detailed information.
 
 ##Preface
 
@@ -70,7 +70,7 @@ Most NetSH actions do not provide you with data, but rather add/remove/update va
 
 ######[Humanizer](https://github.com/MehdiK/Humanizer) - Latest Version
 
-In order to properly build objects, we have to be able to pluralize words when possible.  For instance, when calling `[netSH].Http.Show.UrlAcl()` it provides a list of Reserved URLs, each with a list of Users that are assigned capabilities on those URLs.  When we parse this object, the sub-list of Users gets created because each user block can be grouped together by it's title of `User`.  As a result we take this title, pluralize it, assign it an IEnumerable object, and then place each User object into that collection.  We could recreate this code ourselves, but it is beyond the scope of this project and as such we bring in Humanizer.
+In order to properly build objects, we have to be able to pluralize words when possible.  For instance, when calling `[netSH].Http.Show.UrlAcl()` it provides a list of Reserved URLs, each with a list of Users that are assigned capabilities on those URLs.  When we parse this object, the sub-list of Users gets created because each user block can be grouped together by its title of `User`.  As a result we take this title, pluralize it, assign it an IEnumerable object, and then place each User object into that collection.  We could recreate this code ourselves, but it is beyond the scope of this project and as such we bring in Humanizer.
 
 ##Contribution
 
