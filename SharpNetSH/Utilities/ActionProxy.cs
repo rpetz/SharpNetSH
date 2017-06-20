@@ -65,7 +65,7 @@ namespace Ignite.SharpNetSH
 				if (value == null) continue;
 
 				if (value is Boolean?)
-					// We have to process booleans differently based upon the configured boolean type (i.e. Yes/No, Enabled/Disabled, True/False outputs) 
+					// We have to process booleans differently based upon the configured boolean type (i.e. Yes/No, Enable/Disable, True/False outputs) 
 					results.Add(parameterName + "=" + parameter.GetBooleanType().GetBooleanValue((Boolean) value));
 				else if (value is Guid)
 					// Guids have to contain braces
