@@ -18,6 +18,7 @@ namespace Ignite.SharpNetSH
 		public static NetSH CMD { get {  return new NetSH(new CommandLineHarness()); } }
 
 		public IHttpAction Http { get { return HttpAction.CreateAction("netsh", _harness); } }
-		public IWlanAction Wlan { get { return WlanAction.CreateAction("netsh", _harness); } }
+
+	    public IWlanAction Wlan { get { return WlanAction.CreateAction("netsh", _harness); } }
 	}
 }

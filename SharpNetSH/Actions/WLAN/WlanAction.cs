@@ -1,23 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ignite.SharpNetSH.HTTP;
 
 namespace Ignite.SharpNetSH.WLAN
 {
-    class WlanAction : IWlanAction, IAction
+    internal class WlanAction : IWlanAction, IAction
     {
-        private String _priorText;
+        private bool _initialized;
         private IExecutionHarness _harness;
-        private Boolean _initialized;
+        private String _priorText;
+
+        private WlanAction()
+        {
+
+        }
 
         public string ActionName { get { return "wlan"; } }
 
-        public WlanAction()
+        public void Initialize(string priorText, IExecutionHarness harness)
         {
-            
+            _initialized = true;
+            _priorText = priorText + " " + ActionName;
+            _harness = harness;
         }
 
         internal static IWlanAction CreateAction(String priorText, IExecutionHarness harness)
@@ -27,7 +29,36 @@ namespace Ignite.SharpNetSH.WLAN
             return action;
         }
 
-        
+        public IAddAction Add
+        {
+            get
+            {
+                if(!_initialized)
+                    throw new Exception("Actions must be initialized prior to use.");
+                return ActionProxy<IAddAction>.Create("add", _priorText, _harness);
+            }
+        }
+
+        public IDeleteAction Delete
+        {
+            get
+            {
+                if (!_initialized)
+                    throw new Exception("Actions must be initialized prior to use.");
+                return ActionProxy<IDeleteAction>.Create("delete", _priorText, _harness);
+            }
+        }
+
+        public ISetAction Set
+        {
+            get
+            {
+                if (!_initialized)
+                    throw new Exception("Actions must be initialized prior to use.");
+                return ActionProxy<ISetAction>.Create("set", _priorText, _harness);
+            }
+        }
+
         public IShowAction Show
         {
             get
@@ -37,13 +68,6 @@ namespace Ignite.SharpNetSH.WLAN
 
                 return ActionProxy<IShowAction>.Create("show", _priorText, _harness);
             }
-        }
-
-        public void Initialize(String priorText, IExecutionHarness harness)
-        {
-            _harness = harness;
-            _priorText = priorText + " " + ActionName;
-            _initialized = true;
         }
     }
 }
