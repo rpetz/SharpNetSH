@@ -22,11 +22,9 @@
         /// </summary>
         ISetAction Set { get; }
         
-
-
         /// <summary>
         /// Represents a querying action
         /// </summary>
-        //IShowAction Show { get; }
+        IShowAction Show { get; }
     }
 }

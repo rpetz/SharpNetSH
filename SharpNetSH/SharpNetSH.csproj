@@ -60,7 +60,6 @@
     <Compile Include="Actions\WLAN\IAddAction.cs" />
     <Compile Include="Actions\WLAN\IDeleteAction.cs" />
     <Compile Include="Actions\WLAN\ISetAction.cs" />
-    <Compile Include="Actions\WLAN\IWlanAction.cs" />
     <Compile Include="Actions\WLAN\KeyType.cs" />
     <Compile Include="Actions\WLAN\KeyUsage.cs" />
     <Compile Include="Actions\WLAN\Mode.cs" />
@@ -70,7 +69,6 @@
     <Compile Include="Actions\WLAN\SsoMode.cs" />
     <Compile Include="Actions\WLAN\TracingMode.cs" />
     <Compile Include="Actions\WLAN\User.cs" />
-    <Compile Include="Actions\WLAN\WlanAction.cs" />
     <Compile Include="Actions\WLAN\IShowAction.cs" />
     <Compile Include="Actions\WLAN\IWlanAction.cs" />
     <Compile Include="Actions\WLAN\WlanAction.cs" />
