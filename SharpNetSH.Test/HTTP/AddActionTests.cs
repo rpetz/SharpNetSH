@@ -4,7 +4,7 @@ using Ignite.SharpNetSH.Test.Spike;
 using Ignite.SharpNetSH.HTTP;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Ignite.SharpNetSH.Test
+namespace Ignite.SharpNetSH.Test.HTTP
 {
 	[TestClass]
 	public class AddActionTests
@@ -81,8 +81,8 @@ namespace Ignite.SharpNetSH.Test
 						Assert.IsTrue(value.Contains(name + "={11111111-1111-1111-1111-111111111111}"));
 					else if (type == typeof(Guid?))
 						Assert.IsTrue(value.Contains(name + "={11111111-1111-1111-1111-111111111111}"));
-					else if (type == typeof (bool))
-						Assert.IsTrue(value.Contains(name + "=enabled") || value.Contains(name + "=disabled"));
+					else if (type == typeof (bool) || type == typeof(bool?))
+						Assert.IsTrue(value.Contains(name + "=enable") || value.Contains(name + "=disable"));
 					i++;
 				});
 			}

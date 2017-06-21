@@ -16,7 +16,7 @@ namespace Ignite.SharpNetSH.Test.Spike
 		StandardResponse MethodWithDecoratedEnum(DecoratedEnum testEnum);
 
 		StandardResponse MethodWithBooleanTypeYesNo([ParameterName("testBooleanYesNo", BooleanType.YesNo)] bool yesNo,
-										[ParameterName("testBooleanEnabledDisabled", BooleanType.EnabledDisabled)] bool enabledDisabled,
+										[ParameterName("testBooleanEnableDisable", BooleanType.EnableDisable)] bool enableDisable,
 										[ParameterName("testBooleanTrueFalse", BooleanType.TrueFalse)] bool trueFalse);
 
 		[MethodName("test")]

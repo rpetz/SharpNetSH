@@ -36,8 +36,8 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Humanizer">
-      <HintPath>..\packages\Humanizer.1.33.7\lib\portable-win+net40+sl50+wp8+wpa81\Humanizer.dll</HintPath>
+    <Reference Include="Humanizer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Humanizer.Core.2.2.0\lib\netstandard1.0\Humanizer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,6 +50,29 @@
   <ItemGroup>
     <Compile Include="Actions\HTTP\HttpAction.cs" />
     <Compile Include="Actions\HTTP\Timeout.cs" />
+    <Compile Include="Actions\WLAN\Authentication.cs" />
+    <Compile Include="Actions\WLAN\AuthMode.cs" />
+    <Compile Include="Actions\WLAN\ConnectionMode.cs" />
+    <Compile Include="Actions\WLAN\ConnectionType.cs" />
+    <Compile Include="Actions\WLAN\Cost.cs" />
+    <Compile Include="Actions\WLAN\Display.cs" />
+    <Compile Include="Actions\WLAN\Encryption.cs" />
+    <Compile Include="Actions\WLAN\IAddAction.cs" />
+    <Compile Include="Actions\WLAN\IDeleteAction.cs" />
+    <Compile Include="Actions\WLAN\ISetAction.cs" />
+    <Compile Include="Actions\WLAN\IWlanAction.cs" />
+    <Compile Include="Actions\WLAN\KeyType.cs" />
+    <Compile Include="Actions\WLAN\KeyUsage.cs" />
+    <Compile Include="Actions\WLAN\Mode.cs" />
+    <Compile Include="Actions\WLAN\NetworkMode.cs" />
+    <Compile Include="Actions\WLAN\NetworkType.cs" />
+    <Compile Include="Actions\WLAN\Permission.cs" />
+    <Compile Include="Actions\WLAN\ProfileType.cs" />
+    <Compile Include="Actions\WLAN\SsoMode.cs" />
+    <Compile Include="Actions\WLAN\TracingMode.cs" />
+    <Compile Include="Actions\WLAN\User.cs" />
+    <Compile Include="Actions\WLAN\IShowAction.cs" />
+    <Compile Include="Actions\WLAN\WlanAction.cs" />
     <Compile Include="Interfaces\IResponse.cs" />
     <Compile Include="ResponseProcessors\BlockProcessor.cs" />
     <Compile Include="ResponseProcessors\SkipHeaderProcessor.cs" />
@@ -86,7 +109,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
