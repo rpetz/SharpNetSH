@@ -34,7 +34,7 @@ namespace Ignite.SharpNetSH.WLAN
         /// <returns></returns>
         [MethodName("networks")]
         [ResponseProcessor(typeof(BlockProcessor), @"\s+:\s+")]
-        IResponse Networks([ParameterName("interface")] string @interface = null, [ParameterName("mode")] string mode = null);
+        IResponse Networks([ParameterName("interface")] string @interface = null, [ParameterName("mode")] NetworkMode? mode = null);
 
         /// <summary>
         /// Displays the entire collection of information about wireless network adapters, wireless profiles and wireless networks.

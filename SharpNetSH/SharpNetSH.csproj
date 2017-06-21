@@ -64,6 +64,7 @@
     <Compile Include="Actions\WLAN\KeyType.cs" />
     <Compile Include="Actions\WLAN\KeyUsage.cs" />
     <Compile Include="Actions\WLAN\Mode.cs" />
+    <Compile Include="Actions\WLAN\NetworkMode.cs" />
     <Compile Include="Actions\WLAN\NetworkType.cs" />
     <Compile Include="Actions\WLAN\Permission.cs" />
     <Compile Include="Actions\WLAN\ProfileType.cs" />
