@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Ignite.SharpNetSH
+﻿namespace Ignite.SharpNetSH
 {
 	internal interface IInitializable
 	{
-		void Initialize(String priorText, IExecutionHarness harness);
+		void Initialize(string priorText, IExecutionHarness harness);
 	}
 }

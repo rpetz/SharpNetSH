@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Ignite.SharpNetSH.Test.Spike;
 using Ignite.SharpNetSH.HTTP;
+using Ignite.SharpNetSH.HTTP.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Ignite.SharpNetSH.Test.HTTP

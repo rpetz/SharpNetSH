@@ -10,18 +10,18 @@ namespace Ignite.SharpNetSH
 {
 	internal class ActionProxy<TInterface> : RealProxy
 	{
-		private readonly String _priorText;
-		private readonly String _actionName;
+		private readonly string _priorText;
+		private readonly string _actionName;
 		private readonly IExecutionHarness _harness;
 
-		private ActionProxy(String actionName, String priorText, IExecutionHarness harness) : base(typeof(TInterface))
+		private ActionProxy(string actionName, string priorText, IExecutionHarness harness) : base(typeof(TInterface))
 		{
 			_actionName = actionName;
 			_harness = harness;
 			_priorText = priorText;
 		}
 
-		public static TInterface Create(String actionName, String priorText, IExecutionHarness harness)
+		public static TInterface Create(string actionName, string priorText, IExecutionHarness harness)
 		{ return (TInterface)new ActionProxy<TInterface>(actionName, priorText, harness).GetTransparentProxy(); }
 
 		public override IMessage Invoke(IMessage msg)
@@ -52,9 +52,9 @@ namespace Ignite.SharpNetSH
 			return new ReturnMessage(null, null, 0, methodCall.LogicalCallContext, methodCall);
 		}
 
-		private String ProcessParameters(MethodBase method, IMethodCallMessage methodCall)
+		private string ProcessParameters(MethodBase method, IMethodCallMessage methodCall)
 		{
-			var results = new List<String>();
+			var results = new List<string>();
 			var i = 0;
 			foreach (var value in methodCall.InArgs)
 			{
@@ -64,9 +64,9 @@ namespace Ignite.SharpNetSH
 
 				if (value == null) continue;
 
-				if (value is Boolean?)
-					// We have to process booleans differently based upon the configured boolean type (i.e. Yes/No, Enable/Disable, True/False outputs) 
-					results.Add(parameterName + "=" + parameter.GetBooleanType().GetBooleanValue((Boolean) value));
+				if (value is bool)
+					// We have to process booleans differently based upon the configured boolean type (i.e. Yes/No, Enable/Disable, True/False outputs)
+					results.Add(parameterName + "=" + parameter.GetBooleanType().GetBooleanValue((bool) value));
 				else if (value is Guid)
 					// Guids have to contain braces
 					results.Add(parameterName + "=" + ((Guid)value).ToString("B"));
@@ -78,7 +78,7 @@ namespace Ignite.SharpNetSH
 					results.Add(parameterName + "=" + value);
 			}
 			if (results.Count == 0) return method.GetMethodName();
-			return method.GetMethodName() + " " + results.Aggregate((x, y) => String.IsNullOrWhiteSpace(x) ? y : x + " " + y);
+			return method.GetMethodName() + " " + results.Aggregate((x, y) => string.IsNullOrWhiteSpace(x) ? y : x + " " + y);
 		}
 	}
 }

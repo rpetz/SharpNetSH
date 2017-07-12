@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace Ignite.SharpNetSH.WLAN
+namespace Ignite.SharpNetSH.WLAN.Enums
 {
-    public enum User
+    public enum ProfileType
     {
         [Description("all")]
         All,

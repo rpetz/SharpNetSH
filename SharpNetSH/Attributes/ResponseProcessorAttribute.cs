@@ -6,8 +6,8 @@ namespace Ignite.SharpNetSH
 	[AttributeUsage(AttributeTargets.Method)]
 	internal class ResponseProcessorAttribute : Attribute
 	{
-		public Type ResponseProcessorType { get; private set; }
-		public String SplitRegEx { get; private set; }
+		public Type ResponseProcessorType { get; }
+		public String SplitRegEx { get; }
 
 		public ResponseProcessorAttribute(Type responseProcessorType, String splitRegEx = null)
 		{

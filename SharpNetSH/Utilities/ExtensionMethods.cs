@@ -14,25 +14,25 @@ namespace Ignite.SharpNetSH
 		public static String GetMethodName(this MethodBase method)
 		{
 			foreach (var attribute in Attribute.GetCustomAttributes(method).OfType<MethodNameAttribute>())
-				return (attribute).MethodName;
+				return attribute.MethodName;
 			return method.Name;
 		}
 
 		public static Type GetResponseProcessorType(this MethodInfo method)
 		{
-			var attr = Attribute.GetCustomAttributes(method).OfType<ResponseProcessorAttribute>().Select(attribute => (attribute).ResponseProcessorType).FirstOrDefault();
+			var attr = Attribute.GetCustomAttributes(method).OfType<ResponseProcessorAttribute>().Select(attribute => attribute.ResponseProcessorType).FirstOrDefault();
 			return attr ?? typeof(StandardResponse); // TODO: Determine if we need to handle 'void' methods - currently we don't
 		}
 
-		public static String GetSplitRegEx(this MethodInfo method)
+		public static string GetSplitRegEx(this MethodInfo method)
 		{
-			return Attribute.GetCustomAttributes(method).OfType<ResponseProcessorAttribute>().Select(attribute => (attribute).SplitRegEx).FirstOrDefault();
+			return Attribute.GetCustomAttributes(method).OfType<ResponseProcessorAttribute>().Select(attribute => attribute.SplitRegEx).FirstOrDefault();
 		}
 
-		public static String GetParameterName(this ParameterInfo parameter)
+		public static string GetParameterName(this ParameterInfo parameter)
 		{
 			foreach (var attribute in Attribute.GetCustomAttributes(parameter).OfType<ParameterNameAttribute>())
-				return (attribute).ParameterName;
+				return attribute.ParameterName;
 			return parameter.Name;
 		}
 
@@ -43,7 +43,7 @@ namespace Ignite.SharpNetSH
 			throw new Exception("Missing boolean type");
 		}
 
-		public static String GetBooleanValue(this BooleanType enumerationValue, Boolean value)
+		public static string GetBooleanValue(this BooleanType enumerationValue, bool value)
 		{
 			var attribute = enumerationValue.GetEnumValue<BooleanType, BooleanValueAttribute>();
 
@@ -65,7 +65,7 @@ namespace Ignite.SharpNetSH
 		{
 			if (!enumerationValue.GetType().IsEnum)
 				throw new Exception("Expected enum type");
-			
+
 			var memberInfo = enumerationValue.GetType().GetMember(enumerationValue.ToString()).FirstOrDefault();
 			if (memberInfo == null)
 				return null;
@@ -75,7 +75,7 @@ namespace Ignite.SharpNetSH
 			return (TAttribute)attrs;
 		}
 
-		public static KeyValuePair<String, dynamic> ProcessRawData(this String line, String splitRegEx)
+		public static KeyValuePair<string, dynamic> ProcessRawData(this string line, string splitRegEx)
 		{
 			var regex = new Regex(splitRegEx);
 			var split = regex.Split(line.TrimStart(), 2);
@@ -88,7 +88,7 @@ namespace Ignite.SharpNetSH
 
 			var title = split[0];
 			object value = split[1];
-			switch (((String)value).ToLower())
+			switch (((string)value).ToLower())
 			{
 				case "(null)":
 					value = null;
@@ -105,10 +105,10 @@ namespace Ignite.SharpNetSH
 					break;
 			}
 
-			return new KeyValuePair<String, dynamic>(title.ToCSharpFriendlyPropertyName(), value);
+			return new KeyValuePair<string, dynamic>(title.ToCSharpFriendlyPropertyName(), value);
 		}
 
-		public static String ToCSharpFriendlyPropertyName(this String name)
+		public static string ToCSharpFriendlyPropertyName(this string name)
 		{
 			var textInfo = new CultureInfo("en-US", false).TextInfo;
 			var titleCaseTitle = Regex.Replace(textInfo.ToTitleCase(name), @"\s+", "");
@@ -116,7 +116,7 @@ namespace Ignite.SharpNetSH
 			return titleCaseTitle;
 		}
 
-		public static dynamic ProcessRawData(this IEnumerable<String> lines, String splitRegEx)
+		public static dynamic ProcessRawData(this IEnumerable<string> lines, string splitRegEx)
 		{
 			var outputObject = new ExpandoObject();
 			foreach (var line in lines)

@@ -49,28 +49,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\HTTP\HttpAction.cs" />
-    <Compile Include="Actions\HTTP\Timeout.cs" />
-    <Compile Include="Actions\WLAN\Authentication.cs" />
-    <Compile Include="Actions\WLAN\AuthMode.cs" />
-    <Compile Include="Actions\WLAN\ConnectionMode.cs" />
-    <Compile Include="Actions\WLAN\ConnectionType.cs" />
-    <Compile Include="Actions\WLAN\Cost.cs" />
-    <Compile Include="Actions\WLAN\Display.cs" />
-    <Compile Include="Actions\WLAN\Encryption.cs" />
+    <Compile Include="Actions\HTTP\Enums\Timeout.cs" />
+    <Compile Include="Actions\WLAN\Enums\Authentication.cs" />
+    <Compile Include="Actions\WLAN\Enums\AuthMode.cs" />
+    <Compile Include="Actions\WLAN\Enums\ConnectionMode.cs" />
+    <Compile Include="Actions\WLAN\Enums\ConnectionType.cs" />
+    <Compile Include="Actions\WLAN\Enums\Cost.cs" />
+    <Compile Include="Actions\WLAN\Enums\Display.cs" />
+    <Compile Include="Actions\WLAN\Enums\Encryption.cs" />
     <Compile Include="Actions\WLAN\IAddAction.cs" />
     <Compile Include="Actions\WLAN\IDeleteAction.cs" />
     <Compile Include="Actions\WLAN\ISetAction.cs" />
     <Compile Include="Actions\WLAN\IWlanAction.cs" />
-    <Compile Include="Actions\WLAN\KeyType.cs" />
-    <Compile Include="Actions\WLAN\KeyUsage.cs" />
-    <Compile Include="Actions\WLAN\Mode.cs" />
-    <Compile Include="Actions\WLAN\NetworkMode.cs" />
-    <Compile Include="Actions\WLAN\NetworkType.cs" />
-    <Compile Include="Actions\WLAN\Permission.cs" />
-    <Compile Include="Actions\WLAN\ProfileType.cs" />
-    <Compile Include="Actions\WLAN\SsoMode.cs" />
-    <Compile Include="Actions\WLAN\TracingMode.cs" />
-    <Compile Include="Actions\WLAN\User.cs" />
+    <Compile Include="Actions\WLAN\Enums\KeyType.cs" />
+    <Compile Include="Actions\WLAN\Enums\KeyUsage.cs" />
+    <Compile Include="Actions\WLAN\Enums\Mode.cs" />
+    <Compile Include="Actions\WLAN\Enums\NetworkMode.cs" />
+    <Compile Include="Actions\WLAN\Enums\NetworkType.cs" />
+    <Compile Include="Actions\WLAN\Enums\Permission.cs" />
+    <Compile Include="Actions\WLAN\Enums\ProfileType.cs" />
+    <Compile Include="Actions\WLAN\Enums\SsoMode.cs" />
+    <Compile Include="Actions\WLAN\Enums\TracingMode.cs" />
+    <Compile Include="Actions\WLAN\Enums\User.cs" />
     <Compile Include="Actions\WLAN\IShowAction.cs" />
     <Compile Include="Actions\WLAN\WlanAction.cs" />
     <Compile Include="Interfaces\IResponse.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="Actions\HTTP\IHttpAction.cs" />
     <Compile Include="Actions\INetSH.cs" />
     <Compile Include="Actions\HTTP\IShowAction.cs" />
-    <Compile Include="Actions\NetSh.cs" />
+    <Compile Include="Actions\NetSH.cs" />
     <Compile Include="Utilities\ActionProxy.cs" />
     <Compile Include="Utilities\BooleanType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,6 +108,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actions\AdvFirewall\" />
+    <Folder Include="Actions\LAN\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

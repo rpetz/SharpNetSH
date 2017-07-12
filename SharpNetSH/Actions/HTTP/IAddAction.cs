@@ -1,4 +1,5 @@
 ﻿using System;
+using Ignite.SharpNetSH.HTTP.Enums;
 
 namespace Ignite.SharpNetSH.HTTP
 {

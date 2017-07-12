@@ -1,6 +1,5 @@
-﻿using System;
-using Ignite.SharpNetSH.WLAN;
-using Ignite.SharpNetSH.Test.Spike;
+﻿using Ignite.SharpNetSH.Test.Spike;
+using Ignite.SharpNetSH.WLAN.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Ignite.SharpNetSH.Test.wlan
@@ -35,10 +34,10 @@ namespace Ignite.SharpNetSH.Test.wlan
 		{
 			var harness = new StringHarness();
 			new NetSH(harness).Wlan.Set.BlockedNetwork(Display.Show);
-			Assert.AreEqual("netsh wlan set blockednetworks display=show", harness.Value);
+			Assert.AreEqual("netsh wlan set blockednetwork display=show", harness.Value);
 
 			new NetSH(harness).Wlan.Set.BlockedNetwork(Display.Hide);
-			Assert.AreEqual("netsh wlan set blockednetworks display=hide", harness.Value);
+			Assert.AreEqual("netsh wlan set blockednetwork display=hide", harness.Value);
 		}
 
 		[TestMethod]
@@ -85,23 +84,23 @@ namespace Ignite.SharpNetSH.Test.wlan
 		{
 			var harness = new StringHarness();
 			new NetSH(harness).Wlan.Set.ProfileOrder("\"profile1\"", "\"Wireless Network Connection\"", 1);
-			Assert.AreEqual("set profileorder name=\"profile1\" interface=\"Wireless Network Connection\" priority=1", harness.Value);
+			Assert.AreEqual("netsh wlan set profileorder name=\"profile1\" interface=\"Wireless Network Connection\" priority=1", harness.Value);
 
-			new NetSH(harness).Wlan.Set.ProfileOrder("\"profile1\"", "\"Wireless Network Connection\"", 5);
-			Assert.AreEqual("set profileorder name=\"profile two\" interface=\"Wireless Network Connection\" priority=5", harness.Value);
+			new NetSH(harness).Wlan.Set.ProfileOrder("\"profile2\"", "\"Wireless Network Connection\"", 5);
+			Assert.AreEqual("netsh wlan set profileorder name=\"profile2\" interface=\"Wireless Network Connection\" priority=5", harness.Value);
 		}
 
 		[TestMethod]
 		public void VerifyProfileParameterOutput()
 		{
 			var harness = new StringHarness();
-		   
+
 			/*
 			var tests = new[]
 			{
 				new object[] {"Profile1", "interfacename",  "ssid1",    ConnectionType.Ibss,    null,   null,                   false,  Authentication.Wpa2,    Encryption.Wep, KeyType.Passphrase, null,   null,           false,  null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
 				new object[] {"Profile1", null,             "ssid1",    ConnectionType.Ess,     true,   ConnectionMode.Auto,    false,  null,                   null,           null,               null,   null,           null,   null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-				new object[] {"Profile1", null,             null,       null,                   true,   null,                   null,   Authentication.Wpa,     null,           KeyType.NetworkKey, 1,      "keymaterial",  null,   null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},  
+				new object[] {"Profile1", null,             null,       null,                   true,   null,                   null,   Authentication.Wpa,     null,           KeyType.NetworkKey, 1,      "keymaterial",  null,   null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
 				new object[] {"Profile1", null,             null,       null,                   true,   ConnectionMode.Manual,  null,   Authentication.Open,    null,           null,               null,   null,           true,   null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
 				new object[] {"Profile1", null,             "ssid1",    null,                   null,   null,                   null,   Authentication.Open,    null,           null,               null,   null,           null,   null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
 				new object[] {"Profile1", null,             "ssid1",    null,                   null,   null,                   true,   Authentication.Open,    null,           null,               null,   null,           null,   null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
