@@ -1,5 +1,5 @@
-﻿using Ignite.SharpNetSH.WLAN;
-using Ignite.SharpNetSH.Test.Spike;
+﻿using Ignite.SharpNetSH.Test.Spike;
+using Ignite.SharpNetSH.WLAN.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Ignite.SharpNetSH.Test.wlan

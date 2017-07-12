@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Ignite.SharpNetSH
 {
 	internal class BlockProcessor : IResponseProcessor
 	{
-		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode, String splitRegEx = null)
+		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode, string splitRegEx = null)
 		{
-			var lines = responseLines.ToList();
+		    var lines = responseLines.ToList();
 			var standardResponse = new StandardResponse();
 			((IResponseProcessor)standardResponse).ProcessResponse(lines, exitCode);
 
@@ -19,7 +18,7 @@ namespace Ignite.SharpNetSH
 
 			foreach (var line in lines.Skip(3))
 			{
-				if (String.IsNullOrWhiteSpace(line))
+				if (string.IsNullOrWhiteSpace(line))
 				{
 					if (currentObjectRows.Count > 0)
 						objects.Add(currentObjectRows.ProcessRawData(splitRegEx));

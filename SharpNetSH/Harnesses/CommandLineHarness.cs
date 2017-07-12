@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Ignite.SharpNetSH
@@ -9,7 +8,7 @@ namespace Ignite.SharpNetSH
 	/// </summary>
 	public class CommandLineHarness : IExecutionHarness
 	{
-		public IEnumerable<String> Execute(string action, out int exitCode)
+		public IEnumerable<string> Execute(string action, out int exitCode)
 		{
 			var process = new Process
 			{
@@ -26,7 +25,7 @@ namespace Ignite.SharpNetSH
 
 			process.Start();
 
-			var lines = new List<String>();
+			var lines = new List<string>();
 			while (!process.StandardOutput.EndOfStream)
 				lines.Add(process.StandardOutput.ReadLine());
 

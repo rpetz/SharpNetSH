@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Ignite.SharpNetSH
+﻿namespace Ignite.SharpNetSH
 {
 	internal interface IOutputObject
 	{
-		void AddValue(String title, String value);
+		void AddValue(string title, string value);
 	}
 }

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Ignite.SharpNetSH
 {
 	internal interface IResponseProcessor
 	{
-		StandardResponse ProcessResponse(IEnumerable<String> responseLines, int exitCode, String splitRegEx = null);
+		StandardResponse ProcessResponse(IEnumerable<string> responseLines, int exitCode, string splitRegEx = null);
 	}
 }

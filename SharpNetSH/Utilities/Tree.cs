@@ -5,8 +5,8 @@ namespace Ignite.SharpNetSH
 {
 	internal class Tree
 	{
-		public String RawText { get; set; }
-		public String Title { get; set; }
+		public string RawText { get; set; }
+		public string Title { get; set; }
 		public dynamic Value { get; set; }
 		public int TreeLevel { get; set; }
 		public List<Tree> Children { get; set; }
@@ -33,14 +33,14 @@ namespace Ignite.SharpNetSH
 			Children = new List<Tree>();
 		}
 
-		public Boolean IsParentOf(Tree otherTree)
+		public bool IsParentOf(Tree otherTree)
 		{ return IsParentOf(otherTree.TreeLevel); }
-		public Boolean IsParentOf(int level)
+		public bool IsParentOf(int level)
 		{ return level > TreeLevel; }
 
-		public Boolean IsSameLevelAs(Tree otherTree)
+		public bool IsSameLevelAs(Tree otherTree)
 		{ return IsSameLevelAs(otherTree.TreeLevel); }
-		public Boolean IsSameLevelAs(int level)
+		public bool IsSameLevelAs(int level)
 		{ return level == TreeLevel; }
 
 		public override string ToString()

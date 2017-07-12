@@ -9,7 +9,7 @@ namespace Ignite.SharpNetSH
 {
 	internal class TabulatedObjectProcessor : IResponseProcessor
 	{
-		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode, String splitRegEx = null)
+		StandardResponse IResponseProcessor.ProcessResponse(IEnumerable<string> responseLines, int exitCode, string splitRegEx = null)
 		{
 			var lines = responseLines.ToList();
 			var standardResponse = new StandardResponse();
@@ -28,7 +28,7 @@ namespace Ignite.SharpNetSH
 			if (tabulatedLines.Any(x => !Regex.IsMatch(x, @"^\t"))) // If any lines start with a tab level of 0, we need to tab everything over by 1 tab
 				tabulatedLines = tabulatedLines.Select(x =>
 				{
-					if (!String.IsNullOrWhiteSpace(x))
+					if (!string.IsNullOrWhiteSpace(x))
 						return "\t" + x;
 					return x;
 				}).ToList();
@@ -39,20 +39,20 @@ namespace Ignite.SharpNetSH
 			return standardResponse;
 		}
 
-		void RecursivelyProcessToTree(IEnumerator<String> lineEnumerator, Tree parent, String splitRegEx)
+		void RecursivelyProcessToTree(IEnumerator<string> lineEnumerator, Tree parent, string splitRegEx)
 		{
 			//We are in the scope of the owning tree here
 			while (lineEnumerator.MoveNext())
 			{
 				var line = lineEnumerator.Current;
-				if (String.IsNullOrWhiteSpace(line))
+				if (string.IsNullOrWhiteSpace(line))
 					continue;
 
 				var level = line.Length - line.TrimStart('\t').Length;
 				var tree = new Tree(line.Trim(), level, splitRegEx) { Parent = parent };
 
 				if (parent.TreeLevel == level - 1) // If the new tree is a child of this tree, add it to the parent
-					parent.Children.Add(tree); 
+					parent.Children.Add(tree);
 				else if (level - 1 > parent.TreeLevel) // If the new tree is a distant child of this tree, recursively add it to the last tree we processed
 				{
 					var newParent = parent.Children.Any() ? parent.Children.Last() : parent;
@@ -78,10 +78,10 @@ namespace Ignite.SharpNetSH
 			else if (source.Value == "!#VALUE")
 				return source.Value;
 
-			var lastHeading = String.Empty;
+			var lastHeading = string.Empty;
 			var keepLastHeading = false;
 
-			if (source.Children.All(x => x.Value is String && x.Value == "!#COLLECTION"))
+			if (source.Children.All(x => x.Value is string && x.Value == "!#COLLECTION"))
 				current[source.Title] = source.Children.Select(child => child.RawText.Trim()).Cast<dynamic>().ToList();
 			else
 			{

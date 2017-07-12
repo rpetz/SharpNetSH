@@ -7,6 +7,6 @@ namespace Ignite.SharpNetSH
 		/// <summary>
 		/// Gets the text to output to the netsh command
 		/// </summary>
-		String ActionName { get; }
+		string ActionName { get; }
 	}
 }

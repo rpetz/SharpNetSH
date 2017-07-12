@@ -8,6 +8,6 @@ namespace Ignite.SharpNetSH
 		public MethodNameAttribute(string methodName)
 		{ MethodName = methodName; }
 
-		public String MethodName { get; private set; }
+		public String MethodName { get; }
 	}
 }
